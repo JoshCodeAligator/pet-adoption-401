@@ -34,8 +34,7 @@ const AnimalInterface = () => {
             src="/images/dog.jpg"
             width={200}
             height={200}
-            alt="Picture of a Dog"
-          />
+            alt="Picture of a Dog"          />
         </div>
         <h2 className="mt-4 text-lg font-semibold">Dogs</h2>
         <Link href="/dogs">
