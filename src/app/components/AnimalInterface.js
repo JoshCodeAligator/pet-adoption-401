@@ -5,20 +5,33 @@ import Link from "next/link";
 import { useState } from "react";
 
 const AnimalInterface = () => {
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState({
+    dog: false,
+    cat: false,
+    rabbit: false,
+    exotic: false,
+  });
+
+  const handleMouseEnter = (animal) => {
+    setHovered((prevState) => ({ ...prevState, [animal]: true }));
+  };
 
   return (
     <div className="flex flex-wrap justify-center gap-8">
       <div className="flex flex-col items-center">
         <div
           className={`rounded-full overflow-hidden border-4 border-gray-300 transition duration-300 ${
-            hovered ? "border-orange-500" : ""
+            hovered.dog ? "border-orange-500" : ""
           }`}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseEnter={() =>
+            setHovered((prevState) => ({ ...prevState, dog: true }))
+          }
+          onMouseLeave={() =>
+            setHovered((prevState) => ({ ...prevState, dog: false }))
+          }
         >
           <Image
-            src="/dog.jpg"
+            src="/images/dog.jpg"
             width={200}
             height={200}
             alt="Picture of a Dog"
@@ -35,13 +48,17 @@ const AnimalInterface = () => {
       <div className="flex flex-col items-center">
         <div
           className={`rounded-full overflow-hidden border-4 border-gray-300 transition duration-300 ${
-            hovered ? "border-orange-500" : ""
+            hovered.cat ? "border-orange-500" : ""
           }`}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseEnter={() =>
+            setHovered((prevState) => ({ ...prevState, cat: true }))
+          }
+          onMouseLeave={() =>
+            setHovered((prevState) => ({ ...prevState, cat: false }))
+          }
         >
           <Image
-            src="/cat.jpg"
+            src="/images/cat.jpg"
             width={200}
             height={200}
             alt="Picture of a Cat"
@@ -58,13 +75,17 @@ const AnimalInterface = () => {
       <div className="flex flex-col items-center">
         <div
           className={`rounded-full overflow-hidden border-4 border-gray-300 transition duration-300 ${
-            hovered ? "border-orange-500" : ""
+            hovered.rabbit ? "border-orange-500" : ""
           }`}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseEnter={() =>
+            setHovered((prevState) => ({ ...prevState, rabbit: true }))
+          }
+          onMouseLeave={() =>
+            setHovered((prevState) => ({ ...prevState, rabbit: false }))
+          }
         >
           <Image
-            src="/rabbit.jpg"
+            src="/images/rabbit.jpg"
             width={200}
             height={200}
             alt="Picture of a Rabbit"
@@ -81,13 +102,17 @@ const AnimalInterface = () => {
       <div className="flex flex-col items-center">
         <div
           className={`rounded-full overflow-hidden border-4 border-gray-300 transition duration-300 ${
-            hovered ? "border-orange-500" : ""
+            hovered.exotic ? "border-orange-500" : ""
           }`}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseEnter={() =>
+            setHovered((prevState) => ({ ...prevState, exotic: true }))
+          }
+          onMouseLeave={() =>
+            setHovered((prevState) => ({ ...prevState, exotic: false }))
+          }
         >
           <Image
-            src="/exotic.jpg"
+            src="/images/exotic.jpg"
             width={200}
             height={200}
             alt="Picture of an Exotic"
