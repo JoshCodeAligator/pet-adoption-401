@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const AnimalInterface = () => {
+
+const HomeView = () => {
   const [hovered, setHovered] = useState({
     dog: false,
     cat: false,
@@ -17,7 +18,7 @@ const AnimalInterface = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-8">
+    <div className="flex flex-wrap justify-center gap-8 mt-8">
       <div className="flex flex-col items-center">
         <div
           className={`rounded-full overflow-hidden border-4 border-gray-300 transition duration-300 ${
@@ -128,4 +129,4 @@ const AnimalInterface = () => {
   );
 };
 
-export default AnimalInterface;
+export default HomeView;
