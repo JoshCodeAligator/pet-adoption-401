@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-
 const HomeView = () => {
   const [hovered, setHovered] = useState({
     dog: false,
@@ -35,10 +34,11 @@ const HomeView = () => {
             src="/images/dog.jpg"
             width={200}
             height={200}
-            alt="Picture of a Dog"          />
+            alt="Picture of a Dog"
+          />
         </div>
         <h2 className="mt-4 text-lg font-semibold">Dogs</h2>
-        <Link href="/dogs">
+        <Link href="/BrowsePetsView">
           <button className="mt-2 px-4 py-2 bg-white text-black border border-black rounded-md transition duration-300 hover:text-white hover:bg-orange-500">
             View Dogs
           </button>
@@ -65,7 +65,7 @@ const HomeView = () => {
           />
         </div>
         <h2 className="mt-4 text-lg font-semibold">Cats</h2>
-        <Link href="/cats">
+        <Link href="/BrowsePetsView">
           <button className="mt-2 px-4 py-2 bg-white text-black border border-black rounded-md transition duration-300 hover:text-white hover:bg-orange-500">
             View Cats
           </button>
@@ -92,7 +92,7 @@ const HomeView = () => {
           />
         </div>
         <h2 className="mt-4 text-lg font-semibold">Rabbits</h2>
-        <Link href="/rabbits">
+        <Link href="/BrowsePetsView">
           <button className="mt-2 px-4 py-2 bg-white text-black border border-black rounded-md transition duration-300 hover:text-white hover:bg-orange-500">
             View Rabbits
           </button>
@@ -119,7 +119,7 @@ const HomeView = () => {
           />
         </div>
         <h2 className="mt-4 text-lg font-semibold">Exotics</h2>
-        <Link href="/exotics">
+        <Link href="/BrowsePetsView">
           <button className="mt-2 px-4 py-2 bg-white text-black border border-black rounded-md transition duration-300 hover:text-white hover:bg-orange-500">
             View Exotics
           </button>
