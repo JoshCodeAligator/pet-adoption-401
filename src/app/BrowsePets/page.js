@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
-import Navbar from "../Navbar";
+import Navbar from "../components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -129,7 +129,7 @@ const BrowsePetsView = () => {
         <div className="grid grid-cols-4 gap-8">
         {animals.map((animal) => (
             <div key={animal.id} className="text-center">
-              <Link href="/components/ViewPet">
+              <Link href="/ViewPet">
                 <Image
                   src={animal.image}
                   alt={animal.name}
