@@ -1,14 +1,14 @@
 // db.js
 const config = require("./config.json"); // Assuming the config file is in the same directory
 
-const mysql = require("mysql2/promise");
+import mysql from "mysql2/promise"
 
 const pool = mysql.createPool({
-    host: config.host_config,
-    user: config.user_config,
-    password: config.password_config,
-    database: config.database_config,
-    connectTimeout: config.connectTimeout_config,
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database,
+    connectTimeout: config.connectTimeout,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
@@ -42,9 +42,5 @@ const rollback = async () => {
     connection.release();
 };
 
-module.exports = {
-    query,
-    beginTransaction,
-    commit,
-    rollback,
-};
+export default query;
+
