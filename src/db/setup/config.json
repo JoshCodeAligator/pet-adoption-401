@@ -1,0 +1,7 @@
+{
+    "host": "host_IP",
+    "user": "user",
+    "password": "password",
+    "database": "database_name",
+    "connectTimeout": 60000
+}

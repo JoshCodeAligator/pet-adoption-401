@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Navbar";
+import Navbar from "../components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,7 +13,7 @@ const Page = () => {
           <div className="flex flex-col items-center justify-center w-1/2 p-8 mt-10">
             {/* Moves the image inside the left side div */}
             <div className="w-80 h-80 relative">
-              <Link href="/components/BrowsePets?category=Dogs">
+              <Link href="/BrowsePets?category=Dogs">
                 <button className="text-sm rounded p-2 bg-white text-black mb-4 hover:bg-orange-500">
                   &lt; Back to Listings
                 </button>
@@ -24,7 +24,7 @@ const Page = () => {
                 width={500}
                 height={500}
               />
-              <Link href="/components/BookAppointment">
+              <Link href="/BookAppointment">
                 <button className="text-lg font-bold rounded-full p-4 bg-white text-black mb-4 mt-10 hover:bg-orange-500 hover:text-white">
                   Book An Appointment
                 </button>
