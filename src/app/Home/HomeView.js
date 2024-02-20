@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "../Navbar";
+import Navbar from "../components/Navbar";
 import { useState } from "react";
 import Router from "next/router";
 
@@ -20,7 +20,7 @@ const HomeView = () => {
 
   const handleCategoryClick = (animal) => {
     if (typeof window !== "undefined") {
-      window.location.href = `/components/BrowsePets?category=${animal}`;
+      window.location.href = `/BrowsePets?category=${animal}`;
     }
   };
 
