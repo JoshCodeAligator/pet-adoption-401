@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
-import Router from "next/router";
+import {useRouter} from "next/navigation";
+import {cat, dog, exotic, rabbit} from "@/app/gloabl/constants";
 
 const HomeView = () => {
   const [hovered, setHovered] = useState({
@@ -14,14 +14,18 @@ const HomeView = () => {
     exotic: false,
   });
 
+  const router = useRouter()
+
   const handleMouseEnter = (animal) => {
     setHovered((prevState) => ({ ...prevState, [animal]: true }));
   };
 
   const handleCategoryClick = (animal) => {
-    if (typeof window !== "undefined") {
-      window.location.href = `/BrowsePets?category=${animal}`;
-    }
+    // if (typeof window !== "undefined") {
+    //   // window.location.href = `/BrowsePets?category=${animal}`;
+    //
+    // }
+    router.push(`/BrowsePets?category=${animal}`)
   };
 
   return (
@@ -55,7 +59,7 @@ const HomeView = () => {
 
           <button
             className="mt-2 px-4 py-2 bg-white text-black border border-black rounded-md transition duration-300 hover:text-white hover:bg-orange-500"
-            onClick={() => handleCategoryClick("Dogs")}
+            onClick={() => handleCategoryClick(dog)}
           >
             View Dogs
           </button>
@@ -84,7 +88,7 @@ const HomeView = () => {
 
           <button
             className="mt-2 px-4 py-2 bg-white text-black border border-black rounded-md transition duration-300 hover:text-white hover:bg-orange-500"
-            onClick={() => handleCategoryClick("Cats")}
+            onClick={() => handleCategoryClick(cat)}
           >
             View Cats
           </button>
@@ -113,7 +117,7 @@ const HomeView = () => {
 
           <button
             className="mt-2 px-4 py-2 bg-white text-black border border-black rounded-md transition duration-300 hover:text-white hover:bg-orange-500"
-            onClick={() => handleCategoryClick("Rabbits")}
+            onClick={() => handleCategoryClick(rabbit)}
           >
             View Rabbits
           </button>
@@ -142,7 +146,7 @@ const HomeView = () => {
 
           <button
             className="mt-2 px-4 py-2 bg-white text-black border border-black rounded-md transition duration-300 hover:text-white hover:bg-orange-500"
-            onClick={() => handleCategoryClick("Exotics")}
+            onClick={() => handleCategoryClick(exotic)}
           >
             View Exotics
           </button>
