@@ -1,16 +1,15 @@
 "use server"
 
-import query from "@/db/setup/db";
+import {getAllAvailableCat, getAllAvailablePets, getAllAvailableDogs} from "@/app/BrowsePets/BrowsePetsAPI";
+
 
 async function getAllPets() {
-	try {
-		const res = await query('SELECT * FROM Pet', [])
-		console.log(res)
-		return res
 
-	} catch (e) {
-		console.log("Error with getAllPets", e)
-	}
+	// all queries work as intended
+
+	return getAllAvailablePets()
+	// return getAllAvailableCat()
+	// return getAllAvailableDogs()
 }
 
 export default getAllPets;

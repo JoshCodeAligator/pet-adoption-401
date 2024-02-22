@@ -3,7 +3,7 @@
 import {useEffect, useState} from "react";
 import getAllPets from "@test/testAPI";
 import {TestView} from "@test/TestView";
-import {PetDisplay} from "@test/PetDisplay";
+import {DataType} from "@test/DataType";
 
 // where call to db is made via api file
 // format data received from api call
@@ -21,7 +21,7 @@ const TestController = () => {
 
 			// format data into an object
 			data.map((pet) => {
-				dataArray.push(PetDisplay.objectFromDict(pet))
+				dataArray.push(DataType.objectFromJson(pet))
 			})
 
 			setPetData(dataArray)
