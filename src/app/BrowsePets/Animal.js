@@ -2,7 +2,7 @@ class Animal {
 
 	constructor(id, name, age, sex, category, breed, img) {
 		// the ones that can be simply copied
-		this._id = id
+		this._id = id.toString()
 		this._name = name
 		this._breed = breed
 		this._category = category
@@ -18,7 +18,7 @@ class Animal {
 
 
 		// convert age to a string (should be an int)
-		this._age = age
+		this._age = age.toString() + " years"
 
 		// convert sex
 		if (sex === 'M') {
@@ -63,6 +63,18 @@ class Animal {
 	// factory function to create an Animal object from json/db query
 	static objectFromJson(json) {
 		return new Animal(json.pet_id, json.name, json.age, json.sex, json.category, json.breed, json.img)
+	}
+
+	// function to get json
+	toJson() {
+		return {
+			id: this._id,
+			name: this._name,
+			age: this._age,
+			sex: this._sex,
+			breed: this._breed,
+			image: this._image,
+		}
 	}
 }
 

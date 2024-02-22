@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
-import Router from "next/router";
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {cat, dog, exotic, rabbit} from "@/app/gloabl/constants";
 
 const HomeView = () => {
