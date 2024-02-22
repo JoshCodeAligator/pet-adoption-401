@@ -3,8 +3,6 @@
 import query from "@/db/setup/db";
 
 const available = "available"
-const dog = "Dog"
-const cat = "Cat"
 
 async function getAllAvailablePets() {
 	try {
@@ -19,30 +17,17 @@ async function getAllAvailablePets() {
 	}
 }
 
-async function getAllAvailableDogs() {
+async function getAllAvailablePetsOfType(category) {
 	try {
 		const result = await query(
 			'SELECT * FROM Pet natural join PetType WHERE status = ? AND category = ?',
-			[available, dog])
+			[available, category])
 		console.log(result)
 		return result
 
 	} catch (e) {
-		console.log("Error with getAllAvailableDogs", e)
+		console.log("Error with getAllAvailablePetsOfType", e)
 	}
 }
 
-async function getAllAvailableCat() {
-	try {
-		const result = await query(
-			'SELECT * FROM Pet natural join PetType WHERE status = ? AND category = ?',
-			[available, cat])
-		console.log(result)
-		return result
-
-	} catch (e) {
-		console.log("Error with getAllAvailableCat", e)
-	}
-}
-
-export { getAllAvailablePets, getAllAvailableCat, getAllAvailableDogs }
+export { getAllAvailablePets, getAllAvailablePetsOfType }
