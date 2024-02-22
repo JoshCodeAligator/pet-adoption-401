@@ -10,8 +10,8 @@ async function getAllAvailablePets() {
 			'SELECT * FROM Pet natural join PetType WHERE status = ?',
 			[available])
 		console.log(result)
-		return result
 
+		return result
 	} catch (e) {
 		console.log("Error with getAllAvailablePets", e)
 	}
