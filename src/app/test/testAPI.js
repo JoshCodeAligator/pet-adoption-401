@@ -7,8 +7,8 @@ async function getAllPets() {
 
 	// all queries work as intended
 
-	// return getAllAvailablePets()
-	return getAllAvailablePetsOfType("Dog")
+	return getAllAvailablePets()
+	// return getAllAvailablePetsOfType("Dog")
 }
 
 export default getAllPets;

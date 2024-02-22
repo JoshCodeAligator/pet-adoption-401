@@ -29,7 +29,7 @@ export const TestView = ({petData}) => {
                     <>
                         {petData.map((pet, index) => (
                             <p key={index}>
-                                {pet.toString()}
+                                {pet.id + " " + pet.name + "\n\n"}
                             </p>
                         ))}
                     </>
