@@ -15,16 +15,16 @@ export const AnimalPreview = ({animal}) => {
 			</Link>
 			<h2 className="text-xl font-bold mb-2">{animal.name}</h2>
 			<p>
-				<span className="font-bold">AnimalID:</span> {animal.id}
+				<span className="font-bold">AnimalID: </span>{animal.id}
 			</p>
 			<p>
-				<span className="font-bold">Age:</span> {animal.age}
+				<span className="font-bold">Age: </span>{animal.age}
 			</p>
 			<p>
 				<span className="font-bold">Sex:</span> {animal.sex}
 			</p>
 			<p>
-				<span className="font-bold">Breed:</span> {animal.breed}
+				<span className="font-bold">Breed: </span>{animal.breed}
 			</p>
 		</>
 	)
