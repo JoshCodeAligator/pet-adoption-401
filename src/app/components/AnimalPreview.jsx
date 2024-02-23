@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export const AnimalPreview = ({animal}) => {
+const AnimalPreview = ({animal}) => {
 	return (
 		<>
 			<Link href="/ViewPet">
@@ -29,3 +29,5 @@ export const AnimalPreview = ({animal}) => {
 		</>
 	)
 }
+
+export default AnimalPreview;
