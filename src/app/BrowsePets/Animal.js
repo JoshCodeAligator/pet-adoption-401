@@ -6,33 +6,29 @@ class Animal {
 		this._name = name
 		this._breed = breed
 		this._category = category
+		this._age = age
 
-		// check if img is null
-		if (img === null) {
-			// this is a placeholder image, might want to add category checks?
+		// check if img is null or empty string
+		if (img === null || img === "") {
+			// this is a placeholder image, might want to add category checks? for different placeholder?
 			this._image = "/images/dog.jpg"
 		}
 		else {
 			this._image = img
 		}
 
-
-		// convert age to a string (should be an int)
-		this._age = age.toString() + " years"
-
-		// convert sex
+		// convert sex to full form
 		if (sex === 'M') {
 			this._sex = "Male"
 		}
 		else {
 			this._sex = "Female"
 		}
-
 	}
 
 	// at the moment will make object read only
 	get id() {
-		return this._id;
+		return this._id.toString();
 	}
 
 	get name() {
@@ -52,7 +48,7 @@ class Animal {
 	}
 
 	get age() {
-		return this._age;
+		return this._age.toString() + " years";
 	}
 
 	get sex() {
