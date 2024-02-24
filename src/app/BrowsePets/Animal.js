@@ -2,7 +2,7 @@ class Animal {
 
 	constructor(id, name, age, sex, category, breed, img) {
 		// the ones that can be simply copied
-		this._id = id.toString()
+		this._id = id
 		this._name = name
 		this._breed = breed
 		this._category = category
