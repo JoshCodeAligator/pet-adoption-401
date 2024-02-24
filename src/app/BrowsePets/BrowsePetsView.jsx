@@ -2,7 +2,7 @@
 
 import Navbar from "@components/Navbar";
 import CategorySelectButton from "@components/CategorySelectButton";
-import {animal, cat, category, dog, exotic, rabbit} from "@/app/gloabl/constants";
+import {animal, cat, category, dog, exotic, rabbit} from "@/app/global/constants";
 import BrowseOrderButton from "@components/BrowseOrderButton";
 import AnimalPreview from "@components/AnimalPreview";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
