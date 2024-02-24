@@ -2,9 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const AnimalPreview = ({animal}) => {
+	const viewPetLinkPath = `/ViewPet/${animal.id}`
 	return (
 		<>
-			<Link href="/ViewPet">
+			<Link href={viewPetLinkPath}>
 				<Image
 					src={animal.image}
 					alt={animal.name}
