@@ -63,6 +63,7 @@ CREATE TABLE Client (
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     account_id INT,
+    guest TINYINT(1) DEFAULT 1,
     PRIMARY KEY(client_id)
 );
 
