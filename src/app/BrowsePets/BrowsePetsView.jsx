@@ -72,9 +72,9 @@ const BrowsePetsView = ({animals}) => {
 										  onClick={() => handleCategoryClick(exotic)}/>
 				</div>
 				<div className="mb-10">
-					<BrowseOrderButton content={"By Name"}/>
-					<BrowseOrderButton content={"By Age"}/>
-					<BrowseOrderButton content={"By Size"}/>
+					<BrowseOrderButton content={"By Name"} onClick={() => {}}/>
+					<BrowseOrderButton content={"By Age"} onClick={() => {}}/>
+					<BrowseOrderButton content={"By Size"} onClick={() => {}}/>
 				</div>
 				<div className="grid grid-cols-4 gap-8">
 					{animalsToDisplay.map((animal) => (
