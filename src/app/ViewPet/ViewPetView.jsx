@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 const ViewPetView = ({pet}) => {
+	const bookAppointmentLink = "/BookAppointment/"
+
 	return (
 		<div>
 			<Navbar/>
@@ -25,7 +27,7 @@ const ViewPetView = ({pet}) => {
 								width={500}
 								height={500}
 							/>
-							<Link href="/BookAppointment">
+							<Link href={bookAppointmentLink}>
 								<button
 									className="text-lg font-bold rounded-full p-4 bg-white text-black mb-4 mt-10 hover:bg-orange-500 hover:text-white">
 									Book An Appointment
