@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 const ViewPetView = ({pet}) => {
-	const bookAppointmentLink = "/BookAppointment/"
+  
+	const bookAppointmentLink = "/BookAppointment"
 
 	return (
 		<div>
