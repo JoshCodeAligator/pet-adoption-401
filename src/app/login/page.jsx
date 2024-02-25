@@ -1,9 +1,21 @@
+"use client"
+
+import LoginForm from "@components/LoginForm";
+import {useState} from "react";
 
 
 const Login = () => {
+	const [errorFlag, setErrorFlag] = useState(false)
+	const [errorMessage, setErrorMessage] = useState('')
+
+	const onSubmit = async () => {
+		alert("Attempted Login")
+	}
+
 	return (
 		<>
-			<h1>Login Page</h1>
+			<LoginForm onSubmit={onSubmit}
+					   loginErrorMessage={errorMessage} loginErrorFlag={errorFlag}/>
 		</>
 	)
 }
