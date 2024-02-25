@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div className="flex-shrink-0">
           <Link
-            href="/public"
+            href="/"
             className="flex items-center text-white text-xl font-bold"
           >
             <HomeIcon className="h-8 w-8 mr-2" />
