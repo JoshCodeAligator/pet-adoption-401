@@ -8,13 +8,14 @@ const Login = () => {
 	const [errorFlag, setErrorFlag] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
 
-	const onSubmit = async () => {
-		alert("Attempted Login")
+
+	const submit = (formData) => {
+		alert(`Submitted: ${formData.get('email')}, ${formData.get('***REMOVED***')}`)
 	}
 
 	return (
 		<>
-			<LoginForm onSubmit={onSubmit}
+			<LoginForm onSubmit={submit}
 					   loginErrorMessage={errorMessage} loginErrorFlag={errorFlag}/>
 		</>
 	)
