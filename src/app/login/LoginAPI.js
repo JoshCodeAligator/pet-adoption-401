@@ -5,20 +5,20 @@
 // also needs to check if correct email and password
 
 import query from "@/db/setup/db";
-import VerifyLoginResponse from "@login/VerifyLoginResponse";
+import ValidateLoginResponse from "@login/ValidateLoginResponse";
 
 /**
- * Verifies with database if account with email and password exists in it.
+ * Validate with database if account with email and password exists in it.
  * Will check for 2 possible errors: account doesn't exist, or password is incorrect.
- * @returns {Promise<VerifyLoginResponse>} Holds response about verification of login data
+ * @returns {Promise<ValidateLoginResponse>} Holds response about verification of login data
  */
-const verifyLoginData = async (email, password) => {
+const validateLogin = async (email, password) => {
 	// first check if email exists
 	const accountExists = await verifyAccountExists(email)
 
 	// didn't find email in db
 	if (!accountExists) {
-		return new VerifyLoginResponse(false, "Email not found")
+		return new ValidateLoginResponse(false, "Email not found")
 	}
 
 	// now attempt to verify the account by matching password
@@ -26,11 +26,11 @@ const verifyLoginData = async (email, password) => {
 
 	// account verification failed
 	if (!verifyAccount) {
-		return new VerifyLoginResponse(false, "Incorrect password")
+		return new ValidateLoginResponse(false, "Incorrect password")
 	}
 
 	// account verification successful
-	return new VerifyLoginResponse(true)
+	return new ValidateLoginResponse(true)
 
 }
 
@@ -42,7 +42,7 @@ const verifyLoginData = async (email, password) => {
 const verifyAccountExists = async (email) => {
 	// check if email exists
 	const findEmailResponse = await query(
-		'SELECT account_id WHERE email = ?',
+		'SELECT account_id FROM Account WHERE email = ?',
 		[email]
 	)
 
@@ -58,7 +58,7 @@ const verifyAccountExists = async (email) => {
  */
 const verifyLoginDetails = async (email, password) => {
 	const verifyLogin = await query(
-		'SELECT account_id WHERE email = ? AND password = ?',
+		'SELECT account_id FROM Account WHERE email = ? AND password = ?',
 		[email, password]
 	)
 
@@ -66,4 +66,6 @@ const verifyLoginDetails = async (email, password) => {
 	return verifyLogin.length !== 0
 }
 
-export default verifyLoginData;
+export default validateLogin;
+
+export {verifyAccountExists, verifyLoginDetails}

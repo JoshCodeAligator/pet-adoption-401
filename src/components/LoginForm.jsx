@@ -10,25 +10,28 @@ const LoginForm = ({onSubmit, loginErrorFlag, loginErrorMessage}) => {
   	return (
 		<>
 			<Navbar/>
-			{/* Log in form */}
-			<form action={onSubmit} className="absolute top-20">
-				{/* Email field */}
-				<FormInput type="email" name="email" label="Enter your email:"
-						   placeholder="PetPursuit@email.com"/>
 
-				{/* password field */}
-				<FormInput type="password" name="password" label="Enter your password:"/>
+			<div className="absolute top-20">
+				{/* Log in form */}
+				<form action={onSubmit}>
+					{/* Email field */}
+					<FormInput type="email" name="email" label="Enter your email:"
+							   placeholder="PetPursuit@email.com"/>
 
-				{/* Login button */}
-				<button type="submit">Log In</button>
-			</form>
+					{/* password field */}
+					<FormInput type="password" name="password" label="Enter your password:"/>
 
-			{/* Display error if there is an error */}
-			{loginErrorFlag &&
-				<p className="accent-red-600">
-					{loginErrorMessage}
-				</p>
-			}
+					{/* Login button */}
+					<button type="submit">Log In</button>
+				</form>
+
+				{/* Display error if there is an error */}
+				{loginErrorFlag &&
+					<p>
+						{loginErrorMessage}
+					</p>
+				}
+			</div>
 
 		</>
 	)
