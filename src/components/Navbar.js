@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div className="flex-shrink-0">
           <Link
-            href="/"
+            href="/public"
             className="flex items-center text-white text-xl font-bold"
           >
             <HomeIcon className="h-8 w-8 mr-2" />
@@ -29,7 +29,7 @@ const Navbar = () => {
           <Link href="/contact" className="ml-6">
             <span>Contact</span>
           </Link>
-          <Link href="/" className="ml-6">
+          <Link href="/public" className="ml-6">
             <span>Donate</span>
           </Link>
         </div>
@@ -56,7 +56,7 @@ const Navbar = () => {
             <Link href="/contact" className="my-2 hover:text-gray-300">
               Contact
             </Link>
-            <Link href="/" className="my-2 hover:text-gray-300">
+            <Link href="/public" className="my-2 hover:text-gray-300">
               Donate
             </Link>
           </div>
