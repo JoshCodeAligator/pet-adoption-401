@@ -5,12 +5,14 @@
 // also needs to check if correct email and password
 
 import query from "@/db/setup/db";
-import ValidateLoginResponse from "@login/ValidateLoginResponse";
 
 /**
- * Validate with database if account with email and password exists in it.
- * Will check for 2 possible errors: account doesn't exist, or password is incorrect.
- * @returns {Promise<ValidateLoginResponse>} Holds response about verification of login data
+ * Attempts to validate login information. Checks with database of following cases:
+ * account not found, incorrect password, correct password
+ * @param email email of account
+ * @param password password of account
+ * @returns {Promise<{found: boolean, error: string}>} a json object with a found boolean that tells if an account has
+ * been found and an error message if found is false.
  */
 const validateLogin = async (email, password) => {
 	// first check if email exists
@@ -18,7 +20,10 @@ const validateLogin = async (email, password) => {
 
 	// didn't find email in db
 	if (!accountExists) {
-		return new ValidateLoginResponse(false, "Email not found")
+		return {
+			found: false,
+			error: "Email not found"
+		}
 	}
 
 	// now attempt to verify the account by matching password
@@ -26,11 +31,17 @@ const validateLogin = async (email, password) => {
 
 	// account verification failed
 	if (!verifyAccount) {
-		return new ValidateLoginResponse(false, "Incorrect password")
+		return {
+			found: false,
+			error: "Incorrect password"
+		}
 	}
 
 	// account verification successful
-	return new ValidateLoginResponse(true)
+	return {
+		found: true,
+		error: ""
+	}
 
 }
 
@@ -68,4 +79,4 @@ const verifyLoginDetails = async (email, password) => {
 
 export default validateLogin;
 
-export {verifyAccountExists, verifyLoginDetails}
+// export {verifyAccountExists, verifyLoginDetails}
