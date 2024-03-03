@@ -1,16 +1,12 @@
-"use client"
-
 import Navbar from "@components/Navbar";
 import CreateClientAccountForm from "@components/CreateClientAccountForm";
 
-const ClientCreateAccountView = ({onSubmit, errorFlag, errorMessage}) => {
+const ClientCreateAccountView = () => {
 	return (
 		<>
 			<Navbar/>
 			<div className={"absolute top-20"}>
-				<CreateClientAccountForm onSubmit={onSubmit}
-										 createErrorFlag={errorFlag}
-										 createErrorMessage={errorMessage}/>
+				<CreateClientAccountForm/>
 			</div>
 		</>
 
