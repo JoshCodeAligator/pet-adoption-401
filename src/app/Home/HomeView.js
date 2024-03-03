@@ -4,7 +4,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import {useRouter} from "next/navigation";
-import {cat, dog, exotic, rabbit} from "@/app/global/constants";
+import {cat, dog, exotic, rabbit} from "@/app/constants";
 
 const HomeView = () => {
   const [hovered, setHovered] = useState({
