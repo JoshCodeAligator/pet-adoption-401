@@ -2,8 +2,9 @@
 
 import {useState} from "react";
 import LoginView from "@login/LoginView";
-import {verifyAccountExists, verifyLoginDetails} from "@login/LoginAPI";
+import validateLogin from "@login/LoginAPI";
 import {useRouter} from "next/navigation";
+import LoginValidationResponse from "@login/LoginValidationResponse";
 
 
 
@@ -22,24 +23,10 @@ const LoginController = () => {
 
 		// validate login
 
-		// first check if found account
-		const accountExists = await verifyAccountExists(email)
-
-		if (!accountExists) {
-			// set error for account not existing
-			setErrorFlag(true)
-			setErrorMessage("Email not found")
-			return
-		}
-
-		// now verify ***REMOVED***
-		const correctPassword = await verifyLoginDetails(email, ***REMOVED***)
-		// it seems that for some reason, it returns true even if wrong case
-		// meaning for some reason ***REMOVED*** is case-insensitive (need fix)
-
+		const validationResponse = LoginValidationResponse.objectFromJson(await validateLogin(email, ***REMOVED***))
 
 		// log in success, redirect to home page
-		if (correctPassword) {
+		if (validationResponse.found) {
 			router.push("/")
 			alert("Log in successful!")
 
@@ -48,10 +35,9 @@ const LoginController = () => {
 			return
 		}
 
-
 		// validation failed, set error
 		setErrorFlag(true)
-		setErrorMessage("Incorrect ***REMOVED***")
+		setErrorMessage(validationResponse.error)
 
 	}
 
