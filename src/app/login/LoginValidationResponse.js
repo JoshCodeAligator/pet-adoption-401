@@ -1,7 +1,7 @@
 /**
  * Data structure that holds the response from db query verifying login information
  */
-class ValidateLoginResponse {
+class LoginValidationResponse {
 	constructor(found, error) {
 		// found is a boolean if the account was found in the db
 		this.found = found
@@ -15,6 +15,10 @@ class ValidateLoginResponse {
 		}
 	}
 
+	static objectFromJson({found, error}) {
+		return new LoginValidationResponse(found, error)
+	}
+
 }
 
-export default ValidateLoginResponse
+export default LoginValidationResponse
