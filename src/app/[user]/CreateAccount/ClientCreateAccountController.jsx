@@ -1,3 +1,5 @@
+"use client"
+
 import ClientCreateAccountView from "@CreateAccount/ClientCreateAccountView";
 import {useState} from "react";
 
@@ -11,6 +13,7 @@ const ClientCreateAccountController = () => {
 	const validateCreateAccountForm = async (formData) => {
 		const firstName = formData.get("first_name")
 		const lastName = formData.get("last_name")
+		const phone = formData.get("phone")
 		const email = formData.get("email")
 		const password = formData.get("password")
 		const confirm_password = formData.get("confirm_password")
