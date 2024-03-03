@@ -1,4 +1,14 @@
 import FormInput from "@components/FormInput";
+import AccountFormInputs from "@components/AccountFormInputs";
+
+
+// local component for phone number form input
+const PhoneFormInput = () => {
+	return (
+		<input type={"tel"} name={"phone"} pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
+			   placeholder={"587-123-4567"}/>
+	)
+}
 
 const CreateClientAccountForm = ({onSubmit, createErrorFlag, createErrorMessage}) => {
 
@@ -8,6 +18,8 @@ const CreateClientAccountForm = ({onSubmit, createErrorFlag, createErrorMessage}
 		<>
 			{/*	form to create client account */}
 			<form action={onSubmit}>
+				{/* Client information */}
+
 				{/* First name */}
 				<FormInput type={"text"} name={"first_name"} label={"First Name"}
 						   placeholder={"First"}/>
@@ -20,15 +32,12 @@ const CreateClientAccountForm = ({onSubmit, createErrorFlag, createErrorMessage}
 						   placeholder={"Last"}/>
 				<br/>
 
-				{/* email */}
-				<FormInput type={"email"} name={"email"} label={"Email"}
-						   placeholder={"PetPursuit@email.com"}/>
+				{/* Phone Number */}
+				<PhoneFormInput/>
 				<br/>
-				{/* password */}
-				<FormInput type={"password"} name={"password"} label={"Password"}/>
-				<br/>
-				{/* confirm password */}
-				<FormInput type={"password"} name={"confirm_password"} label={"Confirm Password"}/>
+
+				{/* Account information */}
+				<AccountFormInputs/>
 				<br/>
 
 				{/*	submit button */}
