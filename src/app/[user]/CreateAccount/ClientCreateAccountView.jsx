@@ -1,3 +1,5 @@
+"use client"
+
 import Navbar from "@components/Navbar";
 import CreateClientAccountForm from "@components/CreateClientAccountForm";
 
