@@ -16,7 +16,7 @@ CREATE TABLE Pet (
     pet_id INT AUTO_INCREMENT,
     name VARCHAR(50),
     sex ENUM('M', 'F'),
-    age SMALLINT UNSIGNED,
+    age INT1 UNSIGNED,
     img VARCHAR(256),
     description VARCHAR(500),
     status ENUM('available', 'booked', 'adopted') NOT NULL,
@@ -62,6 +62,7 @@ CREATE TABLE Client (
     client_id BIGINT UNSIGNED,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
+    account_id BIGINT UNSIGNED,
     account_id BIGINT UNSIGNED,
     PRIMARY KEY(client_id)
 );
@@ -113,7 +114,7 @@ CREATE TABLE Appointment (
     date DATE NOT NULL,
     start_time TIME NOT NULL,
     client_id BIGINT UNSIGNED,
-    centre_id INT,
+    centre_id BIGINT UNSIGNED,
     pet_id INT,
     PRIMARY KEY(appointment_id),
     FOREIGN KEY(client_id) REFERENCES Client(client_id)
