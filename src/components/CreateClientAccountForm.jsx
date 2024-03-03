@@ -28,7 +28,7 @@ const CreateClientAccountForm = ({onSubmit, createErrorFlag, createErrorMessage}
 				<FormInput type={"password"} name={"password"} label={"Password"}/>
 				<br/>
 				{/* confirm password */}
-				<FormInput type={"password"} name={"confirm-password"} label={"Confirm Password"}/>
+				<FormInput type={"password"} name={"confirm_password"} label={"Confirm Password"}/>
 				<br/>
 
 				{/*	submit button */}
