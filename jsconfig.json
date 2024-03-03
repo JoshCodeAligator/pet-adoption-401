@@ -4,7 +4,8 @@
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@test/*": ["./src/app/test/*"],
-      "@login/*": ["./src/app/login/*"]
+      "@login/*": ["./src/app/login/*"],
+      "@CreateAccount/*": ["./src/app/[user]/CreateAccount/*"]
     }
   }
 }
