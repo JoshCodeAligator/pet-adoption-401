@@ -2,7 +2,7 @@
 
 import Navbar from "@components/Navbar";
 import CategorySelectButton from "@components/CategorySelectButton";
-import {animal, cat, category, dog, exotic, rabbit} from "@/app/global/constants";
+import {animal, cat, category, dog, exotic, rabbit} from "@/app/constants";
 import BrowseOrderButton from "@components/BrowseOrderButton";
 import AnimalPreview from "@components/AnimalPreview";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
@@ -43,7 +43,7 @@ const BrowsePetsView = ({animals}) => {
 	const handleCategoryClick = (clickedCategory) => {
 		setCurrentCategory(clickedCategory);
 		// change current URL params
-		router.push(pathname + '?' + createQueryString(category, currentCategory))
+		router.push(pathname + '?' + createQueryString(category, clickedCategory))
 	};
 
 	return (
