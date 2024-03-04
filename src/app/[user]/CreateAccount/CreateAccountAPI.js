@@ -23,6 +23,8 @@ const createClientAccount = async ({fName, lName, phone, email, ***REMOVED***}) 
 		// get accountID of account just inserted
 		const accountID = await fetchAccountID(email, ***REMOVED***)
 
+		console.log("AccountID: %d", accountID)
+
 		if (accountID === -1) {
 			// for some reason failed to get account that was just created
 			// so return a server error
@@ -32,7 +34,7 @@ const createClientAccount = async ({fName, lName, phone, email, ***REMOVED***}) 
 			}
 		}
 
-		console.log(accountID)
+
 
 		// attempt to insert a client
 		const insertClientResult = await insertClient(fName, lName, accountID)
@@ -56,6 +58,8 @@ const createClientAccount = async ({fName, lName, phone, email, ***REMOVED***}) 
 
 		// need to get client_id
 		const clientID = await fetchClientID(fName, lName, accountID)
+
+		console.log(`ClientID: ${clientID}`)
 
 		if (clientID === -1) {
 			// unable to fetch client, some sort of server error
