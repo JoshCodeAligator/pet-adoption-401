@@ -13,18 +13,22 @@ const ClientCreateAccountController = () => {
 
 	// function to validate create account form
 	const validateCreateAccountForm = async (formData) => {
-		const firstName = formData.get("first_name")
-		const lastName = formData.get("last_name")
-		const phone = formData.get("phone")
-		const email = formData.get("email")
-		const password = formData.get("password")
-		const confirm_password = formData.get("confirm_password")
 
+		const formFields = {
+			 firstName : formData.get("first_name"),
+			 lastName : formData.get("last_name"),
+			 phone : formData.get("phone"),
+			 email : formData.get("email"),
+			 password : formData.get("password"),
+			 confirm_password : formData.get("confirm_password")
+		}
 
 		// TODO: field validation
 
-		const result = await createClientAccount(
-			{firstName, lastName, phone, email, password})
+		const result = await createClientAccount(formFields)
+
+		console.log("Done executing Create New Account button")
+		console.log(result)
 
 		// Success in client account creation,
 		if (result.success) {
@@ -35,7 +39,7 @@ const ClientCreateAccountController = () => {
 
 		setErrorFlag(true)
 		setError(result.error)
-
+		router.refresh()
 	}
 	return (
 		<ClientCreateAccountView onSubmit={validateCreateAccountForm}
