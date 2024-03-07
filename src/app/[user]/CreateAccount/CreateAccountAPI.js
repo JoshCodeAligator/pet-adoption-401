@@ -2,99 +2,107 @@
 
 // file for create account API for any type of account creation
 
-import query from "@/db/setup/db";
+import query, {beginTransaction, commit} from "@/db/setup/db";
+import {cat} from "@/app/constants";
+const unique_id = require("uniqid")
+
+/**
+ * Generates an 8 byte ID
+ * @returns {number} 8 byte number
+ */
+function generateID() {
+	const id = unique_id.time()
+	// id generated is in base 32
+	return parseInt(id, 32)
+
+}
+
+const createClientAccount = async ({firstName, lastName, phone, email, password}) => {
+	console.log("Starting createClientAccount, got following from form: ")
+	console.log(firstName, lastName, phone, email, password)
 
 
-const createClientAccount = async ({fName, lName, phone, email, password}) => {
+	let accountID
+	let clientID
+	let phoneID
+
 	try {
-		// first attempt to create a new account
-		const insertAccountResult = insertAccount(email, password)
 
-		// failed to insert new account
-		if (!insertAccountResult) {
+		// generate all ID
+		accountID = await generateAccountID();
+		clientID = await generateClientID();
+		phoneID = await generatePhoneID();
+
+		// await accountID
+		// await clientID
+		// await phoneID
+
+		// for some reason using await after to have all 3 generates run together doesn't work
+		// don't get values in time
+
+		console.log("AccountID: ", accountID)
+		console.log("ClientID: ", clientID)
+		console.log("PhoneID: ", phoneID)
+
+		// attempt to create all accounts
+		const insertAccountResult = await insertAccount(accountID, email, password)
+		const insertClientResult = await insertClient(clientID, firstName, lastName, accountID)
+		const insertPhoneResult = await insertPhone(phoneID, clientID, phone)
+
+		// issue with checking errors after running all 3 is the fact that
+		// if attempt to inert a new client, however due to email conflict didn't insert a new account
+		// ge an error for client as we use a non-existent account_id as the fk
+		// so need to catch that error within insertClient so we don't catch it here
+
+		// same deal with insertPhone
+
+
+		// now check for errors
+
+		if (insertAccountResult === false) {
+			await deleteClient(clientID)
+			await deletePhone(phoneID)
+
 			return {
 				success: false,
-				error: "Account already exists"
+				error: "Email already used for an existing account"
 			}
 		}
 
-		// now attempt to add new client and client phone into db
+		// await insertClientResult
+		if (insertClientResult === false) {
+			await deleteAccount(accountID)
+			await deletePhone(phoneID)
 
-		// get accountID of account just inserted
-		const accountID = await fetchAccountID(email, password)
-
-		console.log("AccountID: %d", accountID)
-
-		if (accountID === -1) {
-			// for some reason failed to get account that was just created
-			// so return a server error
 			return {
 				success: false,
-				error: "Server error"
+				error: "Server error while attempting to create a client"
 			}
 		}
-
-
-
-		// attempt to insert a client
-		const insertClientResult = await insertClient(fName, lName, accountID)
-
-		// check if failed to add client to db
-		if (!insertClientResult) {
-			// need to remove account that was just created
-			await query(
-				'DELETE FROM Account WHERE account_id = ?',
-				[accountID]
-			)
-
-			// return that failed to create client
-			return {
-				success: false,
-				error: "Server client insert error"
-			}
-		}
-
-		// now attempt to add phone number
-
-		// need to get client_id
-		const clientID = await fetchClientID(fName, lName, accountID)
-
-		console.log(`ClientID: ${clientID}`)
-
-		if (clientID === -1) {
-			// unable to fetch client, some sort of server error
-			return {
-				success: false,
-				error: "Server error"
-			}
-		}
-
-		// now attempt to inert phone number
-		const insertPhoneResult = await insertPhone(clientID, phone)
-
-		if (!insertPhoneResult) {
-			// some sort of server error
-			// there isn't really any restrictions to ClientPhone
-
-			// so before returning need to delete account and client
-			await query(
-				'DELETE FROM Account WHERE account_id = ?',
-				[accountID]
-			)
-
-			await query(
-				'DELETE FROM Client WHERE client_id = ?',
-				[clientID]
-			)
+		// await insertPhoneResult
+		if (insertPhoneResult === false) {
+			await deleteAccount(accountID)
+			await deleteClient(clientID)
 
 			return {
 				success: false,
-				error: "Server client phone insert error"
+				error: "Server error while attempting to save phone number"
 			}
 		}
 	}
 	catch (e) {
-		console.log(e.error)
+		if (e.error) {
+			console.log(e.error)
+		}
+		else {
+			console.log(e.message)
+		}
+
+
+		// delete everything we possibly inserted just now
+		await deleteAccount(accountID)
+		await deleteClient(clientID)
+		await deletePhone(phoneID)
 
 		return {
 			success: false,
@@ -109,23 +117,74 @@ const createClientAccount = async ({fName, lName, phone, email, password}) => {
 	}
 }
 
+/**
+ * Generates a unique account_id that can be used to create a new Account in the database.
+ * @returns {Promise<number>} 8 byte integer
+ */
+async function generateAccountID() {
+
+	let accountID = generateID()
+
+	// keep looping until you find an unused account_id
+	while (1) {
+		const result = await query(
+			'SELECT account_id FROM Account WHERE account_id = ?',
+			[accountID]
+		)
+		// return once found an unused account id
+		if (result.length === 0) {
+			return accountID;
+		}
+		// add 1 to id and try
+		accountID++
+	}
+}
+
 
 /**
  * Attempts to insert a new account into the database.
  * Returns if insert was successful.
+ * @param accountID account_id of new account
  * @param email email of new account
  * @param password password of new account
  * @returns {Promise<boolean>} true if successful in inserting new account. false if db didn't change
  */
-async function insertAccount(email, password){
-	// attempt to create a new account
-	const insertAccountResult = await query(
-		'INSERT INTO Account (email, password) VALUES (?, ?)',
-		[email, password]
-	)
+async function insertAccount(accountID, email, password){
+	console.log("Started insertAccount")
+	const dup_email_code = 'ER_DUP_ENTRY'
 
-	// check if unable to create a new account
-	return insertAccountResult.affectedRows !== 0;
+	await beginTransaction()
+	try {
+		// attempt to create a new account
+		const insertAccountResult = await query(
+			'INSERT INTO Account (account_id, email, password) VALUES (?, ?, ?)',
+			[accountID, email, password]
+		)
+		await commit()
+		console.log("Finishing normally insertAccount, will return", insertAccountResult.affectedRows > 0)
+		// only return true if db actually changed (due to insert just did)
+
+		return insertAccountResult.affectedRows > 0
+	}
+	catch (e) {
+		// if this error occurs, it means attempted to make account with an existing email
+		if (e.code === dup_email_code) {
+			console.log("Finishing via dup_email_code insertAccount")
+			return false
+		}
+		throw e
+	}
+}
+
+/**
+ * Runs query to delete an account from the database.
+ * @param accountID The account_id of the account to delete
+ */
+async function deleteAccount(accountID) {
+	await query(
+		'DELETE FROM Account WHERE account_id = ?',
+		[accountID]
+	)
 }
 
 /**
@@ -145,20 +204,74 @@ async function fetchAccountID(email, password) {
 }
 
 /**
+ * Generates a unique client)id that can be used to create a new Client in the database.
+ * @returns {Promise<number>} 8 byte integer
+ */
+async function generateClientID() {
+	let clientID = generateID()
+
+	// keep looping until you find an unused client_id
+	while (1) {
+		const result = await query(
+			'SELECT client_id FROM Client WHERE client_id = ?',
+			[clientID]
+		)
+
+		if (result.length === 0) {
+			return clientID;
+		}
+
+		clientID++
+	}
+}
+
+/**
  * Attempts to insert a new client into the database. Returns if successful or not.
+ * @param clientID client_id of new client
  * @param fName first name of new client
  * @param lName last name of new client
- * @param account_id account_id of new client
+ * @param accountID account_id of new client
  * @returns {Promise<boolean>} true if new client added. false if no change to database.
  */
-async function insertClient(fName, lName, account_id) {
-	const insertClientResult = await query(
-		'INSERT INTO Client (first_name, last_name, account_id) VALUES (?, ?, ?)',
-		[fName, lName, account_id]
-	)
-	// check if was able to create new client or not
-	return insertClientResult.affectedRows !== 0;
+async function insertClient(clientID, fName, lName, accountID) {
+	console.log("Started insertClient")
+
+	// sql errno for attempting to insert with an unknown fk
+	const sql_error_no = 1452
+
+	await beginTransaction()
+
+	try {
+		const insertClientResult = await query(
+			'INSERT INTO Client (client_id, first_name, last_name, account_id) VALUES (?, ?, ?, ?)',
+			[clientID, fName, lName, accountID]
+		)
+		await commit()
+
+		// check if was able to create new client or not
+
+		console.log("Return from insertClient")
+		return insertClientResult.affectedRows > 0;
+	}
+	catch (e) {
+		if (e.errno === sql_error_no) {
+			return false
+		}
+	}
+
 }
+
+/**
+ * Runs query to delete a client from the database.
+ * @param clientID The client_id of the client to delete
+ */
+async function deleteClient(clientID) {
+	await query(
+		'DELETE FROM Client WHERE client_id = ?',
+		[clientID]
+	)
+}
+
 
 /**
  * Fetches a client id from the database.
@@ -181,19 +294,68 @@ async function fetchClientID(fName, lName, account_id) {
 }
 
 /**
+ * Generates a unique phone_id that can be used to create a new ClientPhone in the database.
+ * @returns {Promise<number>} 8 byte integer
+ */
+async function generatePhoneID() {
+
+	let phoneID = generateID()
+
+	// keep looping until you find an unused phone_id
+	while (1) {
+
+		const result = await query(
+			'SELECT phone_id FROM ClientPhone WHERE phone_id = ?',
+			[phoneID]
+		)
+
+		if (result.length === 0) {
+			return phoneID
+		}
+
+		phoneID++
+	}
+}
+
+/**
  * Attempts to insert a new client phone number into the database.
+ * @param phoneID phone_id of the new client phone
  * @param client_id client_id of phone number belonging to
  * @param phone phone number
  * @returns {Promise<boolean>} true if inserted a new phone number. false if no change to database,
  */
-async function insertPhone(client_id, phone) {
-	const insertPhoneResult = await query(
-		'INSERT INTO ClientPhone (client_id, phone) VALUES (?, ?)',
-		[client_id, phone]
-	)
-	// check if was able to create new client or not
-	return insertPhoneResult.affectedRows !== 0;
+async function insertPhone(phoneID, client_id, phone) {
+	console.log("Started insertPhone")
 
+	// sql errno for attempting to insert with an unknown fk
+	const sql_error_no = 1452
+
+	try {
+		const insertPhoneResult = await query(
+			'INSERT INTO ClientPhone (phone_id, phone, client_id) VALUES (?, ?, ?)',
+			[phoneID, phone, client_id]
+		)
+		await commit()
+		// check if was able to create new clientPhone or not
+		console.log("Return from insertPhone")
+		return insertPhoneResult.affectedRows > 0;
+	}
+	catch (e) {
+		if (e.errno === sql_error_no) {
+			return false
+		}
+	}
+}
+
+/**
+ * Runs query to delete a ClientPhone from the database.
+ * @param phoneID The phone_id of the phone to delete
+ */
+async function deletePhone(phoneID) {
+	await query(
+		'DELETE FROM ClientPhone WHERE phone_id = ?',
+		[phoneID]
+	)
 }
 
 export {createClientAccount}
