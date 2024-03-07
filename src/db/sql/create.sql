@@ -16,7 +16,7 @@ CREATE TABLE Pet (
     pet_id INT AUTO_INCREMENT,
     name VARCHAR(50),
     sex ENUM('M', 'F'),
-    age INT1 UNSIGNED,
+    age SMALLINT UNSIGNED,
     img VARCHAR(256),
     description VARCHAR(500),
     status ENUM('available', 'booked', 'adopted') NOT NULL,
@@ -59,16 +59,16 @@ ADD FOREIGN KEY(centre_id) REFERENCES RescueCentre(centre_id)
                  ON DELETE CASCADE;
 
 CREATE TABLE Client (
-    client_id INT AUTO_INCREMENT,
+    client_id BIGINT UNSIGNED,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
-    account_id INT,
+    account_id BIGINT UNSIGNED,
     PRIMARY KEY(client_id)
 );
 
 CREATE TABLE ClientPhone (
-    phone_id INT AUTO_INCREMENT,
-    client_id INT,
+    phone_id BIGINT UNSIGNED,
+    client_id BIGINT UNSIGNED,
     phone VARCHAR(12),
     PRIMARY KEY(phone_id),
     FOREIGN KEY(client_id) REFERENCES Client(client_id)
@@ -78,8 +78,8 @@ CREATE TABLE ClientPhone (
 -- will let database store duplicate phone numbers for same client
 
 CREATE TABLE Admin (
-    admin_id INT AUTO_INCREMENT,
-    account_id INT,
+    admin_id BIGINT UNSIGNED,
+    account_id BIGINT UNSIGNED,
     centre_id INT,
     PRIMARY KEY(admin_id),
     FOREIGN KEY(centre_id) REFERENCES RescueCentre(centre_id)
@@ -88,11 +88,11 @@ CREATE TABLE Admin (
 );
 
 CREATE TABLE Account (
-    account_id INT AUTO_INCREMENT,
+    account_id BIGINT UNSIGNED,
     email VARCHAR(100) NOT NULL,
     ***REMOVED*** VARCHAR(50) NOT NULL,
     PRIMARY KEY(account_id),
-    CONSTRAINT unique_account UNIQUE(email, ***REMOVED***)
+    CONSTRAINT unique_account UNIQUE(email)
 );
 
 -- add fk account_id to client
@@ -109,10 +109,10 @@ ADD FOREIGN KEY(account_id) REFERENCES Account(account_id)
 
 CREATE TABLE Appointment (
     appointment_id INT AUTO_INCREMENT,
-    slot_no INT1 UNSIGNED,
+    slot_no SMALLINT UNSIGNED,
     date DATE NOT NULL,
     start_time TIME NOT NULL,
-    client_id INT,
+    client_id BIGINT UNSIGNED,
     centre_id INT,
     pet_id INT,
     PRIMARY KEY(appointment_id),
