@@ -2,6 +2,7 @@
 
 import Error from 'next/error'
 import {admin, client} from "@/app/constants";
+import ClientCreateAccountController from "@CreateAccount/ClientCreateAccountController";
 
 
 const CreateAccount = ({params}) => {
@@ -21,9 +22,7 @@ const CreateAccount = ({params}) => {
 
 	if (user_type === client) {
 		return (
-			<p>
-				Client Create Account
-			</p>
+			<ClientCreateAccountController/>
 		)
 	}
 

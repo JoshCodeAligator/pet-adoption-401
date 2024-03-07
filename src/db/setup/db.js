@@ -44,3 +44,5 @@ const rollback = async () => {
 
 export default query;
 
+export {commit, rollback, beginTransaction}
+
