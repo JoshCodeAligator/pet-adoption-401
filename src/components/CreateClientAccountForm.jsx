@@ -1,12 +1,12 @@
 import FormInput from "@components/FormInput";
 import AccountFormInputs from "@components/AccountFormInputs";
-
+import {firstName, lastName, phone} from "@/app/constants";
 
 // local component for phone number form input
 const PhoneFormInput = () => {
 	return (
-		<input type={"tel"} name={"phone"} pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
-			   placeholder={"587-123-4567"}/>
+		<input type={"tel"} name={phone} pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"}
+			   placeholder={"587-111-1111"}/>
 	)
 }
 
@@ -15,20 +15,20 @@ const CreateClientAccountForm = ({onSubmit, createErrorFlag, createErrorMessage}
 	// field validation done outside this component
 
 	return (
-		<>
+		<div>
 			{/*	form to create client account */}
 			<form action={onSubmit}>
 				{/* Client information */}
 
 				{/* First name */}
-				<FormInput type={"text"} name={"first_name"} label={"First Name"}
+				<FormInput type={"text"} name={firstName} label={"First Name"}
 						   placeholder={"First"}/>
 
 				{/* Add a small bit of space between first and last name fields in same line */}
 				<span>	</span>
 
 				{/*Last Name*/}
-				<FormInput type={"text"} name={"last_name"} label={"Last Name"}
+				<FormInput type={"text"} name={lastName} label={"Last Name"}
 						   placeholder={"Last"}/>
 				<br/>
 
@@ -50,7 +50,7 @@ const CreateClientAccountForm = ({onSubmit, createErrorFlag, createErrorMessage}
 					{createErrorMessage}
 				</p>
 			}
-		</>
+		</div>
 	)
 }
 
