@@ -44,8 +44,9 @@ CREATE TABLE RescueCentre (
     centre_id INT AUTO_INCREMENT,
     name VARCHAR(50),
     address VARCHAR(150),
-    phone VARCHAR(12),
-    slot_len_min INT2 UNSIGNED NOT NULL
+    phone VARCHAR(12)
+        COMMENT 'One phone number per rescue centre',
+    slot_len_min INT2 UNSIGNED NOT NULL DEFAULT 30
         COMMENT 'Length of each appointment slot in minutes',
     num_slot_per_day INT1 UNSIGNED NOT NULL DEFAULT 1
         COMMENT 'Number of appointment slots per day',
