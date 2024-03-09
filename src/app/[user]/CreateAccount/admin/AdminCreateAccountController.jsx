@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {createAdminAccount, getAllRescueCentres} from "@CreateAccount/CreateAccountAPI";
 import RescueCentre from "@CreateAccount/RescueCentre";
-import {address, confirm_***REMOVED***, dropDownMenuName, email, ***REMOVED***, phone} from "@/app/constants";
+import {address, confirm_***REMOVED***, name, email, ***REMOVED***, phone} from "@/app/constants";
 
 export const AdminCreateAccountController = () => {
 	const [errorFlag, setErrorFlag] = useState(false)
@@ -71,9 +71,10 @@ export const AdminCreateAccountController = () => {
 
 	const adminFormSubmit = async (formData) => {
 		// clear error
-		setErrorFlag(false)
-		setError("")
-		// might be optional to do as if just change page on success, then multiple attempts are made while flag is true
+		// setErrorFlag(false)
+		// setError("")
+		// might be optional to do as if just change page on success,
+		// meaning multiple attempts are made while flag is true
 
 		const formFields = {
 			// centre_index: formData.get(dropDownMenuName),
