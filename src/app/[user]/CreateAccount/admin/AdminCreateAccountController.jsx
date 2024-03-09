@@ -1,6 +1,6 @@
 "use client"
 
-import AdminCreateAccountView from "@CreateAccount/AdminCreateAccountView";
+import AdminCreateAccountView from "@CreateAccount/admin/AdminCreateAccountView";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {createAdminAccount, getAllRescueCentres} from "@CreateAccount/CreateAccountAPI";
@@ -11,8 +11,18 @@ export const AdminCreateAccountController = () => {
 	const [errorFlag, setErrorFlag] = useState(false)
 	const [error, setError] = useState('')
 	const [allRescueCentres, setAllRescueCentres] = useState([])
+	const [selectedCentreIndex, setSelectedCentreIndex] = useState(-1)
 
 	const router = useRouter()
+
+	useEffect(() => {
+		console.log("selected centre index: ", selectedCentreIndex)
+		console.log("selected centre: ", allRescueCentres[selectedCentreIndex])
+
+		// some odd reason once you select an index, then go back to blank, if statement still is ran, even though
+		// selectedCentreIndex is -1
+
+	}, [selectedCentreIndex]);
 
 	useEffect(() => {
 		// fetch all rescue centres from db
@@ -27,17 +37,20 @@ export const AdminCreateAccountController = () => {
 		})
 	}, []);
 
-	const validateAdminForm = ({centre_index, name, address, phone, email, ***REMOVED***, confirm_***REMOVED***}) => {
+	const validateAdminForm = ({name, address, phone, email, ***REMOVED***, confirm_***REMOVED***}) => {
+		// may or may not be null, depending on index
+		const rescue_centre = allRescueCentres[selectedCentreIndex]
+
 		// first check all fields filled in
 
-		if (centre_index === -1 && (!name || !address || !phone || !email || !***REMOVED***)) {
+		if (!rescue_centre && (!name || !address || !phone || !email || !***REMOVED***)) {
 			setErrorFlag(true)
 			setError("Fill all fields")
 			console.log("Did not select a rescue centre, and didn't fill in all fields.")
 			return false
 		}
 		// below is case where select an existing rescue centre, then no need to fill out centre fields
-		else if (centre_index !== -1 && (!email || !***REMOVED***)) {
+		else if (rescue_centre && (!email || !***REMOVED***)) {
 			setErrorFlag(true)
 			setError("Fill email and ***REMOVED***")
 			console.log("Didn't fill out email or ***REMOVED***, but selected a rescue centre")
@@ -63,8 +76,9 @@ export const AdminCreateAccountController = () => {
 		// might be optional to do as if just change page on success, then multiple attempts are made while flag is true
 
 		const formFields = {
-			centre_index: formData.get(dropDownMenuName),
-			centre_id: -1,	// needs to be set later, isn't actually a form field, but data derived from on
+			// centre_index: formData.get(dropDownMenuName),
+			centre_id: -1,
+			// needs to be set later, isn't actually a form field, but data derived from one
 			// added to this object to make it easier to use later
 			name: formData.get(name),
 			address: formData.get(address),
@@ -74,10 +88,14 @@ export const AdminCreateAccountController = () => {
 			confirm_***REMOVED***: formData.get(confirm_***REMOVED***)
 		}
 
-		// set centre_id if it isn't -1
-		if (formFields.centre_index !== -1) {
-			formFields.centre_id = allRescueCentres[formFields.centre_index].id
+		// set centre_id if rescue centre isn't null
+		const rescue_centre = allRescueCentres[selectedCentreIndex]
+		if (rescue_centre) {
+			formFields.centre_id = rescue_centre.id
 		}
+
+		console.log("Got following data from form:\n", formFields)
+
 		// issue with if statement above, it seems to trigger even if it should have value -1?
 		// might want to somehow be able to pass up the RescueCentre selected, not just the index
 
@@ -104,12 +122,12 @@ export const AdminCreateAccountController = () => {
 		setError(result.error)
 	}
 
-
 	return (
 		<>
 			<AdminCreateAccountView onSubmit={adminFormSubmit}
 									errorFlag={errorFlag} errorMessage={error}
-									rescueCentres={allRescueCentres}/>
+									rescueCentres={allRescueCentres}
+									setSelectedIndex={setSelectedCentreIndex}/>
 		</>
 	)
 }

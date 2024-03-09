@@ -1,6 +1,6 @@
 "use client"
 
-import ClientCreateAccountView from "@CreateAccount/ClientCreateAccountView";
+import ClientCreateAccountView from "@CreateAccount/client/ClientCreateAccountView";
 import {useState} from "react";
 import {createClientAccount} from "@CreateAccount/CreateAccountAPI";
 import {useRouter} from "next/navigation";

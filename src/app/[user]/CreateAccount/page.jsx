@@ -2,8 +2,8 @@
 
 import Error from 'next/error'
 import {admin, client} from "@/app/constants";
-import ClientCreateAccountController from "@CreateAccount/ClientCreateAccountController";
-import {AdminCreateAccountController} from "@CreateAccount/AdminCreateAccountController";
+import ClientCreateAccountController from "@CreateAccount/client/ClientCreateAccountController";
+import {AdminCreateAccountController} from "@CreateAccount/admin/AdminCreateAccountController";
 
 
 const CreateAccount = ({params}) => {
