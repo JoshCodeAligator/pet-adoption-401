@@ -38,7 +38,7 @@ const DropDownMenu = ({name, label, menuDataList , setIndex}) => {
 				<option value={-1}/>
 				{/* Display the rescue centres */}
 				{menuDataList.map((data, index) => (
-					<option key={index} value={data}>
+					<option key={index} value={index}>
 						{data.toString()}
 						{/* Assumption that there is a toString defined for data */}
 					</option>
