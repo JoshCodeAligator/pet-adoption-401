@@ -1,5 +1,3 @@
-import { useState} from "react";
-
 /**
  * Drop down menu to select a rescue centre.
  * Selection made will be used by function setRescueCentre.
