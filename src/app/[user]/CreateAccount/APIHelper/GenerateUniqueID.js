@@ -83,4 +83,52 @@ async function generatePhoneID() {
 	}
 }
 
-export {generateClientID, generateAccountID, generatePhoneID};
+/**
+ * Generates a unique admin_id that can be used to create a new Admin in the database.
+ * @returns {Promise<number>} 8 byte integer
+ */
+async function generateAdminID() {
+
+	let adminID = generateID()
+
+	// keep looping until you find an unused admin_id
+	while (1) {
+
+		const result = await query(
+			'SELECT admin_id FROM Admin WHERE admin_id = ?',
+			[adminID]
+		)
+
+		if (result.length === 0) {
+			return adminID
+		}
+
+		adminID++
+	}
+}
+
+/**
+ * Generates a unique centre_id that can be used to create a new RescueCentre in the database.
+ * @returns {Promise<number>} 8 byte integer
+ */
+async function generateCentreID() {
+
+	let centreID = generateID()
+
+	// keep looping until you find an unused admin_id
+	while (1) {
+
+		const result = await query(
+			'SELECT centre_id FROM RescueCentre WHERE centre_id = ?',
+			[centreID]
+		)
+
+		if (result.length === 0) {
+			return centreID
+		}
+
+		centreID++
+	}
+}
+
+export {generateClientID, generateAccountID, generatePhoneID, generateAdminID, generateCentreID};

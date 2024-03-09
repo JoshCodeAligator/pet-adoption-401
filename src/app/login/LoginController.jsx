@@ -31,7 +31,7 @@ const LoginController = () => {
 			alert("Log in successful!")
 
 			// might want to set some sort of authentication or cookie with logged in flag to be true
-			// and have their account_id with it
+			// and have their account_id and other information passed from the validateLogin function
 			return
 		}
 
