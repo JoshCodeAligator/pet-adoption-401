@@ -3,7 +3,7 @@ import DropDownMenu from "@components/DropDownMenu";
 import FormInput from "@components/FormInput";
 import {dropDownMenuName, phone, name, address} from "@/app/constants";
 
-const CreateAdminAccountForm = ({onSubmit, createErrorFlag, createErrorMessage, rescueCentres}) => {
+const CreateAdminAccountForm = ({onSubmit, createErrorFlag, createErrorMessage, rescueCentres, setIndex}) => {
 
 	// field validation done outside this component
 
@@ -17,7 +17,7 @@ const CreateAdminAccountForm = ({onSubmit, createErrorFlag, createErrorMessage, 
 
 				{/* Select an existing rescue centre*/}
 				<DropDownMenu name={dropDownMenuName} label={"Select an existing Rescue Centre"}
-							  menuDataList={rescueCentres} setIndex={() => {}}/>
+							  menuDataList={rescueCentres} setIndex={setIndex}/>
 
 				{/* or enter details for a new rescue centre */}
 				<FormInput type={"text"} name={name} label={"Rescue Centre Name"} placeholder={""}/>
