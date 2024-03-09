@@ -1,7 +1,7 @@
 {
-    "host": "host_IP",
-    "user": "user",
+    "host": "localhost",
+    "user": "***REMOVED***",
     "***REMOVED***": "***REMOVED***",
-    "database": "database_name",
+    "database": "PetPursuit",
     "connectTimeout": 60000
 }
