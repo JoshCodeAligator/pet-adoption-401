@@ -22,7 +22,7 @@ export const AdminCreateAccountController = () => {
 		// some odd reason once you select an index, then go back to blank, if statement still is ran, even though
 		// selectedCentreIndex is -1
 
-	}, [selectedCentreIndex]);
+	}, [allRescueCentres, selectedCentreIndex]);
 
 	useEffect(() => {
 		// fetch all rescue centres from db
