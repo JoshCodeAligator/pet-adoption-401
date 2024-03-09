@@ -77,6 +77,10 @@ const ClientCreateAccountController = () => {
 		if (!validateCreateAccountForm(formFields)) {
 			return
 		}
+		// can't use errorFlag to check if an error was set during validation
+		// as state variables only get updated once a function ends
+		// set don't immediately update them, instead those updates are put into a queue
+		// which gets executed once function(calling set) is done
 
 		const result = await createClientAccount(formFields)
 

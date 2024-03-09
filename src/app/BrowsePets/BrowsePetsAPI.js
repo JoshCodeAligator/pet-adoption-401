@@ -2,13 +2,13 @@
 
 import query from "@/db/setup/db";
 
-const available = "available"
+const adopted = "adopted"
 
 async function getAllAvailablePets() {
 	try {
 		const result = await query(
-			'SELECT * FROM Pet natural join PetType WHERE status = ?',
-			[available])
+			'SELECT * FROM Pet natural join PetType WHERE status != ?',
+			[adopted])
 		console.log(result)
 
 		return result
@@ -20,8 +20,8 @@ async function getAllAvailablePets() {
 async function getAllAvailablePetsOfType(category) {
 	try {
 		const result = await query(
-			'SELECT * FROM Pet natural join PetType WHERE status = ? AND category = ?',
-			[available, category])
+			'SELECT * FROM Pet natural join PetType WHERE status != ? AND category = ?',
+			[adopted, category])
 		console.log(result)
 		return result
 

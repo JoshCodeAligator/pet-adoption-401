@@ -3,20 +3,19 @@
 import Error from 'next/error'
 import {admin, client} from "@/app/constants";
 import ClientCreateAccountController from "@CreateAccount/ClientCreateAccountController";
+import {AdminCreateAccountController} from "@CreateAccount/AdminCreateAccountController";
 
 
 const CreateAccount = ({params}) => {
 	// must match admin or client, case-sensitive part
 	const user_type = params.user
 
-	// if we want to make case-insensitive, can add a .toLowerCase()
+	// if we want to make case-insensitive, can add a .toLowerCase() to params.user
 
 	// using user_type, will have return different pages
 	if (user_type === admin) {
 		return (
-			<p>
-				Admin Create Account
-			</p>
+			<AdminCreateAccountController/>
 		)
 	}
 

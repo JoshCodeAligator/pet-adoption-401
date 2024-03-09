@@ -5,6 +5,7 @@
 import {generateAccountID, generateClientID, generatePhoneID} from "@CreateAccount/APIHelper/GenerateUniqueID";
 import {insertAccount, insertClient, insertPhone} from "@CreateAccount/APIHelper/Insert";
 import {deleteAccount, deleteClient, deletePhone} from "@CreateAccount/APIHelper/Delete";
+import query from "@/db/setup/db";
 
 const createClientAccount = async ({firstName, lastName, phone, email, password}) => {
 	console.log("Starting createClientAccount, got following from form: ")
@@ -139,4 +140,23 @@ const createAdminAccount = async ({email, password}) => {
 	}
 }
 
-export {createClientAccount, createAdminAccount}
+const getAllRescueCentres = async () => {
+	console.log("Start getAllRescueCentres")
+
+	try {
+		const fetchRescueCentresResult = await query(
+			'SELECT * FROM RescueCentre',
+			[]
+		)
+		console.log("Result from getAllRescueCentres query:\n", fetchRescueCentresResult)
+		return fetchRescueCentresResult
+	}
+	catch (e) {
+		console.log("Error with getAllRescueCentres:\n", e)
+		return []
+	}
+
+
+}
+
+export {createClientAccount, createAdminAccount, getAllRescueCentres}
