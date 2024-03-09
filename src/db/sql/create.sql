@@ -114,7 +114,7 @@ CREATE TABLE Appointment (
     date DATE NOT NULL,
     start_time TIME NOT NULL,
     client_id BIGINT UNSIGNED,
-    centre_id INT,
+    centre_id BIGINT UNSIGNED,
     pet_id INT,
     PRIMARY KEY(appointment_id),
     FOREIGN KEY(client_id) REFERENCES Client(client_id)
