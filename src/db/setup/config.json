@@ -1,7 +1,7 @@
 {
     "host": "localhost",
     "user": "root",
-    "password": "***REMOVED***",
+    "password": "password",
     "database": "PetPursuit",
     "connectTimeout": 60000
 }
