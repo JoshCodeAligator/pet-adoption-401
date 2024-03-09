@@ -2,9 +2,21 @@
 
 // file for create account API for any type of account creation
 
-import {generateAccountID, generateClientID, generatePhoneID} from "@CreateAccount/APIHelper/GenerateUniqueID";
-import {insertAccount, insertClient, insertPhone} from "@CreateAccount/APIHelper/Insert";
-import {deleteAccount, deleteClient, deletePhone} from "@CreateAccount/APIHelper/Delete";
+import {
+	generateAccountID,
+	generateAdminID,
+	generateCentreID,
+	generateClientID,
+	generatePhoneID
+} from "@CreateAccount/APIHelper/GenerateUniqueID";
+import {
+	insertAccount,
+	insertAdmin,
+	insertClient,
+	insertPhone,
+	insertRescueCentre
+} from "@CreateAccount/APIHelper/Insert";
+import {deleteAccount, deleteAdmin, deleteCentre, deleteClient, deletePhone} from "@CreateAccount/APIHelper/Delete";
 import query from "@/db/setup/db";
 
 const createClientAccount = async ({firstName, lastName, phone, email, ***REMOVED***}) => {
@@ -45,7 +57,7 @@ const createClientAccount = async ({firstName, lastName, phone, email, ***REMOVE
 		console.log("ClientID: ", clientID)
 		console.log("PhoneID: ", phoneID)
 
-		// attempt to create all accounts
+		// attempt to create all rows in database
 		const insertAccountResult = await insertAccount(accountID, email, ***REMOVED***)
 		const insertClientResult = await insertClient(clientID, firstName, lastName, accountID)
 		const insertPhoneResult = await insertPhone(phoneID, clientID, phone)
@@ -117,19 +129,93 @@ const createClientAccount = async ({firstName, lastName, phone, email, ***REMOVE
 	}
 }
 
-const createAdminAccount = async ({email, ***REMOVED***}) => {
-	console.log("Starting createAdminAccount, got values: ", email, ***REMOVED***)
+const createAdminAccount = async ({centre_id, name, address, phone, email, ***REMOVED***}) => {
+	console.log("Starting createAdminAccount, got values:\n", centre_id, name, address, phone, email, ***REMOVED***)
 
 	let accountID
 	let adminID
+	let centreID
+
+	// flag to see if we need to insert a new rescue centre
+	const newCentreFlag = centre_id === -1
 
 	try {
 		// generate ID
 		accountID = await generateAccountID()
+		adminID = await generateAdminID()
+		// if centre_id is -1 (invalid) then generate ID
+		centreID = newCentreFlag ? await generateCentreID() : centre_id
 
+		console.log("accountID: ", accountID)
+		console.log("adminID: ", adminID)
+		console.log("CentreID: ", centreID)
+
+		// attempt to create all rows in database
+		const insertAccountResult = await insertAccount(accountID, email, ***REMOVED***)
+
+		// initially set result to true, so if we don't call insert, pass the error checking later
+		let insertCentreResult = true
+		if (newCentreFlag) {
+			insertCentreResult = await insertRescueCentre(centreID, name, address, phone)
+		}
+		const insertAdminResult = await insertAdmin(adminID, accountID, centreID)
+
+
+		// error checking
+
+		if (insertAccountResult === false) {
+			await deleteAdmin(adminID)
+			if (newCentreFlag) {
+				await deleteCentre(centreID)
+			}
+
+			return {
+				success: false,
+				error: "Email already used for an existing account"
+			}
+		}
+
+		if (insertAdminResult === false) {
+			await deleteAccount(accountID)
+			if (newCentreFlag) {
+				await deleteCentre(centreID)
+			}
+
+			return {
+				success: false,
+				error: "Server error while trying to create an admin"
+			}
+		}
+
+		if (insertCentreResult === false) {
+			await deleteAccount(accountID)
+			await deleteAdmin(adminID)
+
+			return {
+				success: false,
+				error: "Server error while trying to create a rescue centre"
+			}
+		}
 	}
 	catch (e) {
+		if (e.error) {
+			console.log(e.error)
+		}
+		else {
+			console.log(e.message)
+		}
 
+		// delete account and admin and maybe centre
+		await deleteAccount(accountID)
+		await deleteAdmin(adminID)
+		if (newCentreFlag) {
+			await deleteCentre(centreID)
+		}
+
+		return {
+			success: false,
+			error: "Server error"
+		}
 	}
 
 
@@ -139,6 +225,7 @@ const createAdminAccount = async ({email, ***REMOVED***}) => {
 		error: ""
 	}
 }
+
 
 const getAllRescueCentres = async () => {
 	console.log("Start getAllRescueCentres")

@@ -35,4 +35,27 @@ async function deleteClient(clientID) {
 	)
 }
 
-export {deleteAccount, deleteClient, deletePhone}
+/**
+ * Runs query to delete an admin from the database.
+ * @param adminID The admin_id of the client to delete
+ */
+async function deleteAdmin(adminID) {
+	await query(
+		'DELETE FROM Admin WHERE admin_id = ?',
+		[adminID]
+	)
+}
+
+/**
+ * Runs query to delete a rescue centre from the database.
+ * @param centreID The client_id of the client to delete
+ */
+async function deleteCentre(centreID) {
+	await query(
+		'DELETE FROM RescueCentre WHERE centre_id = ?',
+		[centreID]
+	)
+}
+
+
+export {deleteAccount, deleteClient, deletePhone, deleteAdmin, deleteCentre}

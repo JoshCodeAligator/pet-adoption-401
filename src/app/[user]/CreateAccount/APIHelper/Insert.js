@@ -104,4 +104,76 @@ async function insertPhone(phoneID, client_id, phone) {
 	}
 }
 
-export {insertAccount, insertClient, insertPhone}
+/**
+ * Attempts to insert a new admin to the database. Returns if it was successful or not
+ * @param adminID admin_id of new admin
+ * @param accountID account_id of new admin
+ * @param centreID centre_id of new admin
+ * @return {Promise<boolean>} true if new admin was inserted. false if database was unchanged.
+ */
+async function insertAdmin(adminID, accountID, centreID) {
+	console.log("Started insertAdmin")
+
+	// sql errno for attempting to insert with an unknown fk
+	const sql_error_no = 1452
+
+	// await beginTransaction()
+
+	try {
+		const insertAdminResult = await query(
+			'INSERT INTO Admin (admin_id, account_id, centre_id) VALUES (?, ?, ?)',
+			[adminID, accountID, centreID]
+		)
+		// await commit()
+
+		// check if was able to create new client or not
+
+		console.log("Return from insertAdmin")
+		return insertAdminResult.affectedRows > 0;
+	}
+	catch (e) {
+		if (e.errno === sql_error_no) {
+			return false
+		}
+		throw e
+	}
+}
+
+/**
+ * Attempts to insert a new rescue centre into the database. Returns if it was successful or not.
+ * @param centreID centre_id of new rescue centre
+ * @param name name of new rescue centre
+ * @param address address of new rescue centre
+ * @param phone phone of new rescue centre
+ * @return {Promise<boolean>} true if new centre inserted. false if database was unchanged
+ */
+async function insertRescueCentre(centreID, name, address, phone) {
+	console.log("Started insertRescueCentre")
+
+	// sql errno for attempting to insert with an unknown fk
+	// const sql_error_no = 1452
+
+	// await beginTransaction()
+
+	try {
+		const insertCentreResult = await query(
+			'INSERT INTO RescueCentre (centre_id, name, address, phone) VALUES (?, ?, ?, ?)',
+			[centreID, name, address, phone]
+		)
+		// await commit()
+
+		// check if was able to create new client or not
+
+		console.log("Return from insertRescueCentre")
+		return insertCentreResult.affectedRows > 0;
+	}
+	catch (e) {
+		// if (e.errno === sql_error_no) {
+		// 	return false
+		// }
+		throw e
+	}
+
+}
+
+export {insertAccount, insertClient, insertPhone, insertRescueCentre, insertAdmin}
