@@ -131,8 +131,8 @@ CREATE TABLE Appointment (
 -- Now insert some test data
 
 -- insert a Center
-INSERT INTO RescueCentre (centre_id, name, address, phone, slot_len_min, num_slot_per_day)
-VALUES (1, 'CentreA', 'Centre A address', '4030804940', 30, 1);
+INSERT INTO RescueCentre (centre_id, name, address, phone)
+VALUES (1, 'CentreA', 'Centre A address', '4030804940');
 
 -- insert some PetType
 INSERT INTO PetType (type_id, category, breed)
