@@ -1,10 +1,10 @@
 const FormInput = ({type, name, label, placeholder}) => {
 	return (
-		<>
+		<div>
 			<label htmlFor={name}>{label}</label>
-			{/*<br/>*/}
+			<br/>
 			<input type={type} name={name} placeholder={placeholder}/>
-		</>
+		</div>
 	)
 }
 
