@@ -5,18 +5,8 @@ import { useState} from "react";
  * Selection made will be used by function setRescueCentre.
  */
 const DropDownMenu = ({name, label, menuDataList , setIndex}) => {
-	// use index -1 as unselected
-	const [selectedData, setSelectedData] = useState(null)
-	// purpose of this state is only in select value attribute
-	// possible that it isn't needed as no clue for the purpose of the value attribute of select
-
-
 	function handleSelectOption(event) {
-		const data = event.target.value;
-		const index = event.target.key
-
-		// not sure why we call setSelectedIndex
-		setSelectedData(data)
+		const index = event.target.value;
 
 		// setIndex needs to be able to deal with getting -1 (invalid index passed)
 		// possible if select empty option for selecting nothing
@@ -27,15 +17,14 @@ const DropDownMenu = ({name, label, menuDataList , setIndex}) => {
 		<div>
 			{/* Dropdown menu label */}
 			<label htmlFor={name}>{label}</label>
+			<br/>
 			{/* Display all data passed when in menu and display the selected data when clicked */}
 			<select
 				name={name}
-				onChange={handleSelectOption}
-				value={selectedData}>
-				{/* No clue about the purpose value attribute here */}
+				onChange={handleSelectOption}>
 
 				{/* First option is blank, for not selecting anything/cancel selection */}
-				<option value={-1}/>
+				<option key={-1} value={-1}/>
 				{/* Display the rescue centres */}
 				{menuDataList.map((data, index) => (
 					<option key={index} value={index}>
