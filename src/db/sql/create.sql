@@ -13,20 +13,20 @@ CREATE DATABASE PetPursuit;
 USE PetPursuit;
 
 CREATE TABLE Pet (
-    pet_id INT AUTO_INCREMENT,
+    pet_id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(50),
     sex ENUM('M', 'F'),
     age SMALLINT UNSIGNED,
     img VARCHAR(256),
     description VARCHAR(500),
     status ENUM('available', 'booked', 'adopted') NOT NULL,
-    type_id INT,
-    centre_id INT NOT NULL,
+    type_id BIGINT UNSIGNED,
+    centre_id BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY(pet_id)
 );
 
 CREATE TABLE PetType (
-    type_id INT AUTO_INCREMENT,
+    type_id BIGINT UNSIGNED AUTO_INCREMENT,
     category VARCHAR(50) NOT NULL DEFAULT 'unknown',
     breed VARCHAR(50) NOT NULL DEFAULT  'unknown',
     CONSTRAINT unique_pet_type UNIQUE (category, breed),
@@ -41,7 +41,7 @@ ADD FOREIGN KEY(type_id) REFERENCES PetType(type_id)
 -- won't delete pet if pet type gets deleted, just get set to null
 
 CREATE TABLE RescueCentre (
-    centre_id INT AUTO_INCREMENT,
+    centre_id BIGINT UNSIGNED,
     name VARCHAR(50),
     address VARCHAR(150),
     phone VARCHAR(12)
@@ -81,7 +81,7 @@ CREATE TABLE ClientPhone (
 CREATE TABLE Admin (
     admin_id BIGINT UNSIGNED,
     account_id BIGINT UNSIGNED,
-    centre_id INT,
+    centre_id BIGINT UNSIGNED,
     PRIMARY KEY(admin_id),
     FOREIGN KEY(centre_id) REFERENCES RescueCentre(centre_id)
                 ON UPDATE CASCADE
@@ -109,13 +109,13 @@ ADD FOREIGN KEY(account_id) REFERENCES Account(account_id)
                 ON DELETE CASCADE;
 
 CREATE TABLE Appointment (
-    appointment_id INT AUTO_INCREMENT,
+    appointment_id BIGINT UNSIGNED AUTO_INCREMENT,
     slot_no SMALLINT UNSIGNED,
     date DATE NOT NULL,
     start_time TIME NOT NULL,
     client_id BIGINT UNSIGNED,
     centre_id BIGINT UNSIGNED,
-    pet_id INT,
+    pet_id BIGINT UNSIGNED,
     PRIMARY KEY(appointment_id),
     FOREIGN KEY(client_id) REFERENCES Client(client_id)
                 ON UPDATE CASCADE
