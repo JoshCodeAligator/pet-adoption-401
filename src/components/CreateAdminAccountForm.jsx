@@ -26,7 +26,6 @@ const CreateAdminAccountForm = ({onSubmit, createErrorFlag, createErrorMessage, 
 
 				{/* Account information */}
 				<AccountFormInputs/>
-				<br/>
 
 				{/*	submit button */}
 				<button type={"submit"}>Create New Admin Account</button>
