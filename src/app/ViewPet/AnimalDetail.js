@@ -1,25 +1,34 @@
 import Animal from "@/app/BrowsePets/Animal";
+import Centre from "@/app/ViewPet/[id]/Centre";
 
 class AnimalDetail extends Animal {
 
-	constructor(id, name, age, sex, category, breed, img, centre_name, centre_address, centre_phone) {
+	constructor(id, name, age, sex, category, breed, img, status, centre_name, centre_address, centre_phone) {
 		super(id, name, age, sex, category, breed, img)
+		this._status = status
 
-		this._centre = {
-			name: centre_name,
-			address: centre_address,
-			phone: centre_phone
-		}
-
+		this._centre = new Centre(centre_name, centre_address, centre_phone)
 	}
 
-	get centre() {
-		return this._centre
+	get status() {
+		return this._status
+	}
+
+	get centre_name() {
+		return this._centre.name
+	}
+
+	get centre_address() {
+		return this._centre.address
+	}
+
+	get centre_phone() {
+		return this._centre.phone
 	}
 
 	// factory function to create an AnimalDetail object from json/db query
-	static objectFromJson({pet_id, name, age, sex, category, breed, img, centreName, centreLocation, centrePhone}) {
-		return new AnimalDetail(pet_id, name, age, sex, category, breed, img,
+	static objectFromAPIReturn({pet_id, name, age, sex, category, breed, img, status, centreName, centreLocation, centrePhone}) {
+		return new AnimalDetail(pet_id, name, age, sex, category, breed, img, status,
 			centreName, centreLocation, centrePhone)
 	}
 }
