@@ -13,13 +13,18 @@ const ViewPetController = ({pet_id}) => {
 			const response = await getPetDetails(petID)
 
 			if (response.length === 1)
-				return response[0]
+				return AnimalDetail.objectFromAPIReturn(response[0])
+
 			const unknown = "Unknown"
 			return new AnimalDetail(-1, unknown, -1, unknown, unknown, unknown, null,
 				unknown, unknown, unknown)
 		}
 
-		fetchPet(pet_id).then(res => setPet(res))
+		fetchPet(pet_id).then(res => {
+			setPet(res)
+
+			console.log(res)
+		})
 	}, [pet_id]);
 
 	return (
