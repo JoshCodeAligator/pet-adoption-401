@@ -22,7 +22,9 @@ async function getAllAvailablePetsOfType(category) {
       "SELECT * FROM Pet natural join PetType WHERE status != ? AND category = ?",
       ["adopted", category]
     );
-    console.log(result);
+    console.log("category ", category);
+    console.log("type of category ", typeof category);
+    console.log("results from selective search ", result);
     return result;
   } catch (e) {
     console.log("Error with getAllAvailablePetsOfType", e);
