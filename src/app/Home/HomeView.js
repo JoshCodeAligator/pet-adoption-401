@@ -151,6 +151,14 @@ const HomeView = () => {
             View Exotics
           </button>
         </div>
+        <div>
+          <h1
+            className="text-6xl font-extrabold mb-12 px-4 py-2 bg-white text-black border border-black rounded-lg transition duration-300 hover:text-white hover:bg-orange-500 hover:cursor-pointer "
+            onClick={() => handleCategoryClick("Animals")}
+          >
+            View All Animals
+          </h1>
+        </div>
       </div>
     </main>
   );
