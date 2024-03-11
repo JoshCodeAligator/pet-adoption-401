@@ -153,7 +153,7 @@ const HomeView = () => {
         </div>
         <div>
           <h1
-            className="text-6xl font-extrabold mb-12 px-4 py-2 bg-white text-black border border-black rounded-lg transition duration-300 hover:text-white hover:bg-orange-500 hover:cursor-pointer "
+            className="text-4xl font-extrabold mb-12 px-4 py-2 bg-white text-black border border-black rounded-lg transition duration-300 hover:text-white hover:bg-orange-500 hover:cursor-pointer "
             onClick={() => handleCategoryClick(animal)}
           >
             View All Animals
