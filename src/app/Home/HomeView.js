@@ -4,7 +4,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import {useRouter} from "next/navigation";
-import {cat, dog, exotic, rabbit} from "@/app/constants";
+import { cat, dog, exotic, rabbit, animal } from "@/app/constants";
 
 const HomeView = () => {
   const [hovered, setHovered] = useState({
@@ -14,7 +14,7 @@ const HomeView = () => {
     exotic: false,
   });
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleMouseEnter = (animal) => {
     setHovered((prevState) => ({ ...prevState, [animal]: true }));
@@ -25,7 +25,7 @@ const HomeView = () => {
     //   // window.location.href = `/BrowsePets?category=${animal}`;
     //
     // }
-    router.push(`/BrowsePets?category=${animal}`)
+    router.push(`/BrowsePets?category=${animal}`);
   };
 
   return (
@@ -154,7 +154,7 @@ const HomeView = () => {
         <div>
           <h1
             className="text-6xl font-extrabold mb-12 px-4 py-2 bg-white text-black border border-black rounded-lg transition duration-300 hover:text-white hover:bg-orange-500 hover:cursor-pointer "
-            onClick={() => handleCategoryClick("Animals")}
+            onClick={() => handleCategoryClick(animal)}
           >
             View All Animals
           </h1>

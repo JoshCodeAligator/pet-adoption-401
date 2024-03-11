@@ -4,10 +4,10 @@
 
 export const category = "category"
 export const animal = "Animals"
-export const dog = "Dogs"
-export const cat = "Cats"
-export const rabbit = "Rabbits"
-export const exotic = "Exotics"
+export const dog = "Dog";
+export const cat = "Cat";
+export const rabbit = "Rabbit";
+export const exotic = "Exotic";
 export const admin = "admin"
 export const client = "client"
 export const phone = "phone"
