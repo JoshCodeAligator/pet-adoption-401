@@ -6,7 +6,8 @@ import {animal, cat, category, dog, exotic, rabbit} from "@/app/constants";
 import BrowseOrderButton from "@components/BrowseOrderButton";
 import AnimalPreview from "@components/AnimalPreview";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState, useMemo } from "react";
+import { getAllAvailablePets, getAllAvailablePetsOfType } from "./BrowsePetsAPI";
 
 const BrowsePetsView = ({animals}) => {
 	const router = useRouter()
@@ -24,8 +25,20 @@ const BrowsePetsView = ({animals}) => {
 
 	// also can change order of local copy for things like ordering by age or name
 	// without needing to do it on all animals if currently only viewing dogs only
-	const animalsToDisplay = animals
-	// Note: will not work if make it a useState variable
+	const animalsToDisplay = useMemo(() => {
+		switch (currentCategory) {
+		  case dog:
+			return getAllAvailablePetsOfType(dog);
+		  case cat:
+			return getAllAvailablePetsOfType(cat);
+		  case rabbit:
+			return getAllAvailablePetsOfType(rabbit);
+		  case exotic:
+			return getAllAvailablePetsOfType(exotic);
+		  default:
+			return getAllAvailablePets();
+		}
+	  }, [currentCategory]);
 
 
 	// function below is from Next.js docs
@@ -78,10 +91,10 @@ const BrowsePetsView = ({animals}) => {
 				</div>
 				<div className="grid grid-cols-4 gap-8">
 					{animalsToDisplay.map((animal) => (
-						<div key={animal.id} className="text-center">
-							<AnimalPreview animal={animal}/>
-						</div>
-					))}
+				<div key={animal.id} className="text-center">
+				<AnimalPreview animal={animal} />
+				</div>
+			))}
 				</div>
 			</div>
 		</main>
