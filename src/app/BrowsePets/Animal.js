@@ -10,7 +10,7 @@ class Animal {
     // check if img is null or empty string
     if (img === null || img === "") {
       // this is a placeholder image, might want to add category checks? for different placeholder?
-      this._image = "/images/dog.jpg";
+      this._image = "/images/" + this.category.toLowerCase() + ".jpg";
     } else {
       this._image = img;
     }
