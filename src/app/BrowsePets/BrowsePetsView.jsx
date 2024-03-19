@@ -48,17 +48,6 @@ const BrowsePetsView = ({animals}) => {
 		};
 		fetchAnimalsByCategory();
 	}, [currentCategory]);
-	
-
-
-	//   // useEffect to load animalsToDisplay when the page loads
-	//   useEffect(() => {
-	// 	const fetchAnimals = async () => {
-	// 		const animals = await getAllAvailablePets();
-	// 		setAnimalsToDisplay(animals);
-	// 	};
-	// 	fetchAnimals();
-	// }, []);
 
 	// function below is from Next.js docs
 	// searchParams with a provided key/value pair
