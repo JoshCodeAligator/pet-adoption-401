@@ -7,26 +7,25 @@ import BrowsePetsView from "@/app/BrowsePets/BrowsePetsView";
 
 
 const BrowsePetsController = () => {
-	const [animals, SetAnimals] = useState([])
+  const [animals, SetAnimals] = useState([]);
 
-	useEffect(() => {
-		const queryAllPets = async () => {
-			const allPetData = await getAllAvailablePets()
+  useEffect(() => {
+    const queryAllPets = async () => {
+      const allPetData = await getAllAvailablePets();
+      console.log("allPetData ", allPetData);
 
-			const animalArray = []
+      const animalArray = [];
 
-			allPetData.map((petData) => {
-				animalArray.push(Animal.objectFromJson(petData))
-			})
+      allPetData.map((petData) => {
+        animalArray.push(Animal.objectFromJson(petData));
+      });
 
-			return animalArray
-		}
-		queryAllPets().then( result => SetAnimals(result))
-	}, []);
+      return animalArray;
+    };
+    queryAllPets().then((result) => SetAnimals(result));
+  }, []);
 
-	return (
-		<BrowsePetsView animals={animals}/>
-	);
+  return <BrowsePetsView animals={animals} />;
 };
 
 export default BrowsePetsController;

@@ -6,26 +6,55 @@ import {animal, cat, category, dog, exotic, rabbit} from "@/app/constants";
 import BrowseOrderButton from "@components/BrowseOrderButton";
 import AnimalPreview from "@components/AnimalPreview";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState, useMemo } from "react";
+import { getAllAvailablePets, getAllAvailablePetsOfType } from "./BrowsePetsAPI";
 
 const BrowsePetsView = ({animals}) => {
 	const router = useRouter()
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
 	const [currentCategory, setCurrentCategory] = useState(searchParams.get(category));
-
+	const [animalsToDisplay, setAnimalsToDisplay] = useState(animals);
+	
 	// below is a subset of animals that gets updated when any of the buttons on the page
 	// are clicked
-
+	
 	// this is a potential variable as don't want to edit animals holding all of them
 	// as it is possible to click on a category, then want to view all animals
 	// or change category
 	// in those cases need animals to not change but rather be accessed via this local copy
-
+	
 	// also can change order of local copy for things like ordering by age or name
 	// without needing to do it on all animals if currently only viewing dogs only
-	const animalsToDisplay = animals
-	// Note: will not work if make it a useState variable
+	
+	useEffect(() => {
+		const fetchAnimalsByCategory = async () => {
+			try {
+				let animals;
+				if (currentCategory === animal) {
+					animals = await getAllAvailablePets();
+				} else if (currentCategory) {
+					animals = await getAllAvailablePetsOfType(currentCategory);
+				}
+				setAnimalsToDisplay(animals);
+			} catch (error) {
+				console.error("Error fetching animals by category:", error);
+			}
+		};
+		fetchAnimalsByCategory();
+	}, [currentCategory]);
+	
+
+
+	  // useEffect to load animalsToDisplay when the page loads
+	  useEffect(() => {
+		const fetchAnimals = async () => {
+			const animals = await getAllAvailablePets();
+			setAnimalsToDisplay(animals);
+		};
+		fetchAnimals();
+	}, []);
+	
 
 
 	// function below is from Next.js docs
@@ -78,10 +107,10 @@ const BrowsePetsView = ({animals}) => {
 				</div>
 				<div className="grid grid-cols-4 gap-8">
 					{animalsToDisplay.map((animal) => (
-						<div key={animal.id} className="text-center">
-							<AnimalPreview animal={animal}/>
-						</div>
-					))}
+				<div key={animal.id} className="text-center">
+				<AnimalPreview animal={animal} />
+				</div>
+			))}
 				</div>
 			</div>
 		</main>
