@@ -10,6 +10,7 @@ import {useCallback, useEffect, useState, useMemo } from "react";
 import { getAllAvailablePets, getAllAvailablePetsOfType } from "./BrowsePetsAPI";
 import Animal from "./Animal";
 
+
 const BrowsePetsView = ({animals}) => {
 	const router = useRouter()
 	const pathname = usePathname()
