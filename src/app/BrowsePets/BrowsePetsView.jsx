@@ -8,6 +8,7 @@ import AnimalPreview from "@components/AnimalPreview";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useCallback, useEffect, useState, useMemo } from "react";
 import { getAllAvailablePets, getAllAvailablePetsOfType } from "./BrowsePetsAPI";
+import Animal from "./Animal";
 
 const BrowsePetsView = ({animals}) => {
 	const router = useRouter()
@@ -36,7 +37,11 @@ const BrowsePetsView = ({animals}) => {
 				} else if (currentCategory) {
 					animals = await getAllAvailablePetsOfType(currentCategory);
 				}
-				setAnimalsToDisplay(animals);
+				// create animal objects for each animal and store in state
+				const animalObjects = animals.map((animal) => {
+					return new Animal(animal.pet_id, animal.name, animal.age, animal.sex, animal.category, animal.breed, "");
+				});
+				setAnimalsToDisplay(animalObjects);
 			} catch (error) {
 				console.error("Error fetching animals by category:", error);
 			}
@@ -46,16 +51,14 @@ const BrowsePetsView = ({animals}) => {
 	
 
 
-	  // useEffect to load animalsToDisplay when the page loads
-	  useEffect(() => {
-		const fetchAnimals = async () => {
-			const animals = await getAllAvailablePets();
-			setAnimalsToDisplay(animals);
-		};
-		fetchAnimals();
-	}, []);
-	
-
+	//   // useEffect to load animalsToDisplay when the page loads
+	//   useEffect(() => {
+	// 	const fetchAnimals = async () => {
+	// 		const animals = await getAllAvailablePets();
+	// 		setAnimalsToDisplay(animals);
+	// 	};
+	// 	fetchAnimals();
+	// }, []);
 
 	// function below is from Next.js docs
 	// searchParams with a provided key/value pair
