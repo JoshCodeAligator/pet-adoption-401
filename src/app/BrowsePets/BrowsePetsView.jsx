@@ -38,6 +38,20 @@ const BrowsePetsView = ({animals}) => {
 		[searchParams]
 	)
 
+	// function to sort animalsToDisplay by name or age given a key, updates the animalsToDisplay state
+	const sortAnimals = (key) => {
+		const sortedAnimals = [...animalsToDisplay].sort((a, b) => {
+			if (a[key] < b[key]) {
+				return -1;
+			}
+			if (a[key] > b[key]) {
+				return 1;
+			}
+			return 0;
+		});
+		setAnimalsToDisplay(sortedAnimals);
+	};
+
 	const handleCategoryClick = (clickedCategory) => {
 		setCurrentCategory(clickedCategory);
 		// change current URL params
@@ -70,9 +84,9 @@ const BrowsePetsView = ({animals}) => {
 										  onClick={() => handleCategoryClick(exotic)}/>
 				</div>
 				<div className="mb-10">
-					<BrowseOrderButton content={"By Name"} onClick={() => {}}/>
-					<BrowseOrderButton content={"By Age"} onClick={() => {}}/>
-					<BrowseOrderButton content={"By Size"} onClick={() => {}}/>
+					<BrowseOrderButton content={"By Name"} onClick={() => {sortAnimals('name')}}/>
+					<BrowseOrderButton content={"By Age"} onClick={() => {sortAnimals('age')}}/>
+					{/* <BrowseOrderButton content={"By Size"} onClick={() => {}}/> */}
 				</div>
 				<div className="grid grid-cols-4 gap-8">
 					{animalsToDisplay.map((animal) => (
