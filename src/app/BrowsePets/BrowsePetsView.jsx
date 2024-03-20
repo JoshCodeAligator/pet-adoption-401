@@ -7,8 +7,7 @@ import BrowseOrderButton from "@components/BrowseOrderButton";
 import AnimalPreview from "@components/AnimalPreview";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useCallback, useEffect, useState, useMemo } from "react";
-import { getAllAvailablePets, getAllAvailablePetsOfType } from "./BrowsePetsAPI";
-import Animal from "./Animal";
+import {fetchAnimalsByCategory} from "./BrowsePetsController.js";
 
 
 const BrowsePetsView = ({animals}) => {
@@ -18,36 +17,13 @@ const BrowsePetsView = ({animals}) => {
 	const [currentCategory, setCurrentCategory] = useState(searchParams.get(category));
 	const [animalsToDisplay, setAnimalsToDisplay] = useState(animals);
 	
-	// below is a subset of animals that gets updated when any of the buttons on the page
-	// are clicked
-	
-	// this is a potential variable as don't want to edit animals holding all of them
-	// as it is possible to click on a category, then want to view all animals
-	// or change category
-	// in those cases need animals to not change but rather be accessed via this local copy
-	
-	// also can change order of local copy for things like ordering by age or name
-	// without needing to do it on all animals if currently only viewing dogs only
-	
 	useEffect(() => {
-		const fetchAnimalsByCategory = async () => {
-			try {
-				let animals;
-				if (currentCategory === animal) {
-					animals = await getAllAvailablePets();
-				} else if (currentCategory) {
-					animals = await getAllAvailablePetsOfType(currentCategory);
-				}
-				// create animal objects for each animal and store in state
-				const animalObjects = animals.map((animal) => {
-					return new Animal(animal.pet_id, animal.name, animal.age, animal.sex, animal.category, animal.breed, "");
-				});
-				setAnimalsToDisplay(animalObjects);
-			} catch (error) {
-				console.error("Error fetching animals by category:", error);
-			}
+		// fetch animals by category
+		const fetchedAnimals = async () => {
+			const animals = await fetchAnimalsByCategory(currentCategory, animal);
+			setAnimalsToDisplay(animals);
 		};
-		fetchAnimalsByCategory();
+		fetchedAnimals();
 	}, [currentCategory]);
 
 	// function below is from Next.js docs
@@ -61,6 +37,20 @@ const BrowsePetsView = ({animals}) => {
 		},
 		[searchParams]
 	)
+
+	// function to sort animalsToDisplay by name or age given a key, updates the animalsToDisplay state
+	const sortAnimals = (key) => {
+		const sortedAnimals = [...animalsToDisplay].sort((a, b) => {
+			if (a[key] < b[key]) {
+				return -1;
+			}
+			if (a[key] > b[key]) {
+				return 1;
+			}
+			return 0;
+		});
+		setAnimalsToDisplay(sortedAnimals);
+	};
 
 	const handleCategoryClick = (clickedCategory) => {
 		setCurrentCategory(clickedCategory);
@@ -94,9 +84,9 @@ const BrowsePetsView = ({animals}) => {
 										  onClick={() => handleCategoryClick(exotic)}/>
 				</div>
 				<div className="mb-10">
-					<BrowseOrderButton content={"By Name"} onClick={() => {}}/>
-					<BrowseOrderButton content={"By Age"} onClick={() => {}}/>
-					<BrowseOrderButton content={"By Size"} onClick={() => {}}/>
+					<BrowseOrderButton content={"By Name"} onClick={() => {sortAnimals('name')}}/>
+					<BrowseOrderButton content={"By Age"} onClick={() => {sortAnimals('age')}}/>
+					{/* <BrowseOrderButton content={"By Size"} onClick={() => {}}/> */}
 				</div>
 				<div className="grid grid-cols-4 gap-8">
 					{animalsToDisplay.map((animal) => (
