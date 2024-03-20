@@ -14,7 +14,7 @@ const BrowsePetsController = () => {
   useEffect(() => {
     const queryAllPets = async () => {
       const allPetData = await getAllAvailablePets();
-      console.log("allPetData ", allPetData);
+      // console.log("allPetData ", allPetData);
 
       const animalArray = [];
 

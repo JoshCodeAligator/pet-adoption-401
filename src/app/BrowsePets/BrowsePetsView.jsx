@@ -41,6 +41,17 @@ const BrowsePetsView = ({animals}) => {
 	// function to sort animalsToDisplay by name or age given a key, updates the animalsToDisplay state
 	const sortAnimals = (key) => {
 		const sortedAnimals = [...animalsToDisplay].sort((a, b) => {
+			if (key === 'age') {
+				// have to split the string to get the number
+				const aAge = Number(a[key].split(' ')[0]);
+				const bAge = Number(b[key].split(' ')[0]);
+				if (aAge < bAge) return -1;
+				if (aAge > bAge) return 1;
+				return 0;
+			}
+			if ((a[key.length]) < (b[key].length)) {
+				return -1;
+			}
 			if (a[key] < b[key]) {
 				return -1;
 			}
