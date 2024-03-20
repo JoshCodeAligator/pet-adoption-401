@@ -26,11 +26,11 @@ const Navbar = () => {
           <Link href="/about" className="ml-6">
             <span>About</span>
           </Link>
-          <Link href="/contact" className="ml-6">
-            <span>Contact</span>
+          <Link href="/CreateClientAccountForm" className="ml-6">
+            <span>Create Account</span>
           </Link>
           <Link href="/public" className="ml-6">
-            <span>Donate</span>
+            <span>Log In</span>
           </Link>
         </div>
         <div className="lg:hidden">
@@ -54,10 +54,10 @@ const Navbar = () => {
               About
             </Link>
             <Link href="/contact" className="my-2 hover:text-gray-300">
-              Contact
+              Create Account
             </Link>
             <Link href="/public" className="my-2 hover:text-gray-300">
-              Donate
+              Log In
             </Link>
           </div>
         </div>
