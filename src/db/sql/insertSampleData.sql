@@ -51,3 +51,4 @@ VALUES ('Cat D', 'M', 2, null, 'cat d', 'available', 4, 1);
 
 INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
 VALUES ('Cat E', 'M', 3, null, 'cat e', 'available', 4, 1);
+
