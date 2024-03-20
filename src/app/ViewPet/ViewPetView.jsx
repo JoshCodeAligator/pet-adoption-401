@@ -48,7 +48,7 @@ const ViewPetView = ({ pet }) => {
             <p className="text-lg">Category: {pet.category}</p>
             <p className="text-lg mb-2">Breed: {pet.breed}</p>
             <p className="text-lg">Status: {pet.status}</p>
-            <p className="text-lg mb-8">{pet.description}</p>
+            <p className="text-lg mb-8 mt-4">{pet.description}</p>
 
             {/* Maybe a divider here? */}
 
