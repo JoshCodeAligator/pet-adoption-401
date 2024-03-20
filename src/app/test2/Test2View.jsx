@@ -1,6 +1,9 @@
 import Navbar from "@components/Navbar";
+import BookedTimes from "@/app/test2/BookedTimes";
 
 const Test2View = ({data, error, setDate, setCentre, onClick}) => {
+	const bookedTimes = new BookedTimes(data)
+
 	return (
 		<>
 			<Navbar/>
@@ -35,11 +38,15 @@ const Test2View = ({data, error, setDate, setCentre, onClick}) => {
 					<>
 						{data.map(({date, start_time}, index) => (
 							<p key={index}>
-								{date.toDateString() + ": " + start_time + "\n\n"}
+								{date.toISOString() + ": " + start_time + "\n\n"}
 							</p>
 						))}
 					</>
 				}
+				<br/>
+				{"Is Mar 3, 2024, 14:00 booked: " + bookedTimes.timeIsBooked('2024-03-19', '15:00:00')}
+				<br/>
+				{"Is Mar 3, 2024, 15:00 booked: " + bookedTimes.timeIsBooked('2024-03-19', '15:00:00')}
 			</div>
 		</>
 	)
