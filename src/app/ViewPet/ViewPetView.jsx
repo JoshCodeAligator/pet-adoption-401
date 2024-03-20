@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const ViewPetView = ({pet}) => {
   
-	const bookAppointmentLink = "/BookAppointment"
+	const bookAppointmentLink = `/BookAppointment/${pet.pet_id}`
 
 	return (
 		<div>
