@@ -5,7 +5,7 @@ import {getBookedTimesOfWeek} from "@/app/BookAppointment/BookAppointmentAPI";
 import {useState} from "react";
 
 const Test2Controller = () => {
-	const [date, setDate] = useState(new Date())
+	const [date, setDate] = useState(new Date('2024-03-19'))
 	const [centreID, setCentreID] = useState(1)
 	const [data, setData] = useState([])
 	const [error, setError] = useState("")
