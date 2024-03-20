@@ -6,16 +6,16 @@ import {useState} from "react";
 
 const Test2Controller = () => {
 	const [date, setDate] = useState(new Date('2024-03-19'))
-	const [centreID, setCentreID] = useState(1)
+	const [petID, setPetID] = useState(1)
 	const [data, setData] = useState([])
 	const [error, setError] = useState("")
 
 	const click = async () => {
 		setError("")
 
-		console.log(date.toDateString(), centreID)
+		console.log(date.toDateString(), petID)
 
-		const {success, error, data} = await getBookedTimesOfWeek(date, centreID)
+		const {success, error, data} = await getBookedTimesOfWeek(date, petID)
 
 		if (success) {
 			setData(data)
@@ -36,9 +36,9 @@ const Test2Controller = () => {
 
 	const updateCentre = (add) => {
 		if (add)
-			setCentreID(cID => cID + 1)
+			setPetID(cID => cID + 1)
 		else
-			setCentreID(cID => cID -1)
+			setPetID(cID => cID -1)
 	}
 
 	return (

@@ -8,12 +8,12 @@ const Test2View = ({data, error, setDate, setCentre, onClick}) => {
 				<button name={"set-centre"} onClick={() => {
 					setCentre(true)
 				}}>
-					+1 CentreID
+					+1 petID
 				</button>
 				<button name={"set-centre"} onClick={() => {
 					setCentre(false)
 				}}>
-					-1 CentreID
+					-1 petID
 				</button>
 				<br/>
 				<button name={"set-date"} onClick={() => {
@@ -33,9 +33,9 @@ const Test2View = ({data, error, setDate, setCentre, onClick}) => {
 				<br/>
 				{error ? error :
 					<>
-						{data.map((d, index) => (
+						{data.map(({date, start_time}, index) => (
 							<p key={index}>
-								{d.date.toDateString() + ": " + d.start_time + "\n\n"}
+								{date.toDateString() + ": " + start_time + "\n\n"}
 							</p>
 						))}
 					</>
