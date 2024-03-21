@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, {useCallback, useState} from "react";
 
-const Book = ({appointmentType}) => {
+const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+
+  // unavailableTimes is a BookedTimes object
 
   const goToNextWeek = () => {
     const nextWeek = new Date(startDate);
     nextWeek.setDate(nextWeek.getDate() + 7);
     setStartDate(nextWeek);
+
+    // update unavailableTimes
+    updateStartDate(nextWeek)
   };
 
   const goToPrevWeek = () => {
     const prevWeek = new Date(startDate);
     prevWeek.setDate(prevWeek.getDate() - 7);
     setStartDate(prevWeek);
+
+    // update unavailableTimes
+    updateStartDate(prevWeek)
   };
 
   // Function to handle selecting a day and time
@@ -28,13 +36,16 @@ const Book = ({appointmentType}) => {
     const timeSlots = [];
     for (let i = 9; i <= 17; i++) {
       const time = `${i < 10 ? "0" + i : i}:00`;
+      const isBooked = unavailableTimes.timeIsBooked(date, time)
+      console.log("From time slot: ", date, time, isBooked)
       timeSlots.push(
         <button
-          key={time}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-            selectedDay === date.toDateString() && selectedTime === time ? "border-2 border-blue-700" : ""
-          }`}
-          onClick={() => handleDateTimeClick(date.toDateString(), time)}
+            key={time}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+                selectedDay === date.toDateString() && selectedTime === time ? "border-2 border-blue-700" : ""
+            } ${isBooked ? "bg-gray-400 cursor-not-allowed" : ""}`}
+            onClick={() => handleDateTimeClick(date.toDateString(), time)}
+            disabled={isBooked}
         >
           {time}
         </button>
@@ -61,7 +72,7 @@ const Book = ({appointmentType}) => {
             }`}
             onClick={() => setSelectedDay(dateString)}
           >
-            {date.toLocaleDateString()} {/* Display date */}
+            {date.toDateString()} {/* Display date */}
           </button>
           <div className="flex flex-wrap justify-center mt-2">
             {generateTimeSlots(date)}
