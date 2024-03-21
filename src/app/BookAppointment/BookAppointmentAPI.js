@@ -5,7 +5,7 @@
 
 import query from "@/db/setup/db";
 
-export async function getBookedTimesOfWeek(weekStartDate, centreID) {
+export async function getBookedTimesOfWeek(weekStartDate, petID) {
 
 	// because mySQL BETWEEN is inclusive, only add 6 days to start, (not 7)
 	let weekEndDate = new Date(weekStartDate)
@@ -16,17 +16,20 @@ export async function getBookedTimesOfWeek(weekStartDate, centreID) {
 		convertJSDateToMySQLDate(weekEndDate)
 	])
 
-	console.log(startDate, endDate)
-
 	try {
 		const bookedTimesResult = await query(
-			'SELECT date, start_time FROM Appointment WHERE centre_id = ? AND (date BETWEEN ? AND ?) ' +
+			'SELECT date, start_time FROM ' +
+			'((RescueCentre INNER JOIN Pet ON Pet.centre_id = RescueCentre.centre_id) ' +
+			'INNER JOIN Appointment ON Appointment.centre_id = RescueCentre.centre_id) ' +
+			'WHERE Pet.pet_id = ? AND ' +
+			'Appointment.date BETWEEN ? AND ?' +
 			'ORDER BY date, start_time ASC',
-			[centreID, startDate, endDate]
+			[petID, startDate, endDate]
 		)
-
+		console.log("Within getBookedTimesOfWeekAPI call: ", startDate, endDate)
 		console.log(bookedTimesResult)
 
+		// bookedTimesResult should be an array of json {date: Date, start_time: string}
 		return {
 			success: true,
 			error: "",
