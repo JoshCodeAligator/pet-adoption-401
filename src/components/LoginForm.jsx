@@ -9,16 +9,24 @@ const LoginForm = ({onSubmit, loginErrorFlag, loginErrorMessage}) => {
   	return (
 		<>
 			{/* Log in form */}
-			<form action={onSubmit}>
+			<form action={onSubmit} style={{color: 'black', backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
 				{/* Email field */}
-				<FormInput type="email" name="email" label="Enter your email:"
-						   placeholder="PetPursuit@email.com"/>
+				<div>
+					<FormInput type="email" name="email" label="Enter your email"
+							placeholder="petpursuit@email.com"/>
+				</div>
 				<br/>
 				{/* password field */}
-				<FormInput type="password" name="password" label="Enter your password:"/>
+				<div>
+					<FormInput type="password" name="password" label="Enter your password"
+								placeholder={"Password"} style={{borderColor: 'black'}} />
+				</div>
 				<br/>
 				{/* Login button */}
-				<button type="submit">Log In</button>
+				<div className="flex justify-center">
+					<button type="submit" style={{ backgroundColor: 'green', color: 'white',
+							padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Sign In</button>
+				</div>
 			</form>
 
 			{/* Display error if there is an error */}

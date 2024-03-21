@@ -5,12 +5,17 @@ const AccountFormInputs = () => {
 	return (
 		<div>
 			{/* email */}
-			<FormInput type={"email"} name={email} label={"Email"}
-					   placeholder={"PetPursuit@email.com"}/>
+			<div style={{color: 'black', paddingTop: '15px'}} className="flex justify-center">
+				<FormInput type={"email"} name={email} label={"Email"} placeholder={"petpursuit@email.com"}/>
+			</div>
 			{/* password */}
-			<FormInput type={"password"} name={password} label={"Password"}/>
+			<div style={{color: 'black', paddingTop: '15px'}} className="flex justify-center">
+				<FormInput type={"password"} name={password} label={"Password"} placeholder={"Password"}/>
+			</div>
 			{/* confirm password */}
-			<FormInput type={"password"} name={confirm_password} label={"Confirm Password"}/>
+			<div style={{color: 'black', paddingTop: '15px'}} className="flex justify-center">
+				<FormInput type={"password"} name={confirm_password} label={"Confirm Password"} placeholder={"Password"}/>
+			</div>
 		</div>
 	)
 }

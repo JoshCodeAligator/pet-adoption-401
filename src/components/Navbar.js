@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { HomeIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import Link from "next/link";
+import CreateClientAccountForm from "@components/CreateClientAccountForm";
+import ClientCreateAccountView from "@CreateAccount/client/ClientCreateAccountView";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -26,11 +28,11 @@ const Navbar = () => {
           <Link href="/about" className="ml-6">
             <span>About</span>
           </Link>
-          <Link href="/contact" className="ml-6">
-            <span>Contact</span>
+          <Link href="/client/CreateAccount" className="ml-6">
+            <span>Create Account</span>
           </Link>
-          <Link href="/public" className="ml-6">
-            <span>Donate</span>
+          <Link href="/login" className="ml-6">
+            <span>Sign In</span>
           </Link>
         </div>
         <div className="lg:hidden">
@@ -54,10 +56,10 @@ const Navbar = () => {
               About
             </Link>
             <Link href="/contact" className="my-2 hover:text-gray-300">
-              Contact
+              Create Account
             </Link>
             <Link href="/public" className="my-2 hover:text-gray-300">
-              Donate
+              Sign In
             </Link>
           </div>
         </div>
