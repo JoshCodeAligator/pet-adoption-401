@@ -47,13 +47,14 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      {/* Sidebar for smaller window size */}
       {isSidebarOpen && (
         <div className="lg:hidden">
           <div className="flex flex-col items-center text-white mt-4">
             <Link href="/about" className="my-2 hover:text-gray-300">
               About
             </Link>
-            <Link href="/contact" className="my-2 hover:text-gray-300">
+            <Link href="/client/CreateAccount" className="my-2 hover:text-gray-300">
               Create Account
             </Link>
             <Link href="/login" className="my-2 hover:text-gray-300">
