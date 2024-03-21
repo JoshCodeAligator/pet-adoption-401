@@ -36,7 +36,8 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
     const timeSlots = [];
     for (let i = 9; i <= 17; i++) {
       const time = `${i < 10 ? "0" + i : i}:00`;
-
+      const isBooked = unavailableTimes.timeIsBooked(date, time)
+      console.log("From time slot: ", date, time, isBooked)
       timeSlots.push(
         <button
           key={time}
@@ -44,7 +45,7 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
             selectedDay === date.toDateString() && selectedTime === time ? "border-2 border-blue-700" : ""
           }`}
           onClick={() => handleDateTimeClick(date.toDateString(), time)}
-          disabled={false}
+          disabled={isBooked}
         >
           {time}
         </button>
