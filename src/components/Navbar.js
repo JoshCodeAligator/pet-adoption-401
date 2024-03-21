@@ -29,7 +29,7 @@ const Navbar = () => {
           <Link href="/CreateClientAccountForm" className="ml-6">
             <span>Create Account</span>
           </Link>
-          <Link href="/public" className="ml-6">
+          <Link href="/login" className="ml-6">
             <span>Log In</span>
           </Link>
         </div>
@@ -56,7 +56,7 @@ const Navbar = () => {
             <Link href="/contact" className="my-2 hover:text-gray-300">
               Create Account
             </Link>
-            <Link href="/public" className="my-2 hover:text-gray-300">
+            <Link href="/login" className="my-2 hover:text-gray-300">
               Log In
             </Link>
           </div>
