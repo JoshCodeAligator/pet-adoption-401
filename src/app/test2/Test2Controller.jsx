@@ -17,12 +17,9 @@ const Test2Controller = () => {
 
 		const {success, error, data} = await getBookedTimesOfWeek(date, petID)
 
-		if (success) {
-			setData(data)
-		}
-		else {
-			setError(error)
-		}
+		setData(data)
+
+		console.log(data)
 	}
 
 	const updateDate = (add) => {

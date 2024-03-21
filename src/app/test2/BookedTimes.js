@@ -2,7 +2,10 @@ class BookedTimes {
 	constructor(times) {
 		// times should be an array of {date, start_time}
 
-		// we will be storing them as a set of js Date objects
+		// we will be storing them as a set of times (from js Date objects)
+
+		// store the getTime() as equality for js date objects is wacky,
+		// simply to store numbers for simpler comparisons
 
 		this.times = new Set()
 
@@ -10,7 +13,7 @@ class BookedTimes {
 		for (const {date, start_time} of times) {
 			// convert to a js date object
 			const jsDate = this._convertStringDateToJsDate(date, start_time)
-			this.times.add(jsDate)
+			this.times.add(jsDate.getTime())
 		}
 
 	}
@@ -22,10 +25,10 @@ class BookedTimes {
 	 * @return {boolean} true if time provided is booked, false otherwise
 	 */
 	timeIsBooked(date, time) {
-		// first convert to a js date
+		// convert to a js date
 		const checkTime = this._convertStringDateToJsDate(date, time)
 
-		return this.times.has(checkTime)
+		return this.times.has(checkTime.getTime())
 	}
 
 	/**
@@ -49,24 +52,53 @@ class BookedTimes {
 	}
 
 	/**
+	 * Returns the date from a date as a string
+	 * @param date date a string, with following format: YYYY-MM-DD.*
+	 * @return {{date: String, month: String, year: String}} YYYY-MM-DD of date
+	 * @private
+	 */
+	_getDate(date) {
+		return {
+			year: date.slice(0,4),
+			month: date.slice(5, 7),
+			day: date.slice(8, 10)
+		}
+	}
+
+	/**
 	 * Converts a date and time from a string to a js Date object
-	 * @param date date as a string in following format: YYYY-MM-DD
+	 * @param date date object
 	 * @param time time as a string in following format: hh:mm
 	 * @return {Date} the js Date object equivalent of date and time passed
 	 * @private
 	 */
 	_convertStringDateToJsDate(date, time) {
-		const jsDate = new Date(date)
+		// work with UTC
+
+		// convert date to string if it is Date type
+		if (typeof date !== "string") {
+			date = date.toISOString()
+		}
+		// extract year, month, day
+		const {year, month, day} = this._getDate(date)
 
 		// extract hours and minutes
 		const hour = parseInt(this._getHours(time), 10)
 		const minute = parseInt(this._getMinutes(time), 10)
 
+		const jsDate = new Date()
+
+		// set date
+		jsDate.setUTCFullYear(parseInt(year, 10), parseInt(month, 10), parseInt(day, 10))
+
 		// set the time
-		jsDate.setHours(hour, minute)
+		jsDate.setUTCHours(hour, minute, 0, 0)
+
+		console.log("Converting: ", date, time, "->", jsDate.toISOString())
 
 		return jsDate
 	}
+
 }
 
 export default BookedTimes
