@@ -3,13 +3,8 @@ import BookedTimes from "@/app/test2/BookedTimes";
 import {useEffect, useState} from "react";
 
 const Test2View = ({data, error, setDate, setCentre, onClick}) => {
-	const [bookedTimes, setBookedTimes] = useState(new BookedTimes(data))
 	const [b1, setB1] = useState(false)
 	const [b2, setB2] = useState(false)
-
-	useEffect(() => {
-		setBookedTimes(new BookedTimes(data))
-	}, [data]);
 
 	return (
 		<>
@@ -41,19 +36,22 @@ const Test2View = ({data, error, setDate, setCentre, onClick}) => {
 					Query
 				</button>
 				<br/>
+				<p>Check console for results</p>
 				{error ? error :
 					<>
-						{data.map(({date, start_time}, index) => (
-							<p key={index}>
-								{date.toISOString() + ": " + start_time + "\n\n"}
+						{data ? data.times.forEach(({time}) => (
+							<p>
+								{(new Date(time).toDateString()) + "\n\n"}
 							</p>
-						))}
+						)) :
+						<p>Null</p>
+						}
 					</>
 				}
 				<br/>
 				<button onClick={() => {
-					setB1(bookedTimes.timeIsBooked('2024-03-19', '15:00:00'))
-					console.log(bookedTimes.timeIsBooked('2024-03-19', '15:00:00'))
+					setB1(data.timeIsBooked('2024-03-19', '15:00:00'))
+					console.log(data.timeIsBooked('2024-03-19', '15:00:00'))
 				}}>
 					Check March 19, 2024, 14:00 in BookedTimes
 				</button>
@@ -61,8 +59,8 @@ const Test2View = ({data, error, setDate, setCentre, onClick}) => {
 				<p>{b1}</p>
 				<br/>
 				<button onClick={() => {
-					setB2(bookedTimes.timeIsBooked('2024-03-19', '14:00:00'))
-					console.log(bookedTimes.timeIsBooked('2024-03-19', '14:00:00'))
+					setB2(data.timeIsBooked('2024-03-19', '14:00:00'))
+					console.log(data.timeIsBooked('2024-03-19', '14:00:00'))
 				}}>
 					Check March 19, 2024, 15:00 in BookedTimes
 				</button>

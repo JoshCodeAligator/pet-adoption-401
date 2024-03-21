@@ -16,8 +16,6 @@ export async function getBookedTimesOfWeek(weekStartDate, petID) {
 		convertJSDateToMySQLDate(weekEndDate)
 	])
 
-	console.log(startDate, endDate)
-
 	try {
 		const bookedTimesResult = await query(
 			'SELECT date, start_time FROM ' +
@@ -28,8 +26,9 @@ export async function getBookedTimesOfWeek(weekStartDate, petID) {
 			'ORDER BY date, start_time ASC',
 			[petID, startDate, endDate]
 		)
-
+		console.log("Within getBookedTimesOfWeekAPI call: ", startDate, endDate)
 		console.log(bookedTimesResult)
+
 		// bookedTimesResult should be an array of json {date: Date, start_time: string}
 		return {
 			success: true,
