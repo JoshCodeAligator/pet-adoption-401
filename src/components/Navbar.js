@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { HomeIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import Link from "next/link";
+import CreateClientAccountForm from "@components/CreateClientAccountForm";
+import ClientCreateAccountView from "@CreateAccount/client/ClientCreateAccountView";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
