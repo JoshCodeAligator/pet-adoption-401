@@ -161,7 +161,6 @@ const HomeView = () => {
             View All Animals
           </h1>
         </div>
-
       </div>
     </main>
   );

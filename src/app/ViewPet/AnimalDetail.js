@@ -3,11 +3,13 @@ import Centre from "@/app/ViewPet/[id]/Centre";
 
 class AnimalDetail extends Animal {
 
-	constructor(id, name, age, sex, category, breed, img, status, centre_name, centre_address, centre_phone) {
+	constructor(id, name, age, sex, category, breed, img, status, centre_name, centre_address, centre_phone, description) {
 		super(id, name, age, sex, category, breed, img)
 		this._status = status
 
 		this._centre = new Centre(centre_name, centre_address, centre_phone)
+
+		this.description = description
 	}
 
 	get status() {
@@ -27,9 +29,9 @@ class AnimalDetail extends Animal {
 	}
 
 	// factory function to create an AnimalDetail object from json/db query
-	static objectFromAPIReturn({pet_id, name, age, sex, category, breed, img, status, centreName, centreLocation, centrePhone}) {
+	static objectFromAPIReturn({pet_id, name, age, sex, category, breed, img, status, centreName, centreLocation, centrePhone, description}) {
 		return new AnimalDetail(pet_id, name, age, sex, category, breed, img, status,
-			centreName, centreLocation, centrePhone)
+			centreName, centreLocation, centrePhone, description)
 	}
 }
 
