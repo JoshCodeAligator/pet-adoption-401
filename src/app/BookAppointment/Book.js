@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Book = ({ appointmentType }) => {
+const Book = ({appointmentType}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);

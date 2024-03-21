@@ -1,7 +1,7 @@
 {
-    "host": "localhost",
-    "user": "***REMOVED***",
-    "***REMOVED***": "***REMOVED***",
-    "database": "PetPursuit",
-    "connectTimeout": 60000
+  "host": "localhost",
+  "user": "***REMOVED***",
+  "***REMOVED***": "***REMOVED***",
+  "database": "PetPursuit",
+  "connectTimeout": 60000
 }
