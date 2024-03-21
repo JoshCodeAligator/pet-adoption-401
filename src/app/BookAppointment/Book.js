@@ -40,12 +40,12 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
       console.log("From time slot: ", date, time, isBooked)
       timeSlots.push(
         <button
-          key={time}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-            selectedDay === date.toDateString() && selectedTime === time ? "border-2 border-blue-700" : ""
-          }`}
-          onClick={() => handleDateTimeClick(date.toDateString(), time)}
-          disabled={isBooked}
+            key={time}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+                selectedDay === date.toDateString() && selectedTime === time ? "border-2 border-blue-700" : ""
+            } ${isBooked ? "bg-gray-400 cursor-not-allowed" : ""}`}
+            onClick={() => handleDateTimeClick(date.toDateString(), time)}
+            disabled={isBooked}
         >
           {time}
         </button>
