@@ -32,7 +32,7 @@ const Navbar = () => {
             <span>Create Account</span>
           </Link>
           <Link href="/login" className="ml-6">
-            <span>Sign In</span>
+            <span>Log In</span>
           </Link>
         </div>
         <div className="lg:hidden">
@@ -49,17 +49,18 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      {/* Sidebar for smaller window size */}
       {isSidebarOpen && (
         <div className="lg:hidden">
           <div className="flex flex-col items-center text-white mt-4">
             <Link href="/about" className="my-2 hover:text-gray-300">
               About
             </Link>
-            <Link href="/contact" className="my-2 hover:text-gray-300">
+            <Link href="/client/CreateAccount" className="my-2 hover:text-gray-300">
               Create Account
             </Link>
-            <Link href="/public" className="my-2 hover:text-gray-300">
-              Sign In
+            <Link href="/login" className="my-2 hover:text-gray-300">
+              Log In
             </Link>
           </div>
         </div>
