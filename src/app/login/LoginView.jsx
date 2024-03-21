@@ -8,7 +8,7 @@ const LoginView = ({onSubmit, errorFlag, errorMessage}) => {
 	return (
 		<>
 			<Navbar/>
-			<div className="absolute top-20">
+			<div className="h-screen flex justify-center items-center">
 				<LoginForm onSubmit={onSubmit}
 						   loginErrorMessage={errorMessage} loginErrorFlag={errorFlag}/>
 			</div>
