@@ -26,7 +26,7 @@ const Navbar = () => {
           <Link href="/about" className="ml-6">
             <span>About</span>
           </Link>
-          <Link href="/CreateClientAccountForm" className="ml-6">
+          <Link href="/client/CreateAccount" className="ml-6">
             <span>Create Account</span>
           </Link>
           <Link href="/login" className="ml-6">
