@@ -2,7 +2,7 @@
  * Data structure that holds the response from db query verifying login information
  */
 class LoginValidationResponse {
-	constructor(found, error) {
+	constructor(found, error, ) {
 		// found is a boolean if the account was found in the db
 		this.found = found
 

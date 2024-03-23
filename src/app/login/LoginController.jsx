@@ -5,6 +5,7 @@ import LoginView from "@login/LoginView";
 import validateLogin from "@login/LoginAPI";
 import {useRouter} from "next/navigation";
 import LoginValidationResponse from "@login/LoginValidationResponse";
+import {createCookie} from "@/lib";
 
 
 
@@ -22,11 +23,12 @@ const LoginController = () => {
 		const password = formData.get('password')
 
 		// validate login
-
-		const validationResponse = LoginValidationResponse.objectFromJson(await validateLogin(email, password))
-
+		const {found, error, data} = await validateLogin(email, password)
 		// log in success, redirect to home page
-		if (validationResponse.found) {
+		if (found) {
+			// set cookie
+			await createCookie(data, email)
+
 			router.push("/")
 			alert("Log in successful!")
 
@@ -37,7 +39,7 @@ const LoginController = () => {
 
 		// validation failed, set error
 		setErrorFlag(true)
-		setErrorMessage(validationResponse.error)
+		setErrorMessage(error)
 
 	}
 
