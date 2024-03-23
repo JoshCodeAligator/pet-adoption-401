@@ -1,3 +1,5 @@
+"use server"
+
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -43,6 +45,16 @@ export async function getSession() {
 	const session = cookies().get("session")?.value;
 	if (!session) return null;
 	return await decrypt(session);
+}
+
+export async function getSessionUserID() {
+	const parsed = await getSession()
+	// return invalid ID if no session cookie found
+	if (!parsed) return -1
+
+	const {userID, userEmail} = parsed.user
+
+	return parseInt(String(userID), 10)
 }
 
 export async function updateSession(request) {
