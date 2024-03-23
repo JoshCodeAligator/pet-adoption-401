@@ -34,9 +34,9 @@ export async function createCookie(userID, userEmail) {
 	cookies().set("session", session, { expires, httpOnly: true });
 }
 
-export async function deleteCookie() {
+export async function deleteSession() {
 	// Destroy the session
-	cookies().set("session", "", { expires: new Date(0) });
+	cookies().delete('session');
 }
 
 export async function getSession() {
