@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "jose": "^5.2.3",
     "mysql2": "^3.9.1",
     "net": "^1.0.2",
     "next": "^14.1.3",

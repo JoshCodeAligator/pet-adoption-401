@@ -11,7 +11,7 @@ import query from "@/db/setup/db";
  * account not found, incorrect password, correct password
  * @param email email of account
  * @param password password of account
- * @returns {Promise<{found: boolean, error: string}>} a json object with a found boolean that tells if an account has
+ * @returns {Promise<{found: boolean, error: string, data: number}>} a json object with a found boolean that tells if an account has
  * been found and an error message if found is false.
  */
 const validateLogin = async (email, password) => {
@@ -22,25 +22,28 @@ const validateLogin = async (email, password) => {
 	if (!accountExists) {
 		return {
 			found: false,
-			error: "Email not found"
+			error: "Email not found",
+			data: -1
 		}
 	}
 
 	// now attempt to verify the account by matching password
-	const verifyAccount = await verifyLoginDetails(email, password)
+	const {found, ID} = await verifyLoginDetails(email, password)
 
 	// account verification failed
-	if (!verifyAccount) {
+	if (!found) {
 		return {
 			found: false,
-			error: "Incorrect password"
+			error: "Incorrect password",
+			data: -1
 		}
 	}
 
 	// account verification successful
 	return {
 		found: true,
-		error: ""
+		error: "",
+		data: ID
 	}
 
 }
@@ -65,7 +68,8 @@ const verifyAccountExists = async (email) => {
  * Verifies login data, if email and password matches
  * @param email email of account
  * @param password password of account
- * @returns {Promise<boolean>} if email and password matches with account email and password
+ * @returns {Promise<{found: boolean, ID: number}>} if email and password matches with account email and password,
+ * returns true with ID, else false and ID = -1
  */
 const verifyLoginDetails = async (email, password) => {
 	const verifyLogin = await query(
@@ -74,7 +78,10 @@ const verifyLoginDetails = async (email, password) => {
 	)
 
 	// if length is 0, unable to verify login
-	return verifyLogin.length !== 0
+	return {
+		found: verifyLogin.length !== 0,
+		ID: verifyLogin.length !== 0 ? verifyLogin[0].account_id : -1
+	}
 }
 
 export default validateLogin;
