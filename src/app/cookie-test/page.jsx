@@ -1,4 +1,4 @@
-import {createCookie, deleteCookie, getSession} from "../../../lib";
+import {createCookie, deleteSession, getSession} from "../../lib";
 import {redirect} from "next/navigation";
 import validateLogin from "@login/LoginAPI";
 
@@ -34,7 +34,7 @@ const Page = async () => {
 			<form
 				action={async () => {
 					"use server";
-					await deleteCookie();
+					await deleteSession();
 					// alert("Deleted Cookie")
 					redirect("/cookie-test");
 				}}
