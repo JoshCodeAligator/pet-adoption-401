@@ -2,11 +2,11 @@
 
 import React, {useEffect, useState} from 'react'
 import BookAppointmentView from "@BookAppointment/BookAppointmentView";
-import {getBookedTimesOfWeek, insertAppointment} from "@BookAppointment/BookAppointmentAPI";
+import {getBookedTimesOfWeek, insertAppointment, petExists} from "@BookAppointment/BookAppointmentAPI";
 import BookedTimes from "@BookAppointment/BookedTimes";
 import {getSessionUserID} from "@/lib";
 import {redirect, useRouter} from "next/navigation";
-import {router} from "next/client";
+import Error from "next/error";
 
 const BookingController = ({pet_id}) => {
     const [weekStartDate, setWeekStartDate] = useState(new Date())
@@ -14,6 +14,15 @@ const BookingController = ({pet_id}) => {
 
     // some sort of error checking if pet_id exists or not in db
     // possible if directly type URL
+    const [validPet, setValidPet] = useState(true)
+
+    useEffect(() => {
+        petExists(pet_id).then(
+            (result) => {
+                setValidPet(result)
+            }
+        )
+    }, [pet_id]);
 
     const router = useRouter()
 
@@ -60,6 +69,12 @@ const BookingController = ({pet_id}) => {
                 )
             }
         )
+    }
+
+    // essentially same logic as in ViewPetController
+    // means same time of 1s lag before 404 shows up
+    if (!validPet) {
+        return <Error statusCode={404}/>
     }
 
     return (
