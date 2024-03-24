@@ -7,7 +7,7 @@ const Book = ({
   unavailableTimes,
   updateStartDate,
   makeBooking,
-}) => {
+, makeBooking}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);

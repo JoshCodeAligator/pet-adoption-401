@@ -85,6 +85,31 @@ const BookingController = ({pet_id}) => {
         return <Error statusCode={404}/>
     }
 
+    async function addNewAppointment(date, time) {
+        const clientID = await getSessionUserID()
+        if (clientID === -1) {
+            redirect('/login')
+            alert("Due to inactivity, your session has timed out. Log in.")
+            // safety measure in case cookie expires while on page (due to inactivity)
+            return
+        }
+
+        const addAppointmentResult = await insertAppointment(date, time, pet_id, clientID)
+
+        // success, go back to home
+        if (addAppointmentResult) {
+            router.push('/')
+            alert(`Booking made at: ${date}, ${time}`)
+
+        }
+        // failed, most likely due to db error
+        else {
+            // refresh page
+            router.refresh()
+            alert('Booking failed. Most likely due to server error. Try again.')
+        }
+    }
+
     return (
         <BookAppointmentView unavailbleTimes={unavailableTimes} updateWeekStart={updateWeekStartDate}
                              bookAppointment={addNewAppointment}/>
