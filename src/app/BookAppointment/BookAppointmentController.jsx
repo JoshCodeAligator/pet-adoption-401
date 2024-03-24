@@ -28,6 +28,15 @@ const BookingController = ({pet_id}) => {
             }
         )
     }, [pet_id]);
+    const [validPet, setValidPet] = useState(true)
+
+    useEffect(() => {
+        petExists(pet_id).then(
+            (result) => {
+                setValidPet(result)
+            }
+        )
+    }, [pet_id]);
 
     const router = useRouter()
 
@@ -154,6 +163,12 @@ const BookingController = ({pet_id}) => {
                 )
             }
         )
+    }
+
+    // essentially same logic as in ViewPetController
+    // means same time of 1s lag before 404 shows up
+    if (!validPet) {
+        return <Error statusCode={404}/>
     }
 
     return (
