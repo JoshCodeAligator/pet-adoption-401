@@ -31,6 +31,9 @@ const Book = ({
     // do nothing if attempt to go into past
     if (isStartDateToday()) return;
 
+    // do nothing if attempt to go into past
+    if (startDate.getTime() === new Date().getTime()) return
+
     const prevWeek = new Date(startDate);
     prevWeek.setDate(prevWeek.getDate() - 7);
     setStartDate(prevWeek);
@@ -103,7 +106,9 @@ const Book = ({
           <button
             className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
               selectedDay === date ? "border-2 border-blue-700" : ""
+              selectedDay === date ? "border-2 border-blue-700" : ""
             }`}
+            onClick={() => setSelectedDay(date)}
             onClick={() => setSelectedDay(date)}
           >
             {date.toDateString()} {/* Display date */}
