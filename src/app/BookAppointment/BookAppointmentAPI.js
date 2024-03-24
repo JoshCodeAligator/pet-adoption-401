@@ -59,5 +59,26 @@ export async function convertJSDateToMySQLDate(date) {
 	return date.toISOString().slice(0, 10)
 }
 
+
 // a function to make a new appointment
-// possibly a new client (if client is a guest)
+
+export async function insertAppointment(date, time, petID, clientID) {
+	// a missing piece of information needed is centreID, which can be found using petID
+
+	const centreID = await query(
+		'SELECT client FROM Pet WHERE pet_id = ?',
+		[petID]
+	)
+
+	// no need for error checking as clientID must exist as petID exists (assuming calling this from a valid petID page)
+
+	// no need to convert date and time as they should be strings
+
+	const insertResult = await query(
+		'INSERT INTO Appointment (date, start_time, client_id, centre_id, pet_id) VALUES (?, ?, ?, ?, ?)',
+		[date, time, clientID, centreID, petID]
+	)
+
+	// return if insert successful or not
+	return insertResult.affectedRows !== 0
+}

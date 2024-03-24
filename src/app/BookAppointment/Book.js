@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from "react";
 
-const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
+const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -103,6 +103,11 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
       <div className="grid grid-cols-7 gap-4">{generateDateButtons()}</div>
       <div className="mt-4">
         {selectedDay && selectedTime && <p>Selected Day: {selectedDay}, Time: {selectedTime}</p>}
+        <button
+            onClick={makeBooking(selectedDay, selectedTime)}
+        >
+          Book Appointment
+        </button>
       </div>
     </div>
   );
