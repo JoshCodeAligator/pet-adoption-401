@@ -1,11 +1,14 @@
+"use server"
+
 import {getSession, updateSession} from "./lib";
 
 export async function middleware(request) {
+	const pathname = request.nextUrl.pathname
 
 	const session = await getSession()
 
 	// redirect in case of attempt to BookAppointment without being logged in
-	if (!session && request.nextUrl.pathname.startsWith('/BookAppointment')) {
+	if (!session && pathname.startsWith('/BookAppointment')) {
 
 		// redirect to login page
 		return Response.redirect(new URL('/login', request.url))
