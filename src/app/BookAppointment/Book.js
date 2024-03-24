@@ -31,6 +31,15 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
     setSelectedTime(time);
   };
 
+  const bookAppointment = () => {
+    // don't do anything if no slot selected
+    if (selectedDay && selectedTime) {
+      // need to convert selectedDay to a date object
+      const selectedDate = new Date(selectedDay)
+      console.log(selectedDate)
+      makeBooking(selectedDate, selectedTime)
+    }
+  }
   // Function to generate time slots for a day
   const generateTimeSlots = (date) => {
     const timeSlots = [];
@@ -104,7 +113,7 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
       <div className="mt-4">
         {selectedDay && selectedTime && <p>Selected Day: {selectedDay}, Time: {selectedTime}</p>}
         <button
-            onClick={makeBooking(selectedDay, selectedTime)}
+            onClick={bookAppointment}
         >
           Book Appointment
         </button>
