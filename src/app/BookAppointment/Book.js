@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from "react";
 
-const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
+const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -16,7 +16,15 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
     updateStartDate(nextWeek)
   };
 
+  const isStartDateToday = () => {
+    return startDate.toDateString() === new Date().toDateString()
+  }
+
   const goToPrevWeek = () => {
+    // do nothing if attempt to go into past
+    if (isStartDateToday()) return
+    // for some reason above equality fails, prob due to time, seconds off
+
     const prevWeek = new Date(startDate);
     prevWeek.setDate(prevWeek.getDate() - 7);
     setStartDate(prevWeek);
@@ -31,6 +39,15 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
     setSelectedTime(time);
   };
 
+  const bookAppointment = () => {
+    // don't do anything if no slot selected
+    if (selectedDay && selectedTime) {
+      // need to convert selectedDay to a date object
+      const selectedDate = new Date(selectedDay)
+      console.log(selectedDate)
+      makeBooking(selectedDate, selectedTime)
+    }
+  }
   // Function to generate time slots for a day
   const generateTimeSlots = (date) => {
     const timeSlots = [];
@@ -42,9 +59,9 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
         <button
             key={time}
             className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-                selectedDay === date.toDateString() && selectedTime === time ? "border-2 border-blue-700" : ""
+                selectedDay === date && selectedTime === time ? "border-2 border-blue-700" : ""
             } ${isBooked ? "bg-gray-400 cursor-not-allowed" : ""}`}
-            onClick={() => handleDateTimeClick(date.toDateString(), time)}
+            onClick={() => handleDateTimeClick(date, time)}
             disabled={isBooked}
         >
           {time}
@@ -68,9 +85,9 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
         <div key={dateString} className="flex flex-col items-center">
           <button
             className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-              selectedDay === dateString ? "border-2 border-blue-700" : ""
+              selectedDay === date ? "border-2 border-blue-700" : ""
             }`}
-            onClick={() => setSelectedDay(dateString)}
+            onClick={() => setSelectedDay(date)}
           >
             {date.toDateString()} {/* Display date */}
           </button>
@@ -89,7 +106,10 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
       <div className="flex justify-between my-4">
         <button
           onClick={goToPrevWeek}
-          className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
+          className={`bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded 
+            ${isStartDateToday() ? "bg-gray-400 cursor-not-allowed" : ""}`
+          }
+          disabled={isStartDateToday()}
         >
           &lt; Previous Week
         </button>
@@ -102,7 +122,12 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate}) => {
       </div>
       <div className="grid grid-cols-7 gap-4">{generateDateButtons()}</div>
       <div className="mt-4">
-        {selectedDay && selectedTime && <p>Selected Day: {selectedDay}, Time: {selectedTime}</p>}
+        {selectedDay && selectedTime && <p>Selected Day: {selectedDay.toDateString()}, Time: {selectedTime}</p>}
+        <button
+            onClick={bookAppointment}
+        >
+          Book Appointment
+        </button>
       </div>
     </div>
   );
