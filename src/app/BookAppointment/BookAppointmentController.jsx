@@ -85,29 +85,75 @@ const BookingController = ({pet_id}) => {
         return <Error statusCode={404}/>
     }
 
-    async function addNewAppointment(date, time) {
-        const clientID = await getSessionUserID()
-        if (clientID === -1) {
-            redirect('/login')
-            alert("Due to inactivity, your session has timed out. Log in.")
-            // safety measure in case cookie expires while on page (due to inactivity)
-            return
-        }
+    function addNewAppointment(date, time) {
 
-        const addAppointmentResult = await insertAppointment(date, time, pet_id, clientID)
+        getSessionUserID().then(
+            (clientID) => {
+                if (clientID === -1) {
+                    redirect('/login')
+                    alert("Due to inactivity, your session has timed out. Log in.")
+                    // safety measure in case cookie expires while on page (due to inactivity)
+                    return
+                }
 
-        // success, go back to home
-        if (addAppointmentResult) {
-            router.push('/')
-            alert(`Booking made at: ${date}, ${time}`)
+                insertAppointment(date, time, pet_id, clientID).then(
+                    (addAppointmentResult) => {
+                        // success, go back to home
+                        if (addAppointmentResult) {
+                            // update pet status
+                            updatePetStatusToBooked(pet_id).then(r => {})
 
-        }
-        // failed, most likely due to db error
-        else {
-            // refresh page
-            router.refresh()
-            alert('Booking failed. Most likely due to server error. Try again.')
-        }
+                            router.push('/')
+                            alert(`Booking made at: ${date.toDateString()}, ${time}`)
+
+                        }
+                        // failed, most likely due to db error
+                        else {
+                            // refresh page
+                            router.refresh()
+                            alert('Booking failed. Most likely due to a server error. Try again.')
+                        }
+                    }
+                )
+            }
+        )
+    }
+
+    // essentially same logic as in ViewPetController
+    // means same time of 1s lag before 404 shows up
+    if (!validPet) {
+        return <Error statusCode={404}/>
+    }
+
+    function addNewAppointment(date, time) {
+
+        getSessionUserID().then(
+            (clientID) => {
+                if (clientID === -1) {
+                    redirect('/login')
+                    alert("Due to inactivity, your session has timed out. Log in.")
+                    // safety measure in case cookie expires while on page (due to inactivity)
+                    return
+                }
+
+                insertAppointment(date, time, pet_id, clientID).then(
+                    (addAppointmentResult) => {
+                        // success, go back to home
+                        if (addAppointmentResult) {
+                            router.push('/')
+                            alert(`Booking made at: ${date.toDateString()}, ${time}`)
+
+                        }
+                        // failed, most likely due to db error
+                        else {
+                            // refresh page
+                            router.refresh()
+                            alert('Booking failed. Most likely due to server error. Try again.')
+                        }
+                    }
+                )
+            }
+        )
     }
 
     return (
