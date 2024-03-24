@@ -81,6 +81,8 @@ export async function insertAppointment(date, time, petID, clientID) {
 
 	const centreID = centreIDResult[0].centre_id
 
+	console.log("Date being booked: ", mysqlDate)
+
 	const insertResult = await query(
 		'INSERT INTO Appointment (date, start_time, client_id, centre_id, pet_id, slot_no) VALUES (?, ?, ?, ?, ?, ?)',
 		[mysqlDate, time, clientID, centreID, petID, 1]
