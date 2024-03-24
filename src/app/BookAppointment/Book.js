@@ -16,9 +16,14 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
     updateStartDate(nextWeek)
   };
 
+  const isStartDateToday = () => {
+    return startDate.toDateString() === new Date().toDateString()
+  }
+
   const goToPrevWeek = () => {
     // do nothing if attempt to go into past
-    if (startDate.getTime() === new Date().getTime()) return
+    if (isStartDateToday()) return
+    // for some reason above equality fails, prob due to time, seconds off
 
     const prevWeek = new Date(startDate);
     prevWeek.setDate(prevWeek.getDate() - 7);
@@ -102,9 +107,9 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
         <button
           onClick={goToPrevWeek}
           className={`bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded 
-            ${startDate.getTime() === new Date().getTime() ? "bg-gray-400 cursor-not-allowed" : ""}`
+            ${isStartDateToday() ? "bg-gray-400 cursor-not-allowed" : ""}`
           }
-          disabled={startDate.getTime() === new Date().getTime()}
+          disabled={isStartDateToday()}
         >
           &lt; Previous Week
         </button>
