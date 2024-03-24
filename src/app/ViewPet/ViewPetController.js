@@ -4,6 +4,7 @@ import getPetDetails from "@/app/ViewPet/ViewPetAPI";
 import ViewPetView from "@/app/ViewPet/ViewPetView";
 import {useEffect, useState} from "react";
 import AnimalDetail from "@/app/ViewPet/AnimalDetail";
+import Error from "next/error";
 
 const ViewPetController = ({pet_id}) => {
 	const [pet, setPet] = useState({})
@@ -26,6 +27,17 @@ const ViewPetController = ({pet_id}) => {
 			console.log(res)
 		})
 	}, [pet_id]);
+
+	// if pet.id is -1 (meaning pet not found, return a 404 instead)
+	if (pet.id === -1) {
+		return (
+			<Error statusCode={404}/>
+		)
+	}
+	// this attempt does have some lag to it.
+	// What happens it first renders the View
+	// then a second later once the pet gets set (fetchPet at that point is done),
+	// it changes to the 404
 
 	return (
 		<ViewPetView pet={pet}/>

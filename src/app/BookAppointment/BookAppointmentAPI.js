@@ -91,3 +91,20 @@ export async function insertAppointment(date, time, petID, clientID) {
 	// return if insert successful or not
 	return insertResult.affectedRows !== 0
 }
+
+/**
+ * Checks if a pet with petID exists or not.
+ * @param petID the petID of potential pet
+ * @return {Promise<boolean>} true if pet_id found within database
+ */
+export async function petExists(petID) {
+	// use for checking if we want to display a 404 or not
+	// as don't want bookings for non-existent pets
+
+	const fetchPetResult = await query(
+		'SELECT pet_id FROM Pet WHERE pet_id = ?',
+		[petID]
+	)
+
+	return fetchPetResult.length !== 0;
+}
