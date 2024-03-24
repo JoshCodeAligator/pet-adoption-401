@@ -20,11 +20,7 @@ const Book = ({
     setStartDate(nextWeek);
 
     // update unavailableTimes
-    updateStartDate(nextWeek);
-  };
-
-  const isStartDateToday = () => {
-    return startDate.toDateString() === new Date().toDateString();
+    updateStartDate(nextWeek)
   };
 
   const goToPrevWeek = () => {
@@ -32,7 +28,11 @@ const Book = ({
     if (isStartDateToday()) return;
 
     // do nothing if attempt to go into past
-    if (startDate.getTime() === new Date().getTime()) return
+    if (isStartDateToday()) return;
+
+    // do nothing if attempt to go into past
+    if (isStartDateToday()) return
+    // for some reason above equality fails, prob due to time, seconds off
 
     const prevWeek = new Date(startDate);
     prevWeek.setDate(prevWeek.getDate() - 7);
