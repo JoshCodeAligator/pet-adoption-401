@@ -1,9 +1,11 @@
 import query from "@/db/setup/db"; // Database connection
+import { getSessionUserID } from "@/lib";
 
 // Function to fetch appointments booked by a specific user
 export async function getBookedAppointments(userId) {
     try {
         // Query the database to fetch booked appointments for the given user
+        console.log("userId: ", getSessionUserID)
         const appointments = await query("SELECT * FROM Appointments WHERE userId = ?", [userId]);
 
         // Format the data as needed (e.g., convert date formats, sanitize data)
@@ -22,3 +24,4 @@ export async function getBookedAppointments(userId) {
         };
     }
 }
+

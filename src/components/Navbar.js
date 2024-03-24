@@ -4,12 +4,35 @@ import { HomeIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import CreateClientAccountForm from "@components/CreateClientAccountForm";
 import ClientCreateAccountView from "@CreateAccount/client/ClientCreateAccountView";
+import { useEffect } from "react";
+import {createCookie, deleteSession, getSession} from "../lib";
+
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    async function checkSession() {
+      const session = await getSession();
+      if (session) {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
+    }
+
+    checkSession();
+  }, []);
+
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleLogout = async () => {
+    await deleteSession();
+    setLoggedIn(false); // Update loggedIn state after logout
   };
 
   return (
@@ -28,12 +51,24 @@ const Navbar = () => {
           <Link href="/about" className="ml-6">
             <span>About</span>
           </Link>
-          <Link href="/client/CreateAccount" className="ml-6">
-            <span>Create Account</span>
-          </Link>
-          <Link href="/login" className="ml-6">
-            <span>Log In</span>
-          </Link>
+          {loggedIn ? (
+        <Link href="/browseAppointments" className="ml-6">
+          <span>View Appointments</span>
+        </Link>
+                      ) : (
+        <Link href="/client/CreateAccount" className="ml-6">
+          <span>Create Account</span>
+        </Link>
+                      )}
+          {loggedIn ? (
+        <Link href="/" className="ml-6" onClick={handleLogout}>
+          <span>Log Out</span>
+        </Link>
+                      ) : (
+        <Link href="/login" className="ml-6">
+          <span>Log In</span>
+        </Link>
+                      )}
         </div>
         <div className="lg:hidden">
           {isSidebarOpen ? (
