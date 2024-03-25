@@ -17,7 +17,7 @@ const ViewPetView = ({ pet }) => {
             {/* Moves the image inside the left side div */}
             <div className="w-80 h-80 relative">
               <Link href="/BrowsePets?category=Animals">
-                <button className="text-sm rounded p-2 bg-white text-black mb-4 hover:bg-orange-500">
+                <button className="text-lg font-bold rounded-full p-4 bg-white text-black mt-4 hover:bg-orange-500 hover:text-white">
                   &lt; Back to Listings
                 </button>
               </Link>
