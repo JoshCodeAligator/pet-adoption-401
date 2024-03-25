@@ -242,13 +242,13 @@ INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
 VALUES ('Tiger', 'M', 5, null, "Tiger is a charming three-year-old with a penchant for mischief and a heart full of love. With his expressive green eyes and playful antics, Tiger will keep you entertained from sunrise to sunset. Whether he's chasing after toy mice or snuggling up for a nap, Tiger's affectionate nature is bound to steal your heart.", 'adopted', 6, 5);
 
 INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
-VALUES ('Bella', 'F', 2, null, "Bella is as soft as her name suggests. With her fluffy coat and gentle demeanor, Bella is the perfect companion for cozy nights in and sunny afternoons spent lounging by the window. She's playful, affectionate, and ready to bring warmth and joy to her forever home.", 'available', 6, 1);
+VALUES ('Joy', 'F', 2, null, "Bella is as soft as her name suggests. With her fluffy coat and gentle demeanor, Bella is the perfect companion for cozy nights in and sunny afternoons spent lounging by the window. She's playful, affectionate, and ready to bring warmth and joy to her forever home.", 'available', 6, 1);
 
 INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
-VALUES ('Shadow', 'M', 4, null, "Shadow is a majestic beauty with eyes that seem to hold the mysteries of the universe. This four-year-old sweetheart is both independent and affectionate, striking the perfect balance between cuddle buddy and explorer. Whether she's chasing shadows or curling up in your lap, Shadow's presence is sure to brighten any room.", 'available', 5, 2);
+VALUES ('Ash', 'M', 4, null, "Shadow is a majestic beauty with eyes that seem to hold the mysteries of the universe. This four-year-old sweetheart is both independent and affectionate, striking the perfect balance between cuddle buddy and explorer. Whether she's chasing shadows or curling up in your lap, Shadow's presence is sure to brighten any room.", 'available', 5, 2);
 
 INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
-VALUES ('Misty', 'M', 2, null, "Misty is a playful and curious kitty with a heart of gold. At just three years old, Misty has already mastered the art of stealing hearts with her charming personality and soft, silky fur. She loves nothing more than chasing feather toys and basking in the sun's warm rays. Bring Misty home, and you'll gain a loyal friend for life.", 'available', 7, 3);
+VALUES ('Brock', 'M', 2, null, "Misty is a playful and curious kitty with a heart of gold. At just three years old, Misty has already mastered the art of stealing hearts with her charming personality and soft, silky fur. She loves nothing more than chasing feather toys and basking in the sun's warm rays. Bring Misty home, and you'll gain a loyal friend for life.", 'available', 7, 3);
 
 INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
 VALUES ('Oliver', 'M', 3, null, "Oliver is a playful and curious kitty with a heart of gold. At just three years old, Oliver has already mastered the art of stealing hearts with his charming personality and soft, silky fur. He loves nothing more than chasing feather toys and basking in the sun's warm rays. Bring Oliver home, and you'll gain a loyal friend for life.", 'available', 7, 3);
@@ -299,7 +299,7 @@ INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
 VALUES ('Nova', 'M', 8, null, "Nova is a friendly male bearded dragon who loves to bask in the sun and explore his surroundings. He enjoys lounging on his favorite rocks and munching on his favorite greens. Nova is looking for a caring family who will appreciate his gentle nature and provide him with lots of love and attention.", 'available', 10, 2);
 
 INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
-VALUES ('Luna', 'F', 1, null, "Luna is a vibrant and energetic female parrot who loves to sing and dance. She enjoys spending time perched on her favorite toys and interacting with her human companions. Luna is looking for a forever home where she can be the center of attention and spread joy to everyone around her.", 'available', 11, 1);
+VALUES ('Petra', 'F', 1, null, "Luna is a vibrant and energetic female parrot who loves to sing and dance. She enjoys spending time perched on her favorite toys and interacting with her human companions. Luna is looking for a forever home where she can be the center of attention and spread joy to everyone around her.", 'available', 11, 1);
 
 INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
 VALUES ('Phoenix', 'F', 3, null, "Phoenix is a gentle and affectionate female Leopard Gecko who loves to explore her terrarium and bask under her heat lamp. She enjoys hunting for insects and lounging on her favorite rocks. Phoenix is seeking a loving family who will provide her with plenty of space to roam and lots of tasty treats.", 'adopted', 12, 5);
@@ -321,3 +321,54 @@ VALUES ('Apollo', 'M', 8, null, "Apollo is a charming male Leopard Gecko with a 
 
 INSERT INTO Pet (name, sex, age, img, description, status, type_id, centre_id)
 VALUES ('Aurora', 'F', 1, null, "Aurora is a sweet and energetic female parrot who loves to sing and dance. She enjoys spending time with her human companions and showing off her colorful feathers. Aurora is looking for a forever home where she can spread joy and bring happiness to everyone around her.", 'available', 11, 4);
+
+-- inserting images
+
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1372814964/photo/portrait-of-cute-yorkshire-terrier-dog-on-the-sofa.webp?b=1&s=170667a&w=0&k=20&c=i4H09Qvl9yk2ZXx7p8aTi7FbXL64LDoYrVg50miBPeQ=' WHERE pet_id = '1';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1438059369/photo/dog-portrait.webp?b=1&s=170667a&w=0&k=20&c=fNKrZjLDYDz23Npa2FbCDkSM5LYIfXvMmQI2J-Z7sWM=' WHERE pet_id = '2';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1490277576/photo/close-up-boxer-dog-sitting-in-a-public-park.webp?b=1&s=170667a&w=0&k=20&c=hlvlUDKpqV9VuHc0cbWpro-cxVHxUrXrwuQKCgio0Bo=' WHERE pet_id = '3';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1634311257/photo/golden-retriever-happily-running-in-autumn-park.webp?b=1&s=170667a&w=0&k=20&c=pKGZ9z-o2HGGBiCllH8ZEJo0xCcz5N0LqP96xptFm_g=' WHERE pet_id = '4';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1482199939/photo/happy-sitting-and-panting-golden-retriever-dog-looking-at-camera-isolated-on-white.webp?b=1&s=170667a&w=0&k=20&c=rLTdSxJ4zTFQHT-Bj0Wj-ves5inaTa2HB-R78XTluuM=' WHERE pet_id = '5';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1347443657/photo/two-english-bulldogs-dog-puppy-outdoors-meeting.webp?b=1&s=170667a&w=0&k=20&c=RQ_XVQQbsHFyx5bBGbGLF3-Hwi_spfmEfeQWvVF_FG4=' WHERE pet_id = '6';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1318666271/photo/yorkshire-terrier-dog-on-white-background.webp?b=1&s=170667a&w=0&k=20&c=oB3HidkiMcO4vKCkpB1k3C5v-BQk-jd5DU46SYqiwM0=' WHERE pet_id = '7';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1307238003/photo/life-is-good-with-a-faithful-friend-by-your-side.webp?b=1&s=170667a&w=0&k=20&c=5ifdT550uCFkkyMXzL2bTLTC1RdhcnAiNyWKp-_2gbA=' WHERE pet_id = '8';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1324941893/photo/puppy-chewing-a-chew-stick.webp?b=1&s=170667a&w=0&k=20&c=aoWKRIrRLUshjCoa5NY6i2mLGm0ufkgDpEC76sgjY0o=' WHERE pet_id = '9';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1431487447/photo/serious-black-and-tan-german-shepherd-dog-posing-outdoors-in-a-forest-lying-down-on-a-ground.webp?b=1&s=170667a&w=0&k=20&c=zNJMoo6CHSdhEExdP0dY_SpYguo5TeX_dprdHqCQxSQ=' WHERE pet_id = '10';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1460537153/photo/a-golden-retriever-running-with-her-ball-in-yard-by-a-tree-5-year-old.webp?b=1&s=170667a&w=0&k=20&c=TwuvO6yUWwb-0GrpQEzMVtk-594lSZevTQCakNDpxt0=' WHERE pet_id = '11';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1442839848/photo/dog-sitting-under-christmas-tree-with-present.webp?b=1&s=170667a&w=0&k=20&c=ysAP1ofTkEcKVFVLjAMdXvWIU-D-lF3iDjV9coDhXT0=' WHERE pet_id = '12';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1210769260/photo/portrait-of-yorkshire-terrier-dog.webp?b=1&s=170667a&w=0&k=20&c=KTCjB9bYOUsDkg4lC4ikpPM_nv_ALtZvI6a7WI3LD4g=' WHERE pet_id = '13';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1401510248/photo/german-shepherd-laying-on-hardwood-floor.webp?b=1&s=170667a&w=0&k=20&c=vsPT6MoIKC5yAFMrDWCPBE7nD_rP89nZvnOh2uAzy1Q=' WHERE pet_id = '14';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/508701888/photo/siamese-cat-lying-down-at-bed.webp?b=1&s=170667a&w=0&k=20&c=iZrIOKkbFMJ7rzkF57mGuHTZ0clrx-kgERuDWwCtBzc=' WHERE pet_id = '15';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1435371634/photo/white-persian-cat.webp?b=1&s=170667a&w=0&k=20&c=E7kso7gEIfXim5gNKrRfDz1K7dXLaWwSmZNTEwu8tSw=' WHERE pet_id = '16';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1943407858/photo/red-white-persian-cat-on-a-black-background.webp?b=1&s=170667a&w=0&k=20&c=pXFyJlDfypW9aE9xtLkWWngQLv6mEpCGpruH1vTvbVQ=' WHERE pet_id = '17';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1472183071/photo/longhair-tabby-cat-relaxing-on-a-kitchen-floor.webp?b=1&s=170667a&w=0&k=20&c=HGZpeJd4uZZ07D-jrfc-OZaqkC54SSZZtvHKLVujI10=' WHERE pet_id = '18';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/98378117/photo/siamese-cat.webp?b=1&s=170667a&w=0&k=20&c=OKSXQf1Jy3uCp8YwM_vyhpt7QMCRBSJ042DWlHreH2I=' WHERE pet_id = '19';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1475098056/photo/portrait-of-three-cute-maine-coon-kittens.webp?b=1&s=170667a&w=0&k=20&c=Ioh6v6AGWW0WsJuB5I4ctHs_JaKA8pNQW-vSSmGAde4=' WHERE pet_id = '20';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1280045774/photo/maine-coon-in-the-garden.webp?b=1&s=170667a&w=0&k=20&c=K7bwvKCQQS-3Y-ra0tPI7Q39f0YfilM2WM1H3_d_Ung=' WHERE pet_id = '21';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1498838344/photo/grumpy-persian-waiting-on-food.webp?b=1&s=170667a&w=0&k=20&c=LjAK_5FedDnEnip4MwdaV32Jbp9aNix0VRk2Lb4uaag=' WHERE pet_id = '22';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1479157798/photo/young-woman-playing-with-her-cat.webp?b=1&s=170667a&w=0&k=20&c=4kfZI-zjEbGtKoMaG_0wmHtsDxqDF7PZ_iLhPBPYbKU=' WHERE pet_id = '23';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1400915418/photo/siamese-cat.webp?b=1&s=170667a&w=0&k=20&c=pvIFApJLhmdfkaGK9PqK_5xgoOxtET8jUi9PyhfT3u8=' WHERE pet_id = '24';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1644077545/photo/standing-persian-chinchilla-cat-silver-shade-close-up.webp?b=1&s=170667a&w=0&k=20&c=vI0pR09PG0pQGr64XXA9krLR261hD1TRXNTsEGLrbeU=' WHERE pet_id = '25';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1434716137/photo/havana-cathedral-square.webp?b=1&s=170667a&w=0&k=20&c=XBB-8eE3L95pl9Mhr4GWqeBBo5md_9VKAN6za_mw64I=' WHERE pet_id = '26';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1572553037/photo/havana-cuba.webp?b=1&s=170667a&w=0&k=20&c=3FZIzn1ZpK_30VFbJFJbKzCyqWa2JOF_RNM6D3XI79k=' WHERE pet_id = '27';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1431787737/photo/old-town-in-krakow-poland.webp?b=1&s=170667a&w=0&k=20&c=Hetwe015S76KxQSR524g1JnxHTKPlVjOpkq4RJcBCCU=' WHERE pet_id = '28';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1327163640/photo/multicolored-old-american-classic-cars-on-street-of-havana-against-historic-buildings.webp?b=1&s=170667a&w=0&k=20&c=vdK_N8bvHqyD4Xrz2CbS9wBBS8Fc5I65APIxy02RU14=' WHERE pet_id = '29';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1009606890/photo/warsaw-royal-castle-and-old-town-at-sunset.webp?b=1&s=170667a&w=0&k=20&c=QT9K2x3PYFrIviQ4s2wHpmFuqoxy7bj8nHNi_HilV-4=' WHERE pet_id = '30';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1452752338/photo/abstract-light-effect.webp?b=1&s=170667a&w=0&k=20&c=3uOVGvI3YP9F7tsav0Cx49Ha3U2a-wFzG71Jqsca78E=' WHERE pet_id = '31';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1674612928/photo/natural-lens-flare-overlay-on-black-background-design-element.webp?b=1&s=170667a&w=0&k=20&c=nHZC9PTCDQQvnaR-h_U1nK2BpWM1vow5lnobRyGQBgE=' WHERE pet_id = '32';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/537627836/photo/vintage-american-cars-speeding-along-the-malecon-in-havana-cuba.webp?b=1&s=170667a&w=0&k=20&c=Pggq8ff54NAQF0JXzWjH7ELKgY-eP7y618gf-DGEnhQ=' WHERE pet_id = '33';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1445273483/photo/famous-mariacka-street-in-a-golden-light-with-basilica-of-st-mary-in-the-background-gdansk.webp?b=1&s=170667a&w=0&k=20&c=SRgddOcIDosK9LM0G-SO1-D2zLiH9JoVIiQzNWx2mIg=' WHERE pet_id = '34';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1475311670/photo/blue-and-yellow-macaws-blue-and-gold-macaws-aras-bleu-aras-bleu-et-jaune.webp?b=1&s=170667a&w=0&k=20&c=EnwcY476kImiGQP99bjT3zjQmUP8ZuCuQUvbBYU7b1Q=' WHERE pet_id = '35';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1387494794/photo/leopard-gecko-on-the-hands.webp?b=1&s=170667a&w=0&k=20&c=KQO7DLKPSyZ2Pvwt_wwHVFSCFB99b7ee2TkCq7yXEJ8=' WHERE pet_id = '36';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1461310406/photo/bearded-dragon.webp?b=1&s=170667a&w=0&k=20&c=ZJwsb8Ri0C9AfuDLIOUMZEvkIHId3yzoFXwU43jJa4c=' WHERE pet_id = '37';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1635372452/photo/lizard-bearded-dragon.webp?b=1&s=170667a&w=0&k=20&c=5WecCb5o7THZ0Oz176Q_s0UR1T0RVpNmvMREvoUedu8=' WHERE pet_id = '38';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/2035277380/photo/parrot.webp?b=1&s=170667a&w=0&k=20&c=zRU9cCQFv1EgkANaC3phfF9MNWYxLaOVCLTp1z1HWvY=' WHERE pet_id = '39';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1690308131/photo/leopard-gecko.webp?b=1&s=170667a&w=0&k=20&c=b4Wrl3jut1vRgm-ObX5xFrbubAX36LMEWe7ey9YrRm0=' WHERE pet_id = '40';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1348746050/photo/sweet-leopard-gecko-on-color-background-eublepharis-macularius.webp?b=1&s=170667a&w=0&k=20&c=BIVBevu537ubajZVPMpOdqgYjibFke3fIdbL_8ptN9s=' WHERE pet_id = '41';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1459149276/photo/colorful-feather.webp?b=1&s=170667a&w=0&k=20&c=TTb87XS5afb205lYgw3nf5Wxe5JTwtrGgjkcpxS-p7E=' WHERE pet_id = '42';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/1438997532/photo/bearded-dragon.webp?b=1&s=170667a&w=0&k=20&c=QTbwS1S9Ay8gcLXneDkFTh1wCqa99LE1ftiSxyXyRcE=' WHERE pet_id = '43';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/171152147/photo/a-pogona-lizard-sitting-on-a-wooden-surface-in-a-forest.webp?b=1&s=170667a&w=0&k=20&c=-tLpxfnX64KL_owHtXr1Am0_Gxd-dOKx51oUI9PKFNw=' WHERE pet_id = '44';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/108272056/photo/leopard-gecko-with-tongue-out.webp?b=1&s=170667a&w=0&k=20&c=doi2gxBklQ3HMUHnMLUUriuy4pCEZpeeHrG6XWpgd8A=' WHERE pet_id = '45';
+UPDATE pet SET img = 'https://media.istockphoto.com/id/92275497/photo/red-and-green-macaw.webp?b=1&s=170667a&w=0&k=20&c=ADCRm9cQD2pyFxrsuQi7h7DqsYE38N9mUKzSCQZTiJY=' WHERE pet_id = '46';
+
+select name, type_id, img from pet;
