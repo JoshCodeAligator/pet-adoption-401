@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getBookedAppointments } from "./browseAccountsAPI";
+import { getBookedAppointments } from "@BrowseAppointments/BrowseAppointmentsAPI";
 
 const BrowseAccounts = ({ userId }) => {
     const [appointments, setAppointments] = useState([]);
@@ -31,7 +31,7 @@ const BrowseAccounts = ({ userId }) => {
             <h2>Your Booked Appointments</h2>
             <ul>
                 {appointments.map(appointment => (
-                    <li key={appointment.id}>
+                    <li key={appointment.appointment_id}>
                         {/* Render appointment details here */}
                     </li>
                 ))}
