@@ -9,6 +9,7 @@
       "@BrowseAppointments/*": ["./src/app/BrowseAppointments/*"],
       "@BookAppointment/*": ["./src/app/BookAppointment/*"],
       "@about/*": ["./src/app/about/*"],
+      "@about/*": ["./src/app/about/*"],
       "@BrowsePets/*": ["./src/app/BrowsePets/*"],
       "@ViewPet/*": ["./src/app/ViewPet/*"]
     }
