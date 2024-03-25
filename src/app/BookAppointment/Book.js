@@ -1,6 +1,12 @@
-import React, {useCallback, useState} from "react";
+import BrowseOrderButton from "@/components/BrowseOrderButton";
+import React, { useCallback, useState } from "react";
 
-const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking}) => {
+const Book = ({
+  appointmentType,
+  unavailableTimes,
+  updateStartDate,
+  makeBooking,
+}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -13,16 +19,16 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
     setStartDate(nextWeek);
 
     // update unavailableTimes
-    updateStartDate(nextWeek)
+    updateStartDate(nextWeek);
   };
 
   const isStartDateToday = () => {
-    return startDate.toDateString() === new Date().toDateString()
-  }
+    return startDate.toDateString() === new Date().toDateString();
+  };
 
   const goToPrevWeek = () => {
     // do nothing if attempt to go into past
-    if (isStartDateToday()) return
+    if (isStartDateToday()) return;
     // for some reason above equality fails, prob due to time, seconds off
 
     const prevWeek = new Date(startDate);
@@ -30,7 +36,7 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
     setStartDate(prevWeek);
 
     // update unavailableTimes
-    updateStartDate(prevWeek)
+    updateStartDate(prevWeek);
   };
 
   // Function to handle selecting a day and time
@@ -43,26 +49,28 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
     // don't do anything if no slot selected
     if (selectedDay && selectedTime) {
       // need to convert selectedDay to a date object
-      const selectedDate = new Date(selectedDay)
-      console.log(selectedDate)
-      makeBooking(selectedDate, selectedTime)
+      const selectedDate = new Date(selectedDay);
+      console.log(selectedDate);
+      makeBooking(selectedDate, selectedTime);
     }
-  }
+  };
   // Function to generate time slots for a day
   const generateTimeSlots = (date) => {
     const timeSlots = [];
     for (let i = 9; i <= 17; i++) {
       const time = `${i < 10 ? "0" + i : i}:00`;
-      const isBooked = unavailableTimes.timeIsBooked(date, time)
-      console.log("From time slot: ", date, time, isBooked)
+      const isBooked = unavailableTimes.timeIsBooked(date, time);
+      console.log("From time slot: ", date, time, isBooked);
       timeSlots.push(
         <button
-            key={time}
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-                selectedDay === date && selectedTime === time ? "border-2 border-blue-700" : ""
-            } ${isBooked ? "bg-gray-400 cursor-not-allowed" : ""}`}
-            onClick={() => handleDateTimeClick(date, time)}
-            disabled={isBooked}
+          key={time}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+            selectedDay === date && selectedTime === time
+              ? "border-2 border-blue-700"
+              : ""
+          } ${isBooked ? "bg-gray-400 cursor-not-allowed" : ""}`}
+          onClick={() => handleDateTimeClick(date, time)}
+          disabled={isBooked}
         >
           {time}
         </button>
@@ -102,13 +110,14 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
 
   return (
     <div className="container mx-auto mt-20">
-      <h1 className="text-2xl font-bold mb-4">{appointmentType} Appointments</h1>
+      <h1 className="text-2xl font-bold mb-4">
+        {appointmentType} Appointments
+      </h1>
       <div className="flex justify-between my-4">
         <button
           onClick={goToPrevWeek}
           className={`bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded 
-            ${isStartDateToday() ? "bg-gray-400 cursor-not-allowed" : ""}`
-          }
+            ${isStartDateToday() ? "bg-gray-400 cursor-not-allowed" : ""}`}
           disabled={isStartDateToday()}
         >
           &lt; Previous Week
@@ -122,9 +131,14 @@ const Book = ({appointmentType, unavailableTimes, updateStartDate, makeBooking})
       </div>
       <div className="grid grid-cols-7 gap-4">{generateDateButtons()}</div>
       <div className="mt-4">
-        {selectedDay && selectedTime && <p>Selected Day: {selectedDay.toDateString()}, Time: {selectedTime}</p>}
+        {selectedDay && selectedTime && (
+          <p>
+            Selected Day: {selectedDay.toDateString()}, Time: {selectedTime}
+          </p>
+        )}
         <button
-            onClick={bookAppointment}
+          onClick={bookAppointment}
+          className="font-bold bg-orange-500 hover:bg-emerald-500 text-white rounded-full px-8 py-4 mr-4 text-lg"
         >
           Book Appointment
         </button>
