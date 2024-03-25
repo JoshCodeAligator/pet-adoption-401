@@ -7,7 +7,7 @@ const Book = ({
   unavailableTimes,
   updateStartDate,
   makeBooking,
-, makeBooking}) => {
+}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -20,19 +20,16 @@ const Book = ({
     setStartDate(nextWeek);
 
     // update unavailableTimes
-    updateStartDate(nextWeek)
+    updateStartDate(nextWeek);
+  };
+
+  const isStartDateToday = () => {
+    return startDate.toDateString() === new Date().toDateString();
   };
 
   const goToPrevWeek = () => {
     // do nothing if attempt to go into past
     if (isStartDateToday()) return;
-
-    // do nothing if attempt to go into past
-    if (isStartDateToday()) return;
-
-    // do nothing if attempt to go into past
-    if (isStartDateToday()) return
-    // for some reason above equality fails, prob due to time, seconds off
 
     const prevWeek = new Date(startDate);
     prevWeek.setDate(prevWeek.getDate() - 7);
@@ -57,15 +54,6 @@ const Book = ({
       makeBooking(selectedDate, selectedTime);
     }
   };
-  const bookAppointment = () => {
-    // don't do anything if no slot selected
-    if (selectedDay && selectedTime) {
-      // need to convert selectedDay to a date object
-      const selectedDate = new Date(selectedDay)
-      console.log(selectedDate)
-      makeBooking(selectedDate, selectedTime)
-    }
-  }
   // Function to generate time slots for a day
   const generateTimeSlots = (date) => {
     const timeSlots = [];
@@ -106,9 +94,7 @@ const Book = ({
           <button
             className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
               selectedDay === date ? "border-2 border-blue-700" : ""
-              selectedDay === date ? "border-2 border-blue-700" : ""
             }`}
-            onClick={() => setSelectedDay(date)}
             onClick={() => setSelectedDay(date)}
           >
             {date.toDateString()} {/* Display date */}
