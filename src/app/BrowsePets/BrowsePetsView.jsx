@@ -1,12 +1,12 @@
 "use client"
 
 import Navbar from "@components/Navbar";
-import CategorySelectButton from "@components/CategorySelectButton";
+import CategorySelectButton from "@BrowsePets/CategorySelectButton";
 import {animal, cat, category, dog, exotic, rabbit} from "@/app/constants";
 import BrowseOrderButton from "@components/BrowseOrderButton";
-import AnimalPreview from "@components/AnimalPreview";
+import AnimalPreview from "@BrowsePets/AnimalPreview";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {useCallback, useEffect, useState, useMemo } from "react";
+import {useCallback, useEffect, useState } from "react";
 import {fetchAnimalsByCategory} from "./BrowsePetsController.js";
 
 
