@@ -1,6 +1,6 @@
 "use client"
 
-import LoginForm from "@components/LoginForm";
+import LoginForm from "@login/LoginForm";
 import Navbar from "@components/Navbar";
 
 const LoginView = ({onSubmit, errorFlag, errorMessage}) => {
