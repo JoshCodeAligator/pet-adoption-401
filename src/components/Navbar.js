@@ -52,7 +52,7 @@ const Navbar = () => {
             <span>About</span>
           </Link>
           {loggedIn ? (
-        <Link href="/browseAppointments" className="ml-6">
+        <Link href="/BrowseAppointments" className="ml-6">
           <span>View Appointments</span>
         </Link>
                       ) : (
