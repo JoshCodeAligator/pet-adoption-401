@@ -6,12 +6,11 @@
       "@test/*": ["./src/app/test/*"],
       "@login/*": ["./src/app/login/*"],
       "@CreateAccount/*": ["./src/app/[user]/CreateAccount/*"],
-      "@BrowseAppointments/*": ["./src/app/BrowseAppointments/*"],
+      "@BrowseAppointments/*": ["./src/app/BrowseAppointments"],
       "@BookAppointment/*": ["./src/app/BookAppointment/*"],
       "@about/*": ["./src/app/about/*"],
-      "@about/*": ["./src/app/about/*"],
       "@BrowsePets/*": ["./src/app/BrowsePets/*"],
-      "@ViewPet/*": ["./src/app/ViewPet/*"]
+      "@ViewPet/*": ["./src/app/ViewPet/*"],
     }
   }
 }
