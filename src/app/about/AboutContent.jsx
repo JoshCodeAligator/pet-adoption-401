@@ -11,7 +11,7 @@ const AboutContent = () => {
       <section className="p-6 bg-white shadow-md rounded-lg mb-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
         <p className="text-gray-700 leading-relaxed">
-          <span className="text-green-600">PetPursuit's mission</span> is to rescue and rehome animals, promote responsible pet ownership, and raise awareness about animal welfare issues in our community. We strive to provide a safe and nurturing environment for every pet in our care.
+          <span className="text-green-600">{"PetPursuit's mission"}</span> is to rescue and rehome animals, promote responsible pet ownership, and raise awareness about animal welfare issues in our community. We strive to provide a safe and nurturing environment for every pet in our care.
         </p>
       </section>
   
@@ -32,7 +32,7 @@ const AboutContent = () => {
           <li>Exotics</li>
         </ul>
         <p className="text-gray-700 leading-relaxed mt-4">
-          Whether you're looking for a loyal companion, a playful feline friend, an adorable bunny, or an exotic pet to add excitement to your life, <span className="text-green-600">PetPursuit</span> has you covered.
+          {"Whether you're looking for a loyal companion, a playful feline friend, an adorable bunny, or an exotic pet to add excitement to your life, "}<span className="text-green-600">PetPursuit</span> has you covered.
         </p>
       </section>
     </div>
