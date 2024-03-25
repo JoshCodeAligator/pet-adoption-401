@@ -47,7 +47,7 @@ export const fetchAnimalsByCategory = async (currentCategory, animal) => {
         animal.sex,
         animal.category,
         animal.breed,
-        ""
+        animal.img
       );
     });
     return animalObjects;
