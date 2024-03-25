@@ -1,5 +1,5 @@
 import Animal from "@/app/BrowsePets/Animal";
-import Centre from "@/app/ViewPet/[id]/Centre";
+import Centre from "@ViewPet/Centre";
 
 class AnimalDetail extends Animal {
 
