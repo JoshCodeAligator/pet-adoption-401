@@ -13,8 +13,8 @@ type_id_to_breed = {
     10: 'Bearded Dragons',
     12: 'Leopard Geckos',
     11: 'Parrots',
-    8: 'Havanna',
-    9: 'Polish'
+    8: 'Havanna rabbit',
+    9: 'Polish rabbit'
 }
 
 # dictionary to count the number of images for each breed 
