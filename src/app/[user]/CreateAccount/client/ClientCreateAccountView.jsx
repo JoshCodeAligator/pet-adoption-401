@@ -1,7 +1,7 @@
 "use client"
 
 import Navbar from "@components/Navbar";
-import CreateClientAccountForm from "@components/CreateClientAccountForm";
+import CreateClientAccountForm from "@CreateAccount/client/CreateClientAccountForm";
 
 const ClientCreateAccountView = ({ onSubmit, errorFlag, errorMessage }) => {
     return (

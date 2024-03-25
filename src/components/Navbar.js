@@ -2,10 +2,8 @@
 import React, { useState } from "react";
 import { HomeIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import Link from "next/link";
-import CreateClientAccountForm from "@components/CreateClientAccountForm";
-import ClientCreateAccountView from "@CreateAccount/client/ClientCreateAccountView";
 import { useEffect } from "react";
-import {createCookie, deleteSession, getSession} from "../lib";
+import {deleteSession, getSession} from "@/lib";
 
 
 const Navbar = () => {
