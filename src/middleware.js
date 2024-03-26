@@ -14,9 +14,15 @@ export async function middleware(request) {
 		return Response.redirect(new URL('/login', request.url))
 	}
 
+	if (!session && pathname.startsWith('/BrowseAppointments')) {
+		// redirect to login page
+		return Response.redirect(new URL('/login', request.url))
+	}
+
 	// refresh cookie expiry when don't get redirected (means session was not null)
 	// put this down here and not at top to allow future changes of user type to also be adding to checking
-	return await updateSession(request);
+	if (session)
+		return await updateSession(request);
 }
 
 export const config = {
