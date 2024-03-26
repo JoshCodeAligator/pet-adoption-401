@@ -1,5 +1,6 @@
-import BrowseOrderButton from "@/components/BrowseOrderButton";
-import React, { useCallback, useState } from "react";
+"use client"
+
+import React, { useState } from "react";
 
 const Book = ({
   appointmentType,
@@ -29,7 +30,6 @@ const Book = ({
   const goToPrevWeek = () => {
     // do nothing if attempt to go into past
     if (isStartDateToday()) return;
-    // for some reason above equality fails, prob due to time, seconds off
 
     const prevWeek = new Date(startDate);
     prevWeek.setDate(prevWeek.getDate() - 7);
