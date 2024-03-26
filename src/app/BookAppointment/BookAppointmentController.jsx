@@ -2,7 +2,12 @@
 
 import React, {useEffect, useState} from 'react'
 import BookAppointmentView from "@BookAppointment/BookAppointmentView";
-import {getBookedTimesOfWeek, insertAppointment, petExists} from "@BookAppointment/BookAppointmentAPI";
+import {
+    getBookedTimesOfWeek,
+    insertAppointment,
+    petExists,
+    updatePetStatusToBooked
+} from "@BookAppointment/BookAppointmentAPI";
 import BookedTimes from "@BookAppointment/BookedTimes";
 import {getSessionUserID} from "@/lib";
 import {redirect, useRouter} from "next/navigation";
@@ -55,6 +60,9 @@ const BookingController = ({pet_id}) => {
                     (addAppointmentResult) => {
                         // success, go back to home
                         if (addAppointmentResult) {
+                            // update pet status
+                            updatePetStatusToBooked(pet_id).then(r => {})
+
                             router.push('/')
                             alert(`Booking made at: ${date.toDateString()}, ${time}`)
 
@@ -63,7 +71,7 @@ const BookingController = ({pet_id}) => {
                         else {
                             // refresh page
                             router.refresh()
-                            alert('Booking failed. Most likely due to server error. Try again.')
+                            alert('Booking failed. Most likely due to a server error. Try again.')
                         }
                     }
                 )
