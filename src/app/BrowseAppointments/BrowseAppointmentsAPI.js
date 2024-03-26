@@ -17,4 +17,15 @@ export async function getBookedAppointments(getSessionUserID) {
     }
 }
 
+export async function removeAppointment(appointment_id) {
+    try {
+        // Query the database to remove the appointment with the given ID
+        const response = await query("DELETE FROM Appointment WHERE appointment_id = ?", [appointment_id]);
+        // Return the response
+        return response;
+    } catch (error) {
+        console.error("Error removing appointment:", error);
+    }
+}
+
 export default getBookedAppointments;
