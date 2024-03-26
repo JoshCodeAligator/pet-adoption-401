@@ -29,7 +29,7 @@ const BrowseAppointments = ({ appointments}) => {
                             {/* Render appointment details */}
                             {appointments && appointments.map(appointment => (
                                 <div key={appointment.appointment_id} className="mb-6 flex justify-between items-center">
-                                    <div>
+                                    <div className="w-2/3">
                                         <p><strong>Appointment ID:</strong> {appointment.appointment_id}</p>
                                         <p><strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}</p>
                                         <p><strong>Start Time:</strong> {appointment.start_time}</p>
@@ -39,12 +39,14 @@ const BrowseAppointments = ({ appointments}) => {
                                         <p><strong>Pet Name:</strong> {appointment.pet_name}</p>
                                     </div>
                                     {/* Delete Button */}
-                                    <button 
-                                        onClick={() => handleDelete(appointment.appointment_id)}
-                                        className="flex flex-end bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                    >
-                                        Cancel 
-                                    </button>
+                                    <div>
+                                        <button 
+                                            onClick={() => handleDelete(appointment.appointment_id)}
+                                            className="flex flex-end bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                                        >
+                                            Cancel 
+                                        </button>
+                                    </div>
                                 </div>
                             ))}
                         </div>
