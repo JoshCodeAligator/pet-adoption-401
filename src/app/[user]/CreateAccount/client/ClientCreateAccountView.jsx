@@ -46,40 +46,7 @@ const ClientCreateAccountView = ({ onSubmit, errorFlag, errorMessage }) => {
 				{/*  end of animated background */}
 			</div>
             {/* CreateClientAccountForm in the second row */}
-            <div className="flex-grow flex flex-col justify-center items-center background">
-            {/* spans for the animated background */}
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            <div className="flex-grow flex flex-col justify-center items-center">
             {/*  end of animated background */}
                 <div className="flex flex-col items-center">
                     <CreateClientAccountForm 
