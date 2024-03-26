@@ -13,6 +13,14 @@ class AnimalDetail extends Animal {
 	}
 
 	get status() {
+		if (this._status === 'available') {
+			return "No one has booked this pet"
+		}
+
+		if (this._status === 'booked') {
+			return "This pet has been booked by at least one person"
+		}
+
 		return this._status
 	}
 
