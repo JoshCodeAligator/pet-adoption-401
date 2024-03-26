@@ -11,16 +11,26 @@ const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    async function checkSession() {
-      const session = await getSession();
-      if (session) {
-        setLoggedIn(true);
-      } else {
-        setLoggedIn(false);
-      }
-    }
+    // async function checkSession() {
+    //   const session = await getSession();
+    //   if (session) {
+    //     setLoggedIn(true);
+    //   } else {
+    //     setLoggedIn(false);
+    //   }
+    // }
+    //
+    // checkSession();
 
-    checkSession();
+    getSession().then(session => {
+      if (session) {
+        setLoggedIn(true)
+      }
+      else {
+        setLoggedIn(false)
+      }
+    })
+
   }, []);
 
 
@@ -50,7 +60,7 @@ const Navbar = () => {
             <span>About</span>
           </Link>
           {loggedIn ? (
-            <Link href="/browseAppointments" className="ml-6">
+            <Link href="/BrowseAppointments" className="ml-6">
               <span>View Appointments</span>
             </Link>
           ) : (
@@ -89,15 +99,27 @@ const Navbar = () => {
             <Link href="/about" className="my-2 hover:text-gray-300">
               About
             </Link>
-            <Link
-              href="/client/CreateAccount"
-              className="my-2 hover:text-gray-300"
-            >
-              Create Account
-            </Link>
-            <Link href="/login" className="my-2 hover:text-gray-300">
-              Log In
-            </Link>
+            {loggedIn ? (
+                <Link href="/BrowseAppointments" className="my-2 hover:text-gray-300">
+                  View Appointments
+                </Link>
+            ) : (
+                <Link
+                    href="/client/CreateAccount"
+                    className="my-2 hover:text-gray-300"
+                >
+                  Create Account
+                </Link>
+            )}
+            {loggedIn ? (
+                <Link href="/" className="my-2 hover:text-gray-300" onClick={handleLogout}>
+                  Log Out
+                </Link>
+            ) : (
+                <Link href="/login" className="my-2 hover:text-gray-300">
+                  Log In
+                </Link>
+            )}
           </div>
         </div>
       )}
