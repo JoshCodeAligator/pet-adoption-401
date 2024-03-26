@@ -72,8 +72,43 @@ const BrowsePetsView = ({animals}) => {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24 bg-cover bg-center">
 			<Navbar/>
-
-			<div className="text-center mb-16 ">
+			<div className="background">
+				 {/* spans for the animated background */}
+				 <span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				{/*  end of animated background */}
+			</div>
+			<div className="text-center mb-16">
 				<h1 className="text-6xl font-extrabold mb-12 text-orange-500">
 					<span className="text-white">{currentCategory}</span> Listings
 				</h1>
