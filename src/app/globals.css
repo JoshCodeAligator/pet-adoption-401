@@ -30,6 +30,7 @@ body {
 @keyframes move {
   100% {
       transform: translate3d(0, 0, 1px) rotate(360deg);
+      transform: translate3d(0, 0, 1px) rotate(360deg);
   }
 }
 
@@ -39,6 +40,7 @@ body {
   height: 100vh;
   top: 0;
   left: 0;
+  background: #181616;
   background: #181616;
   overflow: hidden;
   z-index: -1;
@@ -52,12 +54,20 @@ body {
   position: absolute;
   animation: move;
   animation-duration: 22;
+  animation-duration: 22;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
 
 .background span:nth-child(0) {
+  color: #f1fec6;
+    top: 8%;
+    left: 7%;
+    animation-duration: 186s;
+    animation-delay: -122s;
+    transform-origin: -22vw -17vh;
+    box-shadow: 2vmin 0 1.1358537431373181vmin currentColor;
   color: #f1fec6;
     top: 8%;
     left: 7%;
@@ -74,8 +84,22 @@ body {
     animation-delay: -194s;
     transform-origin: 11vw 6vh;
     box-shadow: -2vmin 0 0.5234899992688162vmin currentColor;
+  color: #ffd6cc;
+    top: 8%;
+    left: 34%;
+    animation-duration: 254s;
+    animation-delay: -194s;
+    transform-origin: 11vw 6vh;
+    box-shadow: -2vmin 0 0.5234899992688162vmin currentColor;
 }
 .background span:nth-child(2) {
+  color: #ff3a20;
+    top: 6%;
+    left: 49%;
+    animation-duration: 94s;
+    animation-delay: -163s;
+    transform-origin: 25vw -4vh;
+    box-shadow: 2vmin 0 1.0134388630137052vmin currentColor;
   color: #ff3a20;
     top: 6%;
     left: 49%;
