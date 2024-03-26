@@ -1,7 +1,0 @@
-{
-  "host": "34.145.18.216",
-  "user": "root",
-  "password": "password401pet",
-  "database": "PetPursuit",
-  "connectTimeout": 100000
-}
