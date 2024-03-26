@@ -1,16 +1,15 @@
 // db.js
-const config = require("./config.json"); // Assuming the config file is in the same directory
 
 import mysql from "mysql2/promise"
 
 const pool = mysql.createPool({
-    host: config.host,
-    user: config.user,
-    ***REMOVED***: config.***REMOVED***,
-    database: config.database,
-    connectTimeout: config.connectTimeout,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    ***REMOVED***: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    connectTimeout: 10000,
     waitForConnections: true,
-    connectionLimit: 10,
+    connectionLimit: 100,
     queueLimit: 0,
 });
 

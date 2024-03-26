@@ -5,8 +5,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 // following information should be hidden in git
-const secretKey = "***REMOVED***";
-const key = new TextEncoder().encode(secretKey);
+const key = new TextEncoder().encode(process.env.SECRET_KEY);
 
 export async function encrypt(payload) {
 	return await new SignJWT(payload)

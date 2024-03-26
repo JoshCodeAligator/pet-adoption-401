@@ -370,5 +370,3 @@ UPDATE Pet SET img = 'https://media.istockphoto.com/id/1438997532/photo/bearded-
 UPDATE Pet SET img = 'https://media.istockphoto.com/id/171152147/photo/a-pogona-lizard-sitting-on-a-wooden-surface-in-a-forest.webp?b=1&s=170667a&w=0&k=20&c=-tLpxfnX64KL_owHtXr1Am0_Gxd-dOKx51oUI9PKFNw=' WHERE pet_id = '44';
 UPDATE Pet SET img = 'https://media.istockphoto.com/id/108272056/photo/leopard-gecko-with-tongue-out.webp?b=1&s=170667a&w=0&k=20&c=doi2gxBklQ3HMUHnMLUUriuy4pCEZpeeHrG6XWpgd8A=' WHERE pet_id = '45';
 UPDATE Pet SET img = 'https://media.istockphoto.com/id/92275497/photo/red-and-green-macaw.webp?b=1&s=170667a&w=0&k=20&c=ADCRm9cQD2pyFxrsuQi7h7DqsYE38N9mUKzSCQZTiJY=' WHERE pet_id = '46';
-
-select name, type_id, img from Pet;
