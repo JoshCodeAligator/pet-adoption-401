@@ -7,7 +7,7 @@ const LoginForm = ({onSubmit, loginErrorFlag, loginErrorMessage}) => {
 	// need to be to validate values of email and ***REMOVED***
 
   	return (
-		<>
+		<div className="flex flex-col">
 			{/* Log in form */}
 			<form action={onSubmit} style={{color: 'black', backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
 				{/* Email field */}
@@ -30,13 +30,14 @@ const LoginForm = ({onSubmit, loginErrorFlag, loginErrorMessage}) => {
 			</form>
 
 			{/* Display error if there is an error */}
+			<div className="text-red-600 font-extrabold text-2xl text-center pt-5">
 			{loginErrorFlag &&
 				<p>
 					{loginErrorMessage}
 				</p>
 			}
-
-		</>
+			</div>
+		</div>
 	)
 }
 
