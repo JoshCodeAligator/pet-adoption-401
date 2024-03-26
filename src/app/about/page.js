@@ -7,12 +7,47 @@ import AboutContent from "@about/AboutContent";
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-pawprint-pattern flex flex-col justify-center items-center py-12">
+    <div className="min-h-screen bg-pawprint-pattern flex flex-col justify-center items-center py-12 relative">
       {/* Navigation */}
-      <Navbar/>
-
+      <Navbar />
       {/* Main content */}
-      <AboutContent/>
+      <AboutContent />
+      <div className="background">
+        {/* spans for the animated background */}
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        {/*  end of animated background */}
+      </div>
     </div>
   );
 };
