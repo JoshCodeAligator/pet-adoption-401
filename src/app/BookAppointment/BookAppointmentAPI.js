@@ -93,14 +93,6 @@ export async function insertAppointment(date, time, petID, clientID) {
 	return insertResult.affectedRows !== 0
 }
 
-export async function updatePetStatusToBooked(petID) {
-	const booked = "booked"
-	await query(
-		'UPDATE Pet SET status = ? WHERE pet_id = ?',
-		[booked, petID]
-	);
-}
-
 /**
  * Checks if a pet with petID exists or not.
  * @param petID the petID of potential pet
