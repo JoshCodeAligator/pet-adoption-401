@@ -95,7 +95,7 @@ export async function insertAppointment(date, time, petID, clientID) {
 export async function updatePetStatusToBooked(petID) {
 	const booked = "booked"
 	await query(
-		'UPDATE PET SET status = ? WHERE pet_id = ?',
+		'UPDATE Pet SET status = ? WHERE pet_id = ?',
 		[booked, petID]
 	);
 }
