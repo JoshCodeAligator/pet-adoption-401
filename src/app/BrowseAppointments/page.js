@@ -11,10 +11,11 @@
 "use client"
 
 import BrowseAppointment from "@/app/BrowseAppointments/BrowseAppointmentsView";
+import BrowseAppointmentsController from "./BrowseAppointmentsController";
 
 const BrowseAppointments = () => {
     return (
-        <BrowseAppointment/>
+        <BrowseAppointmentsController/>
     );
 };
 

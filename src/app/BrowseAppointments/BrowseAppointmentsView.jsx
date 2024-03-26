@@ -1,35 +1,28 @@
+"use client"
+
 import React, { useState, useEffect } from "react";
 import { getBookedAppointments } from "./BrowseAppointmentsAPI";
 import { fetchAppointments } from "./BrowseAppointmentsController";
 import Navbar from "@components/Navbar";
+import { getSessionUserID } from "@/lib";
 
 
-const BrowseAppointments = ({  }) => {
-    const [appointments, setAppointments] = useState([]);
-
-    useEffect(() => {
-        // Fetch booked appointments when the component mounts
-        fetchAppointments();
-    }, []);
-
-
+const BrowseAppointments = ({ appointments }) => {
+    console.log("Appointments2", appointments)
     return (
         <div>
-        <Navbar />
-            <div className="absolute top-10 left-10 right-0 bottom-0">
-                <div className="flex flex-grow">
-                    <h2>Your Booked Appointments</h2>
-                        <ul>
-                            {appointments.map(appointment => (
-                                <li key={appointment.appointment.id}>
-                                    <p>Date: {appointment.date}</p>
-                                    <p>Start Time: {appointment.start_time}</p>
-                                    {/* Render other appointment details as needed */}
-                                </li>
-                            ))}
-                        </ul>
+            <Navbar /> 
+                <div className="absolute top-10 left-10 right-0 bottom-0">
+                    <div className="flex flex-grow">
+                    {/* Left Side */}
+                        <div className="flex flex-col items-center justify-center w-1/2 p-8 mt-10">
+                    {/* Moves the image inside the left side div */}
+                            <div className="w-80 h-80 relative">
+                                <h2> Your Appointments: {} </h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
     );
 };
