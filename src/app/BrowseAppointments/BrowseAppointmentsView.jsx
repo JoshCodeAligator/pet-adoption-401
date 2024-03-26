@@ -11,6 +11,7 @@ const BrowseAppointments = ({ appointments }) => {
         // Implement deletion logic here
         removeAppointment(appointmentId);
         console.log("Deleting appointment with ID:", appointmentId);
+        window.location.reload();
     };
 
     return (
@@ -40,7 +41,7 @@ const BrowseAppointments = ({ appointments }) => {
                                         onClick={() => handleDelete(appointment.appointment_id)}
                                         className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                     >
-                                        Delete
+                                        Cancel Appointment
                                     </button>
                                 </div>
                             ))}
