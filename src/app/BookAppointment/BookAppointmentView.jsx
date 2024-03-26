@@ -8,7 +8,45 @@ const BookAppointmentView = ({unavailbleTimes, updateWeekStart, bookAppointment}
   return (
     <div className="mx-auto max-w-screen-lg">
       <Navbar className="mt-10" />
-      <Book unavailableTimes={unavailbleTimes} updateStartDate={updateWeekStart} makeBooking={bookAppointment}/>
+      <div className="background">
+				 {/* spans for the animated background */}
+				 <span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				{/*  end of animated background */}
+			</div>
+      <div>
+        <Book unavailableTimes={unavailbleTimes} updateStartDate={updateWeekStart} makeBooking={bookAppointment}/>
+      </div>
     </div>
   );
 };
