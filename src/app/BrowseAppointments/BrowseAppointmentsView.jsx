@@ -4,8 +4,10 @@ import { getSessionUserID } from "@/lib";
 import { getBookedAppointments } from "./BrowseAppointmentsAPI";
 import { fetchAppointments } from "./BrowseAppointmentsController";
 import { removeAppointment } from "./BrowseAppointmentsAPI";
+import {fetchPet} from "@/app/ViewPet/ViewPetController";
+import getPetDetails from "../ViewPet/ViewPetAPI";
 
-const BrowseAppointments = ({ appointments }) => {
+const BrowseAppointments = ({ appointments}) => {
     // Function to handle deletion of an appointment
     const handleDelete = (appointmentId) => {
         // Implement deletion logic here
@@ -31,15 +33,15 @@ const BrowseAppointments = ({ appointments }) => {
                                         <p><strong>Appointment ID:</strong> {appointment.appointment_id}</p>
                                         <p><strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}</p>
                                         <p><strong>Start Time:</strong> {appointment.start_time}</p>
-                                        <p><strong>Client ID:</strong> {appointment.client_id}</p>
-                                        <p><strong>Centre ID:</strong> {appointment.centre_id}</p>
+                                        <p><strong>Centre Name:</strong> {appointment.centre_name}</p>
+                                        <p><strong>Centre Address:</strong> {appointment.centre_address}</p>
                                         {/* could get pet information from pet and display pets name and picture here */}
-                                        <p><strong>Pet ID:</strong> {appointment.pet_id}</p>
+                                        <p><strong>Pet Name:</strong> {appointment.pet_name}</p>
                                     </div>
                                     {/* Delete Button */}
-                                    <button
+                                    <button 
                                         onClick={() => handleDelete(appointment.appointment_id)}
-                                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        className="flex flex-end bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                     >
                                         Cancel 
                                     </button>

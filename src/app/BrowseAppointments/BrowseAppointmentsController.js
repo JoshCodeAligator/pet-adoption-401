@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { getBookedAppointments } from "@/app/BrowseAppointments/BrowseAppointmentsAPI";
 import { getSessionUserID } from "@/lib";
 import BrowseAppointmentsView from "./BrowseAppointmentsView";
+import getPetDetails from "../ViewPet/ViewPetAPI";
 
 const BrowseAppointmentsController = ()=> {
     const [appointments, setAppointments] = useState([]);
@@ -20,6 +21,7 @@ const BrowseAppointmentsController = ()=> {
                 
                 if (response) {
                     // Update state with fetched appointments
+                    
                     setAppointments(response);
                     console.log("Response", response)
                     console.log("Appointments", appointments)

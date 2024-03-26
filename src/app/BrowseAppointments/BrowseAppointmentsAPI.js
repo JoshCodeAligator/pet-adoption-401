@@ -9,7 +9,21 @@ export async function getBookedAppointments(getSessionUserID) {
        
         // Query the database to fetch booked appointments for the given user
        
-        const appointments = await query("SELECT * FROM Appointment WHERE client_id = ?", [getSessionUserID.value]);
+        const appointments = await query(`
+        SELECT 
+            Appointment.*, 
+            Pet.name AS pet_name,
+            RescueCentre.name AS centre_name,
+            RescueCentre.address AS centre_address
+        FROM 
+            Appointment
+        INNER JOIN 
+            Pet ON Appointment.pet_id = Pet.pet_id
+        INNER JOIN 
+            RescueCentre ON Appointment.centre_id = RescueCentre.centre_id
+        WHERE 
+            Appointment.client_id = ?
+    `, [getSessionUserID.value]);
         // Return the fetched appointments
        return appointments
     } catch (error) {
