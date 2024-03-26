@@ -31,27 +31,17 @@ const createClientAccount = async ({firstName, lastName, phone, email, password}
 	try {
 
 		// generate all ID
-		accountID = await generateAccountID();
-		clientID = await generateClientID();
-		phoneID = await generatePhoneID();
+
+		// accountID = await generateAccountID();
+		// clientID = await generateClientID();
+		// phoneID = await generatePhoneID();
 
 		// for speed might consider doing it concurrently using
 		// Promise.all([/* generate function calls go here as array elements */])
 
-		// this will lead to all id generated to be the same (probably)
-		// however that doesn't really matter much as long as they are unique to their own tables
-
-		// they won't be the same if we allow for phone numbers to be deleted
-		// as then it is possible for a phoneID to be available but not client or account IDs
-
-		// at the moment, it seems id generated are all the same anyway
-
-		// await accountID
-		// await clientID
-		// await phoneID
-
-		// for some reason using await after to have all 3 generates run together doesn't work
-		// don't get values in time
+		[accountID, clientID, phoneID] = await Promise.all(
+			[generateAccountID(), generateClientID(), generatePhoneID()]
+		)
 
 		console.log("AccountID: ", accountID)
 		console.log("ClientID: ", clientID)
