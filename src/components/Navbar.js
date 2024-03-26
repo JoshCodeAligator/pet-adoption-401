@@ -34,7 +34,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-900 py-4 fixed top-0 left-0 w-full z-50 shadow-md">
+    <nav className="bg-gray-900 py-4 fixed top-0 left-0 w-full z-50 shadow-md mb-5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div className="flex-shrink-0">
           <Link
@@ -50,23 +50,23 @@ const Navbar = () => {
             <span>About</span>
           </Link>
           {loggedIn ? (
-        <Link href="/browseAppointments" className="ml-6">
-          <span>View Appointments</span>
-        </Link>
-                      ) : (
-        <Link href="/client/CreateAccount" className="ml-6">
-          <span>Create Account</span>
-        </Link>
-                      )}
+            <Link href="/browseAppointments" className="ml-6">
+              <span>View Appointments</span>
+            </Link>
+          ) : (
+            <Link href="/client/CreateAccount" className="ml-6">
+              <span>Create Account</span>
+            </Link>
+          )}
           {loggedIn ? (
-        <Link href="/" className="ml-6" onClick={handleLogout}>
-          <span>Log Out</span>
-        </Link>
-                      ) : (
-        <Link href="/login" className="ml-6">
-          <span>Log In</span>
-        </Link>
-                      )}
+            <Link href="/" className="ml-6" onClick={handleLogout}>
+              <span>Log Out</span>
+            </Link>
+          ) : (
+            <Link href="/login" className="ml-6">
+              <span>Log In</span>
+            </Link>
+          )}
         </div>
         <div className="lg:hidden">
           {isSidebarOpen ? (
@@ -89,7 +89,10 @@ const Navbar = () => {
             <Link href="/about" className="my-2 hover:text-gray-300">
               About
             </Link>
-            <Link href="/client/CreateAccount" className="my-2 hover:text-gray-300">
+            <Link
+              href="/client/CreateAccount"
+              className="my-2 hover:text-gray-300"
+            >
               Create Account
             </Link>
             <Link href="/login" className="my-2 hover:text-gray-300">

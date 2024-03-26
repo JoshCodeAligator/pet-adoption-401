@@ -109,7 +109,7 @@ const Book = ({
   };
 
   return (
-    <div className="container mx-auto mt-20">
+    <div className="container mx-auto mt-20 bg-gray-900 p-8 rounded-lg">
       <h1 className="text-2xl font-bold mb-4">
         {appointmentType} Appointments
       </h1>
