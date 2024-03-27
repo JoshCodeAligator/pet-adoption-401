@@ -16,6 +16,7 @@ export async function getBookedTimesOfWeek(weekStartDate, petID) {
 		convertJSDateToMySQLDate(weekEndDate)
 	])
 
+
 	try {
 		const bookedTimesResult = await query(
 			'SELECT date, start_time FROM ' +
@@ -78,6 +79,8 @@ export async function insertAppointment(date, time, petID, clientID) {
 	const [centreIDResult, mysqlDate] = await Promise.all(
 		[getCentreID, convertDate]
 	)
+
+	console.log("Within Insert Appointment, date conversion: ", date, "->", mysqlDate)
 
 	const centreID = centreIDResult[0].centre_id
 

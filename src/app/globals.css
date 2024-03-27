@@ -16,6 +16,9 @@
   }
 }
 
+html * {
+  color: #ffffff;
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -309,3 +312,4 @@ body {
     transform-origin: 5vw 12vh;
     box-shadow: -2vmin 0 0.25349177688029334vmin currentColor;
 }
+
