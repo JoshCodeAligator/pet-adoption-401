@@ -22,6 +22,9 @@ html * {
 label {
   color: black;
 }
+li {
+  color: black;
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
