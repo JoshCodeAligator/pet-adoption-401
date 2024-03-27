@@ -32,6 +32,7 @@ const BrowseAppointmentsController = ()=> {
                 // console.error("Error fetching appointments:", error);
             }
         };
+        fetchAppointments().then(r => {})
 
         // getSessionUserID().then(
         //     (sessionUserID) => {
