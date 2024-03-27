@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "@components/Navbar";
+import Background from "@components/Background";
 import { removeAppointment } from "./BrowseAppointmentsAPI";
+
 
 const BrowseAppointments = ({ appointments}) => {
     // Function to handle deletion of an appointment
@@ -14,6 +16,7 @@ const BrowseAppointments = ({ appointments}) => {
     return (
         <div>
             <Navbar />
+            <Background />
             <div className="absolute top-10 left-10 right-0 bottom-0">
                 <div className="flex flex-grow">
                     {/* Left Side */}
