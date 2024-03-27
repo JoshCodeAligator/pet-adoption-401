@@ -35,6 +35,14 @@ const BookingController = ({pet_id}) => {
 
     // upon loading of page, get all booked times for a centre and week starting from current date
     useEffect(() => {
+
+        // // initially set startDate
+        // if (weekStartDate === null) {
+        //     const temp_date = new Date()
+        //     temp_date.setHours(0, 0, 0, 0)
+        //     setWeekStartDate(temp_date)
+        // }
+
         getBookedTimesOfWeek(weekStartDate, pet_id).then(
             ({success, error, data}) => {
                 // console.log("getBookedTimesOfWeek: ", data)

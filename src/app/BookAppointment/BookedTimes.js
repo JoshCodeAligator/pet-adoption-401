@@ -98,9 +98,9 @@ class BookedTimes {
 		// console.log("Partial Conversion", jsDate.toISOString())
 
 		// set the time
-		jsDate.setHours(hour, minute, 0, 0)
+		jsDate.setUTCHours(hour, minute, 0, 0)
 
-		// console.log("Converted: ", date, time, "->", jsDate.toISOString())
+		console.log("Converted: ", date, time, "->", jsDate.toISOString())
 
 		return jsDate
 	}
