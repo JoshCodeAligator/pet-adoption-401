@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { getBookedAppointments } from "@/app/BrowseAppointments/BrowseAppointmentsAPI";
 import { getSessionUserID } from "@/lib";
 import BrowseAppointmentsView from "./BrowseAppointmentsView";
-import getPetDetails from "../ViewPet/ViewPetAPI";
 
 const BrowseAppointmentsController = ()=> {
     const [appointments, setAppointments] = useState([]);
@@ -23,14 +22,14 @@ const BrowseAppointmentsController = ()=> {
                     // Update state with fetched appointments
                     
                     setAppointments(response);
-                    console.log("Response", response)
-                    console.log("Appointments", appointments)
+                    // console.log("Response", response)
+                    // console.log("Appointments", appointments)
                 } else {
                     // Handle error
-                    console.error(response.error);
+                    // console.error(response.error);
                 }
             } catch (error) {
-                console.error("Error fetching appointments:", error);
+                // console.error("Error fetching appointments:", error);
             }
         };
 

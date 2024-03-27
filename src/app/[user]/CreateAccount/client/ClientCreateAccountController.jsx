@@ -33,7 +33,7 @@ const ClientCreateAccountController = () => {
 		if (!firstName || !lastName || !phone || !email || !password) {
 			setErrorFlag(true)
 			setError("Fill out all fields")
-			console.log("Not all fields are filled out.")
+			// console.log("Not all fields are filled out.")
 			return false
 		}
 
@@ -41,11 +41,11 @@ const ClientCreateAccountController = () => {
 		if (password !== confirm_password) {
 			setErrorFlag(true)
 			setError("Password and Confirm Password needs to be the same")
-			console.log("Confirm password doesn't match")
+			// console.log("Confirm password doesn't match")
 			return false
 		}
 
-		console.log("No issues with client creation form fields.")
+		// console.log("No issues with client creation form fields.")
 
 		// might want to add more validation,
 		// like character limits to match database column limits for the field
@@ -84,8 +84,8 @@ const ClientCreateAccountController = () => {
 
 		const result = await createClientAccount(formFields)
 
-		console.log("Done executing Create New Account button")
-		console.log(result)
+		// console.log("Done executing Create New Account button")
+		// console.log(result)
 
 		// Success in client account creation,
 		if (result.success) {

@@ -16,8 +16,8 @@ export const AdminCreateAccountController = () => {
 	const router = useRouter()
 
 	useEffect(() => {
-		console.log("selected centre index: ", selectedCentreIndex)
-		console.log("selected centre: ", allRescueCentres[selectedCentreIndex])
+		// console.log("selected centre index: ", selectedCentreIndex)
+		// console.log("selected centre: ", allRescueCentres[selectedCentreIndex])
 
 		// some odd reason once you select an index, then go back to blank, if statement still is ran, even though
 		// selectedCentreIndex is -1
@@ -46,14 +46,14 @@ export const AdminCreateAccountController = () => {
 		if (!rescue_centre && (!name || !address || !phone || !email || !password)) {
 			setErrorFlag(true)
 			setError("Fill all fields")
-			console.log("Did not select a rescue centre, and didn't fill in all fields.")
+			// console.log("Did not select a rescue centre, and didn't fill in all fields.")
 			return false
 		}
 		// below is case where select an existing rescue centre, then no need to fill out centre fields
 		else if (rescue_centre && (!email || !password)) {
 			setErrorFlag(true)
 			setError("Fill email and password")
-			console.log("Didn't fill out email or password, but selected a rescue centre")
+			// console.log("Didn't fill out email or password, but selected a rescue centre")
 			return false
 		}
 
@@ -61,11 +61,11 @@ export const AdminCreateAccountController = () => {
 		if (password !== confirm_password) {
 			setErrorFlag(true)
 			setError("Password and Confirm Password needs to be the same")
-			console.log("Confirm password doesn't match")
+			// console.log("Confirm password doesn't match")
 			return false
 		}
 
-		console.log("Validation success")
+		// console.log("Validation success")
 		return true
 	}
 
@@ -95,7 +95,7 @@ export const AdminCreateAccountController = () => {
 			formFields.centre_id = rescue_centre.id
 		}
 
-		console.log("Got following data from form:\n", formFields)
+		// console.log("Got following data from form:\n", formFields)
 
 		// issue with if statement above, it seems to trigger even if it should have value -1?
 		// might want to somehow be able to pass up the RescueCentre selected, not just the index
@@ -111,7 +111,7 @@ export const AdminCreateAccountController = () => {
 		}
 
 		const result = await createAdminAccount(formFields)
-		console.log(result)
+		// console.log(result)
 
 		if (result.success) {
 			alert("Admin account created")

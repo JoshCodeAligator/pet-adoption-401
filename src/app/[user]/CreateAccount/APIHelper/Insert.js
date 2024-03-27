@@ -11,7 +11,7 @@ import query from "@/db/setup/db";
  * @returns {Promise<boolean>} true if successful in inserting new account. false if db didn't change
  */
 async function insertAccount(accountID, email, password) {
-	console.log("Started insertAccount")
+	// console.log("Started insertAccount")
 	const dup_email_code = 'ER_DUP_ENTRY'
 
 	// await beginTransaction()
@@ -22,14 +22,14 @@ async function insertAccount(accountID, email, password) {
 			[accountID, email, password]
 		)
 		// await commit()
-		console.log("Finishing normally insertAccount, will return", insertAccountResult.affectedRows > 0)
+		// console.log("Finishing normally insertAccount, will return", insertAccountResult.affectedRows > 0)
 		// only return true if db actually changed (due to insert just did)
 
 		return insertAccountResult.affectedRows > 0
 	} catch (e) {
 		// if this error occurs, it means attempted to make account with an existing email
 		if (e.code === dup_email_code) {
-			console.log("Finishing via dup_email_code insertAccount")
+			// console.log("Finishing via dup_email_code insertAccount")
 			return false
 		}
 		throw e
@@ -45,7 +45,7 @@ async function insertAccount(accountID, email, password) {
  * @returns {Promise<boolean>} true if new client added. false if no change to database.
  */
 async function insertClient(clientID, fName, lName, accountID) {
-	console.log("Started insertClient")
+	// console.log("Started insertClient")
 
 	// sql errno for attempting to insert with an unknown fk
 	const sql_error_no = 1452
@@ -61,7 +61,7 @@ async function insertClient(clientID, fName, lName, accountID) {
 
 		// check if was able to create new client or not
 
-		console.log("Return from insertClient")
+		// console.log("Return from insertClient")
 		return insertClientResult.affectedRows > 0;
 	}
 	catch (e) {
@@ -81,7 +81,7 @@ async function insertClient(clientID, fName, lName, accountID) {
  * @returns {Promise<boolean>} true if inserted a new phone number. false if no change to database,
  */
 async function insertPhone(phoneID, client_id, phone) {
-	console.log("Started insertPhone")
+	// console.log("Started insertPhone")
 
 	// sql errno for attempting to insert with an unknown fk
 	const sql_error_no = 1452
@@ -93,7 +93,7 @@ async function insertPhone(phoneID, client_id, phone) {
 		)
 		// await commit()
 		// check if was able to create new clientPhone or not
-		console.log("Return from insertPhone")
+		// console.log("Return from insertPhone")
 		return insertPhoneResult.affectedRows > 0;
 	}
 	catch (e) {
@@ -112,7 +112,7 @@ async function insertPhone(phoneID, client_id, phone) {
  * @return {Promise<boolean>} true if new admin was inserted. false if database was unchanged.
  */
 async function insertAdmin(adminID, accountID, centreID) {
-	console.log("Started insertAdmin")
+	// console.log("Started insertAdmin")
 
 	// sql errno for attempting to insert with an unknown fk
 	const sql_error_no = 1452
@@ -128,7 +128,7 @@ async function insertAdmin(adminID, accountID, centreID) {
 
 		// check if was able to create new client or not
 
-		console.log("Return from insertAdmin")
+		// console.log("Return from insertAdmin")
 		return insertAdminResult.affectedRows > 0;
 	}
 	catch (e) {
@@ -148,7 +148,7 @@ async function insertAdmin(adminID, accountID, centreID) {
  * @return {Promise<boolean>} true if new centre inserted. false if database was unchanged
  */
 async function insertRescueCentre(centreID, name, address, phone) {
-	console.log("Started insertRescueCentre")
+	// console.log("Started insertRescueCentre")
 
 	// sql errno for attempting to insert with an unknown fk
 	// const sql_error_no = 1452
@@ -164,7 +164,7 @@ async function insertRescueCentre(centreID, name, address, phone) {
 
 		// check if was able to create new client or not
 
-		console.log("Return from insertRescueCentre")
+		// console.log("Return from insertRescueCentre")
 		return insertCentreResult.affectedRows > 0;
 	}
 	catch (e) {

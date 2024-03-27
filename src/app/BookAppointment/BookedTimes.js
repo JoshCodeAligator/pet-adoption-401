@@ -95,12 +95,12 @@ class BookedTimes {
 		// set date
 		// jsDate.setFullYear(parseInt(year, 10), parseInt(month, 10), parseInt(day, 10))
 
-		console.log("Partial Conversion", jsDate.toISOString())
+		// console.log("Partial Conversion", jsDate.toISOString())
 
 		// set the time
 		jsDate.setHours(hour, minute, 0, 0)
 
-		console.log("Converted: ", date, time, "->", jsDate.toISOString())
+		// console.log("Converted: ", date, time, "->", jsDate.toISOString())
 
 		return jsDate
 	}

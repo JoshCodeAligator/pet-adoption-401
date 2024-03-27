@@ -1,18 +1,13 @@
 import React from "react";
 import Navbar from "@components/Navbar";
-import { getSessionUserID } from "@/lib";
-import { getBookedAppointments } from "./BrowseAppointmentsAPI";
-import { fetchAppointments } from "./BrowseAppointmentsController";
 import { removeAppointment } from "./BrowseAppointmentsAPI";
-import {fetchPet} from "@/app/ViewPet/ViewPetController";
-import getPetDetails from "../ViewPet/ViewPetAPI";
 
 const BrowseAppointments = ({ appointments}) => {
     // Function to handle deletion of an appointment
     const handleDelete = (appointmentId) => {
         // Implement deletion logic here
         removeAppointment(appointmentId);
-        console.log("Deleting appointment with ID:", appointmentId);
+        // console.log("Deleting appointment with ID:", appointmentId);
         window.location.reload();
     };
 

@@ -35,7 +35,7 @@ const BookingController = ({pet_id}) => {
     useEffect(() => {
         getBookedTimesOfWeek(weekStartDate, pet_id).then(
             ({success, error, data}) => {
-                console.log("getBookedTimesOfWeek: ", data)
+                // console.log("getBookedTimesOfWeek: ", data)
 
                 setUnavailableTimes(new BookedTimes(data))
         })
