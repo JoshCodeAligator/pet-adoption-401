@@ -50,6 +50,7 @@ const Book = ({
     if (selectedDay && selectedTime) {
       // need to convert selectedDay to a date object
       const selectedDate = new Date(selectedDay);
+      selectedDate.setHours(0, 0, 0, 0)
       console.log(selectedDate);
       makeBooking(selectedDate, selectedTime);
     }
@@ -59,7 +60,7 @@ const Book = ({
     const timeSlots = [];
     for (let i = 9; i <= 17; i++) {
       const time = `${i < 10 ? "0" + i : i}:00`;
-      const isBooked = unavailableTimes.timeIsBooked(date, time);
+      const isBooked = unavailableTimes.timeIsBooked(date.toDateString(), time);
       console.log("From time slot: ", date, time, isBooked);
       timeSlots.push(
         <button

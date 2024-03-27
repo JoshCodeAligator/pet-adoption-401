@@ -13,7 +13,7 @@ class BookedTimes {
 		for (const {date, start_time} of times) {
 			// convert to a js date object
 			const jsDate = this._convertStringDateToJsDate(date, start_time)
-			this.times.add(jsDate.getTime())
+			this.times.add(jsDate.toISOString())
 		}
 
 	}
@@ -28,7 +28,7 @@ class BookedTimes {
 		// convert to a js date
 		const checkTime = this._convertStringDateToJsDate(date, time)
 
-		return this.times.has(checkTime.getTime())
+		return this.times.has(checkTime.toISOString())
 	}
 
 	/**
@@ -73,26 +73,32 @@ class BookedTimes {
 	 * @private
 	 */
 	_convertStringDateToJsDate(date, time) {
-		// work with UTC to keep timezones consistent
 
-		// convert date to string if it is Date type
+		// store ISOString
+
 		if (typeof date !== "string") {
 			date = date.toISOString()
 		}
+		else {
+			date = new Date(date).toISOString()
+		}
+
 		// extract year, month, day
-		const {year, month, day} = this._getDate(date)
+		// const {year, month, day} = this._getDate(date)
 
 		// extract hours and minutes
 		const hour = parseInt(this._getHours(time), 10)
 		const minute = parseInt(this._getMinutes(time), 10)
 
-		const jsDate = new Date()
+		const jsDate = new Date(date)
 
 		// set date
-		jsDate.setUTCFullYear(parseInt(year, 10), parseInt(month, 10), parseInt(day, 10))
+		// jsDate.setFullYear(parseInt(year, 10), parseInt(month, 10), parseInt(day, 10))
+
+		console.log("Partial Conversion", jsDate.toISOString())
 
 		// set the time
-		jsDate.setUTCHours(hour, minute, 0, 0)
+		jsDate.setHours(hour, minute, 0, 0)
 
 		console.log("Converted: ", date, time, "->", jsDate.toISOString())
 
