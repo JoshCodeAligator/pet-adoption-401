@@ -4,7 +4,7 @@ import FormInput from "@components/FormInput";
 
 const LoginForm = ({onSubmit, loginErrorFlag, loginErrorMessage}) => {
 
-	// need to be to validate values of email and ***REMOVED***
+	// need to be to validate values of email and password
 
   	return (
 		<div className="flex flex-col">
@@ -16,9 +16,9 @@ const LoginForm = ({onSubmit, loginErrorFlag, loginErrorMessage}) => {
 							placeholder="petpursuit@email.com"/>
 				</div>
 				<br/>
-				{/* ***REMOVED*** field */}
+				{/* password field */}
 				<div>
-					<FormInput type="***REMOVED***" name="***REMOVED***" label="Enter your ***REMOVED***"
+					<FormInput type="password" name="password" label="Enter your password"
 								placeholder={"Password"} style={{borderColor: 'black'}} />
 				</div>
 				<br/>

@@ -91,7 +91,7 @@ CREATE TABLE Admin (
 CREATE TABLE Account (
     account_id BIGINT UNSIGNED,
     email VARCHAR(100) NOT NULL,
-    ***REMOVED*** VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
     PRIMARY KEY(account_id),
     CONSTRAINT unique_account UNIQUE(email)
 );

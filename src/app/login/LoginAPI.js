@@ -2,19 +2,19 @@
 
 
 // function needs to check if account exists (email exists)
-// also needs to check if correct email and ***REMOVED***
+// also needs to check if correct email and password
 
 import query from "@/db/setup/db";
 
 /**
  * Attempts to validate login information. Checks with database of following cases:
- * account not found, incorrect ***REMOVED***, correct ***REMOVED***
+ * account not found, incorrect password, correct password
  * @param email email of account
- * @param ***REMOVED*** ***REMOVED*** of account
+ * @param password password of account
  * @returns {Promise<{found: boolean, error: string, data: number}>} a json object with a found boolean that tells if an account has
  * been found and an error message if found is false.
  */
-const validateLogin = async (email, ***REMOVED***) => {
+const validateLogin = async (email, password) => {
 	// first check if email exists
 	const accountExists = await verifyAccountExists(email)
 
@@ -27,14 +27,14 @@ const validateLogin = async (email, ***REMOVED***) => {
 		}
 	}
 
-	// now attempt to verify the account by matching ***REMOVED***
-	const {found, ID} = await verifyLoginDetails(email, ***REMOVED***)
+	// now attempt to verify the account by matching password
+	const {found, ID} = await verifyLoginDetails(email, password)
 
 	// account verification failed
 	if (!found) {
 		return {
 			found: false,
-			error: "Incorrect ***REMOVED***",
+			error: "Incorrect password",
 			data: -1
 		}
 	}
@@ -65,16 +65,16 @@ const verifyAccountExists = async (email) => {
 }
 
 /**
- * Verifies login data, if email and ***REMOVED*** matches
+ * Verifies login data, if email and password matches
  * @param email email of account
- * @param ***REMOVED*** ***REMOVED*** of account
- * @returns {Promise<{found: boolean, ID: number}>} if email and ***REMOVED*** matches with account email and ***REMOVED***,
+ * @param password password of account
+ * @returns {Promise<{found: boolean, ID: number}>} if email and password matches with account email and password,
  * returns true with ID, else false and ID = -1
  */
-const verifyLoginDetails = async (email, ***REMOVED***) => {
+const verifyLoginDetails = async (email, password) => {
 	const verifyLogin = await query(
-		'SELECT account_id FROM Account WHERE email = ? AND ***REMOVED*** = ?',
-		[email, ***REMOVED***]
+		'SELECT account_id FROM Account WHERE email = ? AND password = ?',
+		[email, password]
 	)
 
 	// if length is 0, unable to verify login

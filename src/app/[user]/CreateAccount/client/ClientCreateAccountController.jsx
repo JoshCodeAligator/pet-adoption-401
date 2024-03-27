@@ -4,7 +4,7 @@ import ClientCreateAccountView from "@CreateAccount/client/ClientCreateAccountVi
 import {useState} from "react";
 import {createClientAccount} from "@CreateAccount/CreateAccountAPI";
 import {useRouter} from "next/navigation";
-import {confirm_***REMOVED***, email, firstName, lastName, ***REMOVED***, phone} from "@/app/constants";
+import {confirm_password, email, firstName, lastName, password, phone} from "@/app/constants";
 
 const ClientCreateAccountController = () => {
 	const [errorFlag, setErrorFlag] = useState(false)
@@ -23,25 +23,25 @@ const ClientCreateAccountController = () => {
 	 * @param lastName data from lastName field
 	 * @param phone data from phone field
 	 * @param email data from email field
-	 * @param ***REMOVED*** data from ***REMOVED*** field
-	 * @param confirm_***REMOVED*** data from confirm_***REMOVED*** field
+	 * @param password data from password field
+	 * @param confirm_password data from confirm_password field
 	 * @return {boolean} true if no issues with fields (error not set). false otherwise.
 	 */
-	const validateCreateAccountForm = ({firstName, lastName, phone, email, ***REMOVED***, confirm_***REMOVED***}) => {
+	const validateCreateAccountForm = ({firstName, lastName, phone, email, password, confirm_password}) => {
 		// first go check all fields are filled
-		// no need to check for confirm ***REMOVED*** as it isn't filled out, then it won't match ***REMOVED***
-		if (!firstName || !lastName || !phone || !email || !***REMOVED***) {
+		// no need to check for confirm password as it isn't filled out, then it won't match password
+		if (!firstName || !lastName || !phone || !email || !password) {
 			setErrorFlag(true)
 			setError("Fill out all fields")
 			console.log("Not all fields are filled out.")
 			return false
 		}
 
-		// check ***REMOVED*** and confirm ***REMOVED*** match
-		if (***REMOVED*** !== confirm_***REMOVED***) {
+		// check password and confirm password match
+		if (password !== confirm_password) {
 			setErrorFlag(true)
 			setError("Password and Confirm Password needs to be the same")
-			console.log("Confirm ***REMOVED*** doesn't match")
+			console.log("Confirm password doesn't match")
 			return false
 		}
 
@@ -69,8 +69,8 @@ const ClientCreateAccountController = () => {
 			 lastName : formData.get(lastName),
 			 phone : formData.get(phone),
 			 email : formData.get(email),
-			 ***REMOVED*** : formData.get(***REMOVED***),
-			 confirm_***REMOVED*** : formData.get(confirm_***REMOVED***)
+			 password : formData.get(password),
+			 confirm_password : formData.get(confirm_password)
 		}
 
 		// if an error was set during validation, don't continue and try to create an account

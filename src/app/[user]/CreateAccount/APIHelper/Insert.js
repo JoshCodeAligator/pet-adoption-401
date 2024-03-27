@@ -7,10 +7,10 @@ import query from "@/db/setup/db";
  * Returns if insert was successful.
  * @param accountID account_id of new account
  * @param email email of new account
- * @param ***REMOVED*** ***REMOVED*** of new account
+ * @param password password of new account
  * @returns {Promise<boolean>} true if successful in inserting new account. false if db didn't change
  */
-async function insertAccount(accountID, email, ***REMOVED***) {
+async function insertAccount(accountID, email, password) {
 	console.log("Started insertAccount")
 	const dup_email_code = 'ER_DUP_ENTRY'
 
@@ -18,8 +18,8 @@ async function insertAccount(accountID, email, ***REMOVED***) {
 	try {
 		// attempt to create a new account
 		const insertAccountResult = await query(
-			'INSERT INTO Account (account_id, email, ***REMOVED***) VALUES (?, ?, ?)',
-			[accountID, email, ***REMOVED***]
+			'INSERT INTO Account (account_id, email, password) VALUES (?, ?, ?)',
+			[accountID, email, password]
 		)
 		// await commit()
 		console.log("Finishing normally insertAccount, will return", insertAccountResult.affectedRows > 0)

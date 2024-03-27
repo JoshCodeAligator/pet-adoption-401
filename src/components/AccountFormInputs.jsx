@@ -1,5 +1,5 @@
 import FormInput from "@components/FormInput";
-import {confirm_***REMOVED***, email, ***REMOVED***} from "@/app/constants";
+import {confirm_password, email, password} from "@/app/constants";
 
 const AccountFormInputs = () => {
 	return (
@@ -8,13 +8,13 @@ const AccountFormInputs = () => {
 			<div style={{color: 'black', paddingTop: '15px'}} className="flex justify-center">
 				<FormInput type={"email"} name={email} label={"Email"} placeholder={"petpursuit@email.com"}/>
 			</div>
-			{/* ***REMOVED*** */}
+			{/* password */}
 			<div style={{color: 'black', paddingTop: '15px'}} className="flex justify-center">
-				<FormInput type={"***REMOVED***"} name={***REMOVED***} label={"Password"} placeholder={"Password"}/>
+				<FormInput type={"password"} name={password} label={"Password"} placeholder={"Password"}/>
 			</div>
-			{/* confirm ***REMOVED*** */}
+			{/* confirm password */}
 			<div style={{color: 'black', paddingTop: '15px'}} className="flex justify-center">
-				<FormInput type={"***REMOVED***"} name={confirm_***REMOVED***} label={"Confirm Password"} placeholder={"Password"}/>
+				<FormInput type={"password"} name={confirm_password} label={"Confirm Password"} placeholder={"Password"}/>
 			</div>
 		</div>
 	)

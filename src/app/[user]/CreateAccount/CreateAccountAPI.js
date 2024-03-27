@@ -19,9 +19,9 @@ import {
 import {deleteAccount, deleteAdmin, deleteCentre, deleteClient, deletePhone} from "@CreateAccount/APIHelper/Delete";
 import query from "@/db/setup/db";
 
-const createClientAccount = async ({firstName, lastName, phone, email, ***REMOVED***}) => {
+const createClientAccount = async ({firstName, lastName, phone, email, password}) => {
 	console.log("Starting createClientAccount, got following from form: ")
-	console.log(firstName, lastName, phone, email, ***REMOVED***)
+	console.log(firstName, lastName, phone, email, password)
 
 	// declare variables here so can be used within catch scope as well
 	let accountID
@@ -48,7 +48,7 @@ const createClientAccount = async ({firstName, lastName, phone, email, ***REMOVE
 		console.log("PhoneID: ", phoneID)
 
 		// attempt to create all rows in database
-		const insertAccountResult = await insertAccount(accountID, email, ***REMOVED***)
+		const insertAccountResult = await insertAccount(accountID, email, password)
 		const insertClientResult = await insertClient(clientID, firstName, lastName, accountID)
 		const insertPhoneResult = await insertPhone(phoneID, clientID, phone)
 
@@ -119,8 +119,8 @@ const createClientAccount = async ({firstName, lastName, phone, email, ***REMOVE
 	}
 }
 
-const createAdminAccount = async ({centre_id, name, address, phone, email, ***REMOVED***}) => {
-	console.log("Starting createAdminAccount, got values:\n", centre_id, name, address, phone, email, ***REMOVED***)
+const createAdminAccount = async ({centre_id, name, address, phone, email, password}) => {
+	console.log("Starting createAdminAccount, got values:\n", centre_id, name, address, phone, email, password)
 
 	let accountID
 	let adminID
@@ -141,7 +141,7 @@ const createAdminAccount = async ({centre_id, name, address, phone, email, ***RE
 		console.log("CentreID: ", centreID)
 
 		// attempt to create all rows in database
-		const insertAccountResult = await insertAccount(accountID, email, ***REMOVED***)
+		const insertAccountResult = await insertAccount(accountID, email, password)
 
 		// initially set result to true, so if we don't call insert, pass the error checking later
 		let insertCentreResult = true

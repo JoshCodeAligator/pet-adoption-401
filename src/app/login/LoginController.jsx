@@ -20,10 +20,10 @@ const LoginController = () => {
 		// setErrorFlag(false)
 
 		const email  = formData.get('email')
-		const ***REMOVED*** = formData.get('***REMOVED***')
+		const password = formData.get('password')
 
 		// validate login
-		const {found, error, data} = await validateLogin(email, ***REMOVED***)
+		const {found, error, data} = await validateLogin(email, password)
 		// log in success, redirect to home page
 		if (found) {
 			// set cookie

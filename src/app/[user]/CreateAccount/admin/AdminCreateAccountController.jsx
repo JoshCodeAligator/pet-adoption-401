@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {createAdminAccount, getAllRescueCentres} from "@CreateAccount/CreateAccountAPI";
 import RescueCentre from "@CreateAccount/RescueCentre";
-import {address, confirm_***REMOVED***, name, email, ***REMOVED***, phone} from "@/app/constants";
+import {address, confirm_password, name, email, password, phone} from "@/app/constants";
 
 export const AdminCreateAccountController = () => {
 	const [errorFlag, setErrorFlag] = useState(false)
@@ -37,31 +37,31 @@ export const AdminCreateAccountController = () => {
 		})
 	}, []);
 
-	const validateAdminForm = ({name, address, phone, email, ***REMOVED***, confirm_***REMOVED***}) => {
+	const validateAdminForm = ({name, address, phone, email, password, confirm_password}) => {
 		// may or may not be null, depending on index
 		const rescue_centre = allRescueCentres[selectedCentreIndex]
 
 		// first check all fields filled in
 
-		if (!rescue_centre && (!name || !address || !phone || !email || !***REMOVED***)) {
+		if (!rescue_centre && (!name || !address || !phone || !email || !password)) {
 			setErrorFlag(true)
 			setError("Fill all fields")
 			console.log("Did not select a rescue centre, and didn't fill in all fields.")
 			return false
 		}
 		// below is case where select an existing rescue centre, then no need to fill out centre fields
-		else if (rescue_centre && (!email || !***REMOVED***)) {
+		else if (rescue_centre && (!email || !password)) {
 			setErrorFlag(true)
-			setError("Fill email and ***REMOVED***")
-			console.log("Didn't fill out email or ***REMOVED***, but selected a rescue centre")
+			setError("Fill email and password")
+			console.log("Didn't fill out email or password, but selected a rescue centre")
 			return false
 		}
 
-		// check if confirm ***REMOVED*** matches
-		if (***REMOVED*** !== confirm_***REMOVED***) {
+		// check if confirm password matches
+		if (password !== confirm_password) {
 			setErrorFlag(true)
 			setError("Password and Confirm Password needs to be the same")
-			console.log("Confirm ***REMOVED*** doesn't match")
+			console.log("Confirm password doesn't match")
 			return false
 		}
 
@@ -85,8 +85,8 @@ export const AdminCreateAccountController = () => {
 			address: formData.get(address),
 			phone: formData.get(phone),
 			email: formData.get(email),
-			***REMOVED***: formData.get(***REMOVED***),
-			confirm_***REMOVED***: formData.get(confirm_***REMOVED***)
+			password: formData.get(password),
+			confirm_password: formData.get(confirm_password)
 		}
 
 		// set centre_id if rescue centre isn't null
