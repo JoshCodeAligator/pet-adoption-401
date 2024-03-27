@@ -13,6 +13,14 @@ const BrowseAppointments = ({ appointments}) => {
         window.location.reload();
     };
 
+
+    // some odd reason in deployment end up displaying 1 date before
+    function correctDate(date) {
+        const d = new Date(date)
+        d.setDate(d.getDate()+1)
+        return d
+    }
+
     return (
         <div>
             <Navbar />
@@ -29,7 +37,8 @@ const BrowseAppointments = ({ appointments}) => {
                                 <div key={appointment.appointment_id} className="mb-6 flex justify-between items-center">
                                     <div>
                                         <p><strong>Appointment ID:</strong> {appointment.appointment_id}</p>
-                                        <p><strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}</p>
+                                        <p><strong>Date:</strong>
+                                            {correctDate(appointment.date).toLocaleDateString()}</p>
                                         <p><strong>Start Time:</strong> {appointment.start_time}</p>
                                         <p><strong>Centre Name:</strong> {appointment.centre_name}</p>
                                         <p><strong>Centre Address:</strong> {appointment.centre_address}</p>
