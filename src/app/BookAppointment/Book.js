@@ -49,10 +49,10 @@ const Book = ({
     // don't do anything if no slot selected
     if (selectedDay && selectedTime) {
       // need to convert selectedDay to a date object
-      const selectedDate = new Date(selectedDay);
-      selectedDate.setHours(0, 0, 0, 0)
+      // const selectedDate = new Date(selectedDay);
+      // selectedDate.setHours(0, 0, 0, 0)
       // console.log(selectedDate);
-      makeBooking(selectedDate, selectedTime);
+      makeBooking(selectedDay, selectedTime);
     }
   };
   // Function to generate time slots for a day
@@ -84,7 +84,8 @@ const Book = ({
   const generateDateButtons = () => {
     const days = [];
     const currentDate = new Date(startDate);
-
+    // set time to 0
+    currentDate.setHours(0, 0, 0, 0)
     // Loop through the next 7 days from startDate
     for (let i = 0; i < 7; i++) {
       const date = new Date(currentDate);
@@ -98,7 +99,7 @@ const Book = ({
             }`}
             onClick={() => setSelectedDay(date)}
           >
-            {date.toDateString()} {/* Display date */}
+            {dateString} {/* Display date */}
           </button>
           <div className="flex flex-wrap justify-center mt-2">
             {generateTimeSlots(date)}

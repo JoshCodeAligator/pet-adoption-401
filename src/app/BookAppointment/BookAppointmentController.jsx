@@ -45,38 +45,34 @@ const BookingController = ({pet_id}) => {
         setWeekStartDate(startDate)
     }
 
-    function addNewAppointment(date, time) {
+    async function addNewAppointment(date, time) {
 
-        getSessionUserID().then(
-            (clientID) => {
-                if (clientID === -1) {
-                    redirect('/login')
-                    alert("Due to inactivity, your session has timed out. Log in.")
-                    // safety measure in case cookie expires while on page (due to inactivity)
-                    return
-                }
+        const clientID = await getSessionUserID()
 
-                insertAppointment(date, time, pet_id, clientID).then(
-                    (addAppointmentResult) => {
-                        // success, go back to home
-                        if (addAppointmentResult) {
-                            // update pet status
-                            updatePetStatusToBooked(pet_id).then(r => {})
+        if (clientID === -1) {
+            redirect('/login')
+            alert("Due to inactivity, your session has timed out. Log in.")
+            // safety measure in case cookie expires while on page (due to inactivity)
+            return
+        }
 
-                            router.push('/')
-                            alert(`Booking made at: ${date.toDateString()}, ${time}`)
 
-                        }
-                        // failed, most likely due to db error
-                        else {
-                            // refresh page
-                            router.refresh()
-                            alert('Booking failed. Most likely due to a server error. Try again.')
-                        }
-                    }
-                )
-            }
-        )
+        const addAppointmentResult = await insertAppointment(date, time, pet_id, clientID)
+        // success, go back to home
+        if (addAppointmentResult) {
+            // update pet status
+            updatePetStatusToBooked(pet_id).then(r => {})
+
+            router.push('/')
+            alert(`Booking made at: ${date.toDateString()}, ${time}`)
+
+        }
+        // failed, most likely due to db error
+        else {
+            // refresh page
+            router.refresh()
+            alert('Booking failed. Most likely due to a server error. Try again.')
+        }
     }
 
     // essentially same logic as in ViewPetController
