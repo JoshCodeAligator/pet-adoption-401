@@ -8,7 +8,10 @@ export async function getBookedAppointments(getSessionUserID) {
     try {
        
         // Query the database to fetch booked appointments for the given user
-       
+
+        const clientIDResult = await getClientID(getSessionUserID.value)
+        const clientID = clientIDResult[0].client_id
+
         const appointments = await query(`
         SELECT 
             Appointment.*, 
@@ -23,12 +26,19 @@ export async function getBookedAppointments(getSessionUserID) {
             RescueCentre ON Appointment.centre_id = RescueCentre.centre_id
         WHERE 
             Appointment.client_id = ?
-    `, [getSessionUserID.value]);
+    `, [clientID]);
         // Return the fetched appointments
        return appointments
     } catch (error) {
         console.error("Error fetching appointments:", error);
     }
+}
+
+async function getClientID(accountID) {
+    return await query(
+        'SELECT client_id FROM Client WHERE account_id = ?',
+        [accountID]
+    )
 }
 
 export async function removeAppointment(appointment_id) {

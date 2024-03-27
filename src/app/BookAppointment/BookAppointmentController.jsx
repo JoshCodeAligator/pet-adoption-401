@@ -50,9 +50,9 @@ const BookingController = ({pet_id}) => {
     async function addNewAppointment(date, time) {
 
         try {
-            const clientID = await getSessionUserID()
+            const accountID = await getSessionUserID()
 
-            if (clientID === -1) {
+            if (accountID === -1) {
                 redirect('/login')
                 alert("Due to inactivity, your session has timed out. Log in.")
                 // safety measure in case cookie expires while on page (due to inactivity)
@@ -60,7 +60,7 @@ const BookingController = ({pet_id}) => {
             }
 
 
-            const addAppointmentResult = await insertAppointment(date, time, pet_id, clientID)
+            const addAppointmentResult = await insertAppointment(date, time, pet_id, accountID)
             // success, go back to home
             if (addAppointmentResult) {
                 // update pet status
@@ -79,7 +79,7 @@ const BookingController = ({pet_id}) => {
             }
         }
         catch (e) {
-            console.log(e)
+            // console.log(e)
             setServerError(true)
         }
     }

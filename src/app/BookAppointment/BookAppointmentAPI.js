@@ -63,26 +63,33 @@ export async function convertJSDateToMySQLDate(date) {
 
 // a function to make a new appointment
 
-export async function insertAppointment(date, time, petID, clientID) {
+export async function insertAppointment(date, time, petID, accountID) {
 	// a missing piece of information needed is centreID, which can be found using petID
 
 	const getCentreID =  query(
 		'SELECT centre_id FROM Pet WHERE pet_id = ?',
 		[petID]
 	)
-	// no need for error checking as clientID must exist as petID exists (assuming calling this from a valid petID page)
+	// no need for error checking as accountID must exist as petID exists (assuming calling this from a valid petID page)
+
+	const getClientID = query(
+		'SELECT client_id FROM Client WHERE account_id = ?',
+		[accountID]
+	)
+	// also no need for error checking here
 
 	// also need to convert date
 	const convertDate = convertJSDateToMySQLDate(date)
 
 
-	const [centreIDResult, mysqlDate] = await Promise.all(
-		[getCentreID, convertDate]
+	const [centreIDResult, clientIDResult, mysqlDate] = await Promise.all(
+		[getCentreID, getClientID, convertDate]
 	)
 
 	console.log("Within Insert Appointment, date conversion: ", date, "->", mysqlDate)
 
 	const centreID = centreIDResult[0].centre_id
+	const clientID = clientIDResult[0].client_id
 
 	console.log("Date being booked: ", mysqlDate)
 
